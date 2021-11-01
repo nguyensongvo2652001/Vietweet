@@ -1,0 +1,25 @@
+1. User model 
++ username: required, unique
++ email: required, unique 
++ password (required, using regex to test strong password)
++ avatar (string, default)
++ background (string, default)
++ date joined (default, can NOT be updated)
++ bio (160 characters max)
++ Location (30 characters max)
++ Website (100 characters max)
++ Birthdate 
++ role: (default: user)
++ followingCount: Number
++ followerCount
+
+2. Following model 
++ user: parent referencing 
++ following: parent referencing 
+NOTE1: users can not FOLLOW their own accounts. 
+NOTE2: We will use document middleware to update the followingCount and followerCount of corresponding users 
+
+3. Tweet model 
++ user: parent referencing (This will be the current logged in user)
++ content: (200 max characters)
++ date tweeted
