@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 const validator = require('validator');
+const bcrypt = require('bcrypt');
 
 const userSchema = new mongoose.Schema({
   username: {
@@ -21,12 +22,17 @@ const userSchema = new mongoose.Schema({
     validate: {
       validator: function(val) {
         return val.match(
-          '^(?=.*[a-z])(?=.*[A-Z])(?=.*d)(?=.*[@$!%*?&])[A-Za-zd@$!%*?&]{10,}$'
+          /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{10,}$/
         );
       },
       message:
         'Your password is not strong enough. Password must contain at least 10 characters, one uppercase letter, one lowercase letter, one number and one special character'
-    }
+    },
+    select: false
+  },
+  passwordChangedAt: {
+    type: Date,
+    select: false
   },
   avatar: {
     type: String,
@@ -42,8 +48,24 @@ const userSchema = new mongoose.Schema({
     enum: {
       values: ['user', 'admin'],
       message: 'Invalid role. Please try again'
-    }
+    },
+    select: false
+  },
+  dateJoined: {
+    type: Date,
+    default: Date.now()
   }
+});
+
+userSchema.pre('save', async function(next) {
+  if (!this.isNew || !this.isModified('password')) return next();
+
+  this.password = await bcrypt.hash(
+    this.password,
+    Number(process.env.PASSWORD_BCRYPT_SALT_NUMBER)
+  );
+
+  next();
 });
 
 const User = mongoose.model('User', userSchema);

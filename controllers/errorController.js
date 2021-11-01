@@ -12,15 +12,17 @@ const handleRenderErrorDev = (err, req, res) => {
 };
 
 module.exports = (error, req, res, next) => {
+  console.log(error);
   const environment = process.env.NODE_ENV;
 
   const errorCopy = { ...error };
   errorCopy.statusCode = error.statusCode || 500;
   errorCopy.status = error.status || 'error';
   errorCopy.message = error.message;
-
   if (environment === 'development') {
-    if (req.originalUrl.startsWith('/api')) return handleAPIErrorDev(errorCopy);
-    return handleRenderErrorDev(errorCopy);
+    if (req.originalUrl.startsWith('/api')) {
+      return handleAPIErrorDev(errorCopy, req, res);
+    }
+    return handleRenderErrorDev(errorCopy, req, res);
   }
 };
