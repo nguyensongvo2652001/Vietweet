@@ -17,11 +17,13 @@ beforeEach(initializeDatabase);
 const apiVersion = process.env.API_VERSION;
 const apiBasePath = `/api/v${apiVersion}`;
 
-test('Test signup with a valid user', async function() {
+test('Login with a valid user', async () => {
+  await User.create(users.validUserOne);
+
   const response = await request(app)
-    .post(`${apiBasePath}/users/signup`)
+    .post(`${apiBasePath}/users/login`)
     .send(users.validUserOne)
-    .expect(201);
+    .expect(200);
 
   //Test if there is a jwt cookie
   expect(
@@ -33,18 +35,14 @@ test('Test signup with a valid user', async function() {
   expect(response.token).not.toBeNull();
 });
 
-test('Test signup with an invalid user (duplicated field)', async function() {
+test('Login with an invalid user', async () => {
   await User.create(users.validUserOne);
 
   await request(app)
-    .post(`${apiBasePath}/users/signup`)
-    .send(users.validUserOne)
-    .expect(400);
-});
-
-test('Test signup with an invalid user (validation error)', async function() {
-  await request(app)
-    .post(`${apiBasePath}/users/signup`)
-    .send(users.validationErrorUser)
+    .post(`${apiBasePath}/users/login`)
+    .send({
+      username: users.validUserOne.username,
+      password: 'WRONGPASSWORD'
+    })
     .expect(400);
 });
