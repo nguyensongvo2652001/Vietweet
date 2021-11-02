@@ -45,4 +45,21 @@ const signUp = catchAsync(async (req, res, next) => {
   await createAndSendToken({ user, statusCode: 201, req, res });
 });
 
-module.exports = { signUp };
+const login = catchAsync(async (req, res, next) => {
+  const { username, email, password } = req.body;
+
+  if (!username && !email)
+    return next(new AppError('Username or email must be defined', 400));
+
+  if (!password) return next(new AppError('Password must be defined', 400));
+
+  const user = await User.findOne({ $or: [{ username }, { email }] }).select(
+    '+password'
+  );
+  if (!user || !(await user.checkPassword(password, user.password)))
+    return next(new AppError('Incorrect username or password', 400));
+
+  await createAndSendToken({ user, statusCode: 200, req, res });
+});
+
+module.exports = { signUp, login };
