@@ -1,28 +1,18 @@
-const handleAPIErrorDev = (err, req, res) => {
-  res.status(err.statusCode).json({
-    status: err.status,
-    message: err.message,
-    error: err,
-    stack: err.stack
-  });
-};
-
-const handleRenderErrorDev = (err, req, res) => {
-  return err;
-};
+const handleDevelopmentError = require('./errorControllerDev');
+const handleProductionError = require('./errorControllerProd');
 
 module.exports = (error, req, res, next) => {
-  console.log(error);
   const environment = process.env.NODE_ENV;
 
   const errorCopy = { ...error };
   errorCopy.statusCode = error.statusCode || 500;
   errorCopy.status = error.status || 'error';
   errorCopy.message = error.message;
-  if (environment === 'development') {
-    if (req.originalUrl.startsWith('/api')) {
-      return handleAPIErrorDev(errorCopy, req, res);
-    }
-    return handleRenderErrorDev(errorCopy, req, res);
-  }
+  errorCopy.name = error.name;
+
+  if (environment === 'development')
+    return handleDevelopmentError(errorCopy, req, res);
+
+  if (environment === 'test' || environment === 'production')
+    return handleProductionError(errorCopy, req, res);
 };
