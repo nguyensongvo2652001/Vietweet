@@ -1,0 +1,12 @@
+{
+  "validUserOne": {
+    "username": "test1",
+    "email": "test1@example.com",
+    "password": "Vietweet911!"
+  },
+  "validUserTwo": {
+    "username": "test2",
+    "email": "test2@example.com",
+    "password": "Vietweet911!"
+  }
+}
