@@ -8,5 +8,9 @@
     "username": "test2",
     "email": "test2@example.com",
     "password": "Vietweet911!"
+  },
+  "validationErrorUser": {
+    "username": "test3",
+    "password": "Vietweet"
   }
 }

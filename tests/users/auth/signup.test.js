@@ -1,3 +1,5 @@
+/*eslint-disable*/
+
 const fs = require('fs');
 
 const request = require('supertest');
@@ -29,7 +31,7 @@ const userData = JSON.parse(
 test('Test signup with a valid user', async function() {
   const response = await request(app)
     .post(`${apiBasePath}/users/signup`)
-    .send(userData.validUserTwo)
+    .send(userData.validUserOne)
     .expect(201);
 
   //Test if there is a jwt cookie
@@ -43,8 +45,15 @@ test('Test signup with a valid user', async function() {
 });
 
 test('Test signup with an invalid user (duplicated field)', async function() {
-  const response = await request(app)
+  await request(app)
     .post(`${apiBasePath}/users/signup`)
-    .send(userData.validUserTwo);
-  expect('statusCode').not.toBe(201);
+    .send(userData.validUserOne)
+    .expect(400);
+});
+
+test('Test signup with an invalid user (validation error)', async function() {
+  await request(app)
+    .post(`${apiBasePath}/users/signup`)
+    .send(userData.validationErrorUser)
+    .expect(400);
 });
