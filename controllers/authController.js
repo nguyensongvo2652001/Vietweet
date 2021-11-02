@@ -70,7 +70,6 @@ const login = catchAsync(async (req, res, next) => {
 
 const protect = catchAsync(async (req, res, next) => {
   let token;
-
   if (
     req.headers.authorization &&
     req.headers.authorization.startsWith('Bearer')
@@ -78,9 +77,9 @@ const protect = catchAsync(async (req, res, next) => {
     token = req.headers.authorization.split(' ')[1];
 
   token = token || req.cookies.jwt;
-
-  if (!token)
-    return next(new AppError('Please log in to perform this action', 401));
+  if (!token) {
+    return next(new AppError('Please log in to perform this action', 400));
+  }
 
   const decoded = await promisify(jwt.verify)(
     token,
