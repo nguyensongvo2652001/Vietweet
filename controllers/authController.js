@@ -1,3 +1,5 @@
+const { promisify } = require('util');
+
 const jwt = require('jsonwebtoken');
 
 const User = require('../models/userModel');
@@ -20,6 +22,7 @@ const createAndSendToken = async args => {
 
   // Hide sensitive fields
   user.password = undefined;
+  user.passwordChangedAt = undefined;
   user.role = undefined;
 
   res.cookie('jwt', token, {
@@ -38,7 +41,10 @@ const createAndSendToken = async args => {
 };
 
 const signUp = catchAsync(async (req, res, next) => {
-  const filteredBody = filterObject(req.body, 'email', 'username', 'password');
+  const filteredBody =
+    process.env.NODE_ENV === 'development'
+      ? req.body
+      : filterObject(req.body, 'email', 'username', 'password');
 
   const user = await User.create(filteredBody);
 
@@ -62,4 +68,44 @@ const login = catchAsync(async (req, res, next) => {
   await createAndSendToken({ user, statusCode: 200, req, res });
 });
 
-module.exports = { signUp, login };
+const protect = catchAsync(async (req, res, next) => {
+  let token;
+
+  if (
+    req.headers.authorization &&
+    req.headers.authorization.startsWith('Bearer')
+  )
+    token = req.headers.authorization.split(' ')[1];
+
+  token = token || req.cookies.jwt;
+
+  if (!token)
+    return next(new AppError('Please log in to perform this action', 401));
+
+  const decoded = await promisify(jwt.verify)(
+    token,
+    process.env.JWT_SECRET_KEY
+  );
+
+  const user = await User.findById(decoded.id).select('+passwordChangedAt');
+
+  if (!user)
+    return next(new AppError('No users found with the specified token', 400));
+
+  const changedPasswordAfter = user.changedPasswordAfter(
+    user.passwordChangedAt,
+    decoded.iat
+  );
+
+  if (changedPasswordAfter)
+    return next(
+      new AppError(
+        'Users with this token already changed their password. Please login again',
+        400
+      )
+    );
+
+  next();
+});
+
+module.exports = { signUp, login, protect };

@@ -13,10 +13,15 @@ const handleValidationError = err => {
   return new AppError(message, 400);
 };
 
+const handleJsonWebTokenError = () => new AppError('Invalid JsonWebToken', 400);
+
+const handleExpiredTokenError = () => new AppError('Expired JsonWebToken', 400);
+
 const handleAPIErrorProd = (err, req, res) => {
   if (err.code === 11000) err = handleDuplicatedFieldError(err);
   if (err.name === 'ValidationError') err = handleValidationError(err);
-
+  if (err.name === 'JsonWebTokenError') err = handleJsonWebTokenError();
+  if (err.name === 'TokenExpiredError') err = handleExpiredTokenError();
   res.status(err.statusCode).json({
     status: err.status,
     message: err.message
