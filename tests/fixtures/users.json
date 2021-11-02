@@ -10,7 +10,7 @@
     "password": "Vietweet911!"
   },
   "validationErrorUser": {
-    "username": "test3",
-    "password": "Vietweet"
+    "email": "test3@example.com",
+    "password": "Vietweet911"
   }
 }
