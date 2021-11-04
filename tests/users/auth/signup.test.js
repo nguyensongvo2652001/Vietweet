@@ -1,21 +1,17 @@
 /*eslint-disable*/
-const fs = require('fs');
-
 const request = require('supertest');
 
 const app = require('../../../app');
 const User = require('../../../models/userModel');
-const { connectToDatabase, initializeDatabase } = require('../../db');
-
-const users = JSON.parse(
-  fs.readFileSync(`${__dirname}/../../fixtures/users.json`, 'utf-8')
-);
+const {
+  connectToDatabase,
+  initializeDatabase,
+  users,
+  apiBasePath
+} = require('../../db');
 
 beforeAll(connectToDatabase);
 beforeEach(initializeDatabase);
-
-const apiVersion = process.env.API_VERSION;
-const apiBasePath = `/api/v${apiVersion}`;
 
 test('Test signup with a valid user', async function() {
   const response = await request(app)

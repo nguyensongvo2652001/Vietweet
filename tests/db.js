@@ -1,3 +1,5 @@
+const fs = require('fs');
+
 const mongoose = require('mongoose');
 
 const User = require('../models/userModel');
@@ -15,4 +17,11 @@ const initializeDatabase = async () => {
   await User.deleteMany();
 };
 
-module.exports = { connectToDatabase, initializeDatabase };
+const users = JSON.parse(
+  fs.readFileSync(`${__dirname}/fixtures/users.json`, 'utf-8')
+);
+
+const apiVersion = process.env.API_VERSION;
+const apiBasePath = `/api/v${apiVersion}`;
+
+module.exports = { connectToDatabase, initializeDatabase, users, apiBasePath };
