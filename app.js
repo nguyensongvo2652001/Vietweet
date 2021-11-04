@@ -5,6 +5,7 @@ const cookieParser = require('cookie-parser');
 const errorController = require('./controllers/errorController');
 
 const userRouter = require('./routers/userRouter');
+const followRouter = require('./routers/followRouter');
 
 const app = express();
 const apiVersion = process.env.API_VERSION;
@@ -18,6 +19,7 @@ app.use(express.json({ limit: process.env.REQUEST_BODY_MAX_SIZE }));
 app.use(express.static('public'));
 
 app.use(`${apiBasePath}/users`, userRouter);
+app.use(`${apiBasePath}/follows`, followRouter);
 
 app.use(errorController);
 

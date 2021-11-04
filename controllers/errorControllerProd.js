@@ -6,9 +6,17 @@ const handleDuplicatedFieldError = err => {
   return new AppError(message, 400);
 };
 
+const handleCastError = err => {
+  const message = `Invalid id: ${err.value}`;
+  return new AppError(message, 400);
+};
+
 const handleValidationError = err => {
   const message = Object.values(err.errors)
-    .map(obj => obj.message)
+    .map(obj => {
+      if (obj.name === 'CastError') return `Invalid id: ${obj.value}`;
+      return obj.message;
+    })
     .join('; ');
   return new AppError(message, 400);
 };
@@ -22,6 +30,7 @@ const handleAPIErrorProd = (err, req, res) => {
   if (err.name === 'ValidationError') err = handleValidationError(err);
   if (err.name === 'JsonWebTokenError') err = handleJsonWebTokenError();
   if (err.name === 'TokenExpiredError') err = handleExpiredTokenError();
+  if (err.name === 'CastError') err = handleCastError(err);
   res.status(err.statusCode).json({
     status: err.status,
     message: err.message

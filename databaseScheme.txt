@@ -16,6 +16,7 @@
 2. Following model 
 + user: parent referencing 
 + following: parent referencing 
++ date followed
 NOTE1: users can not FOLLOW their own accounts. 
 NOTE2: We will use document middleware to update the followingCount and followerCount of corresponding users 
 
