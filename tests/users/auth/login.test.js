@@ -14,8 +14,6 @@ beforeAll(connectToDatabase);
 beforeEach(initializeDatabase);
 
 test('Login with a valid user', async () => {
-  await User.create(users.validUserOne);
-
   const response = await request(app)
     .post(`${apiBasePath}/users/login`)
     .send(users.validUserOne)
@@ -31,8 +29,6 @@ test('Login with a valid user', async () => {
 });
 
 test('Login with an invalid user', async () => {
-  await User.create(users.validUserOne);
-
   await request(app)
     .post(`${apiBasePath}/users/login`)
     .send({

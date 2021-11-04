@@ -16,7 +16,7 @@ beforeEach(initializeDatabase);
 test('Test signup with a valid user', async function() {
   const response = await request(app)
     .post(`${apiBasePath}/users/signup`)
-    .send(users.validUserOne)
+    .send(users.validUserTwo)
     .expect(201);
 
   //Test if there is a jwt cookie
@@ -30,8 +30,6 @@ test('Test signup with a valid user', async function() {
 });
 
 test('Test signup with an invalid user (duplicated field)', async function() {
-  await User.create(users.validUserOne);
-
   await request(app)
     .post(`${apiBasePath}/users/signup`)
     .send(users.validUserOne)

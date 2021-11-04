@@ -4,6 +4,10 @@ const mongoose = require('mongoose');
 
 const User = require('../models/userModel');
 
+const users = JSON.parse(
+  fs.readFileSync(`${__dirname}/fixtures/users.json`, 'utf-8')
+);
+
 const connectToDatabase = async () => {
   const db = process.env.DB_STRING.replace(
     /<password>/,
@@ -15,13 +19,16 @@ const connectToDatabase = async () => {
 
 const initializeDatabase = async () => {
   await User.deleteMany();
-};
 
-const users = JSON.parse(
-  fs.readFileSync(`${__dirname}/fixtures/users.json`, 'utf-8')
-);
+  await User.create(users.validUserOne);
+};
 
 const apiVersion = process.env.API_VERSION;
 const apiBasePath = `/api/v${apiVersion}`;
 
-module.exports = { connectToDatabase, initializeDatabase, users, apiBasePath };
+module.exports = {
+  connectToDatabase,
+  initializeDatabase,
+  users,
+  apiBasePath
+};
