@@ -24,7 +24,6 @@ test('Login with a valid user', async () => {
     .post(`${apiBasePath}/users/login`)
     .send(users.validUserOne)
     .expect(200);
-
   //Test if there is a jwt cookie
   expect(
     response.headers['set-cookie'].some(cookieString =>
@@ -32,7 +31,7 @@ test('Login with a valid user', async () => {
     )
   ).toBe(true);
 
-  expect(response.token).not.toBeNull();
+  expect(response.body.data.token).not.toBeNull();
 });
 
 test('Login with an invalid user', async () => {

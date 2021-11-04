@@ -35,8 +35,11 @@ const createAndSendToken = async args => {
   });
 
   res.status(statusCode).json({
-    user,
-    token
+    status: 'success',
+    data: {
+      user,
+      token
+    }
   });
 };
 

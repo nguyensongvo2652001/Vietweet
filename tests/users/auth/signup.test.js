@@ -30,7 +30,7 @@ test('Test signup with a valid user', async function() {
     )
   ).toBe(true);
 
-  expect(response.token).not.toBeNull();
+  expect(response.body.data.token).not.toBeNull();
 });
 
 test('Test signup with an invalid user (duplicated field)', async function() {
