@@ -11,11 +11,16 @@ const {
   users,
   apiBasePath
 } = require('../db');
+const {
+  checkFollowingsCount,
+  checkFollowersCount
+} = require('./checkFollowersAndFollowingsCount');
 
 beforeAll(connectToDatabase);
 beforeEach(initializeDatabase);
 
 let token, userOne, userTwo;
+
 beforeEach(async function() {
   userOne = await User.findOne({ email: users.validUserOne.email });
   userTwo = await User.create(users.validUserTwo);
@@ -35,6 +40,13 @@ test('Should create a new follow document successfully', async () => {
     })
     .set('Authorization', `Bearer ${token}`)
     .expect(201);
+
+  checkFollowersCount(userTwo, await User.findOne({ email: userTwo.email }), 1);
+  checkFollowingsCount(
+    userOne,
+    await User.findOne({ email: userOne.email }),
+    1
+  );
 });
 
 test('Should not create a new follow document (users can not follow themselves)', async () => {
@@ -45,10 +57,22 @@ test('Should not create a new follow document (users can not follow themselves)'
     })
     .set('Authorization', `Bearer ${token}`)
     .expect(400);
+
+  checkFollowersCount(userTwo, await User.findOne({ email: userTwo.email }), 0);
+  checkFollowingsCount(
+    userOne,
+    await User.findOne({ email: userOne.email }),
+    0
+  );
 });
 
 test('Should not create a new follow document (user already followed another user)', async () => {
   await Follow.create({ user: userOne.id, following: userTwo.id });
+
+  //Updated userOne, userTwo since the followingsCount and followersCount may be changed
+  userOne = await User.findOne({ email: users.validUserOne.email });
+  userTwo = await User.findOne({ email: users.validUserTwo.email });
+
   await request(app)
     .post(`${apiBasePath}/follows`)
     .send({
@@ -56,6 +80,13 @@ test('Should not create a new follow document (user already followed another use
     })
     .set('Authorization', `Bearer ${token}`)
     .expect(400);
+
+  checkFollowersCount(userTwo, await User.findOne({ email: userTwo.email }), 0);
+  checkFollowingsCount(
+    userOne,
+    await User.findOne({ email: userOne.email }),
+    0
+  );
 });
 
 test('Should not create a new follow document (without jwt)', async () => {
@@ -65,4 +96,11 @@ test('Should not create a new follow document (without jwt)', async () => {
       following: userTwo.id
     })
     .expect(400);
+
+  checkFollowersCount(userTwo, await User.findOne({ email: userTwo.email }), 0);
+  checkFollowingsCount(
+    userOne,
+    await User.findOne({ email: userOne.email }),
+    0
+  );
 });
