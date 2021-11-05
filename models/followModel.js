@@ -37,6 +37,27 @@ followSchema.pre('save', function(next) {
   next();
 });
 
+followSchema.post('save', async function(doc, next) {
+  const user = await User.findById(doc.user);
+  const following = await User.findById(doc.following);
+  user.followingsCount += 1;
+  following.followersCount += 1;
+
+  await user.save({ validateBeforeSave: false });
+  await following.save({ validateBeforeSave: false });
+  next();
+});
+
+followSchema.post('findOneAndDelete', async function(query, next) {
+  const user = await User.findById(query.user);
+  const following = await User.findById(query.following);
+  user.followingsCount -= 1;
+  following.followersCount -= 1;
+
+  await user.save({ validateBeforeSave: false });
+  await following.save({ validateBeforeSave: false });
+});
+
 // An user can follow another user once
 followSchema.index({ user: 1, following: 1 }, { unique: true });
 

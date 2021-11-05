@@ -54,6 +54,14 @@ const userSchema = new mongoose.Schema({
   dateJoined: {
     type: Date,
     default: Date.now()
+  },
+  followersCount: {
+    type: Number,
+    default: 0
+  },
+  followingsCount: {
+    type: Number,
+    default: 0
   }
 });
 
