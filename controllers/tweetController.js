@@ -3,6 +3,7 @@ const sharp = require('sharp');
 
 const handlerFactory = require('./handlerFactory');
 const Tweet = require('../models/tweetModel');
+const Follow = require('../models/followModel');
 const AppError = require('../utils/appError');
 const catchAsync = require('../utils/catchAsync');
 
@@ -24,6 +25,8 @@ const upload = multer({ storage, fileFilter });
 const uploadImage = upload.single('image');
 
 const resizeImage = catchAsync(async (req, res, next) => {
+  if (!req.file) return next();
+
   req.body.image = `tweet_${req.user.id}_${Date.now()}.jpeg`;
   const filePath = `public/img/tweets/${req.body.image}`;
   await sharp(req.file.buffer)
@@ -45,4 +48,26 @@ const createTweet = handlerFactory.createOne(Tweet, 'tweet', [
   'user'
 ]);
 
-module.exports = { createTweet, uploadImage, resizeImage, setTweetUser };
+const setMyTweetFilterQuery = catchAsync(async (req, res, next) => {
+  const followDocs = await Follow.find({ user: req.user.id });
+  const followings = followDocs.map(followDoc => followDoc.following);
+
+  req.filterQuery = {
+    $or: [{ user: { $in: followings } }, { user: req.user.id }]
+  };
+
+  req.query.sort = 'dateTweeted';
+
+  next();
+});
+
+const getAllTweets = handlerFactory.getAll(Tweet, 'tweets');
+
+module.exports = {
+  createTweet,
+  uploadImage,
+  resizeImage,
+  setTweetUser,
+  setMyTweetFilterQuery,
+  getAllTweets
+};

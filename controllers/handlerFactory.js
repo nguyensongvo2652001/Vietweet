@@ -2,6 +2,19 @@ const catchAsync = require('../utils/catchAsync');
 const AppError = require('../utils/appError');
 const filterObject = require('../utils/filterObject');
 
+const getAll = (Model, docsName) =>
+  catchAsync(async (req, res, next) => {
+    const docs = await Model.find(req.filterQuery);
+
+    res.status(200).json({
+      status: 'success',
+      data: {
+        length: docs.length,
+        [docsName]: docs
+      }
+    });
+  });
+
 const createOne = (Model, docName, whiteList = []) =>
   catchAsync(async (req, res, next) => {
     req.body =
@@ -30,4 +43,4 @@ const deleteOne = (Model, docName) =>
     });
   });
 
-module.exports = { createOne, deleteOne };
+module.exports = { getAll, createOne, deleteOne };

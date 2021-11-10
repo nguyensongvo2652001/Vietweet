@@ -2,67 +2,80 @@ const mongoose = require('mongoose');
 const validator = require('validator');
 const bcrypt = require('bcrypt');
 
-const userSchema = new mongoose.Schema({
-  username: {
-    type: String,
-    required: [true, 'Username must be defined'],
-    unique: [true, 'An user with this username already existed'],
-    trim: true
-  },
-  email: {
-    type: String,
-    required: [true, 'Email must be defined'],
-    unique: [true, 'An user with this email already existed'],
-    trim: true,
-    validate: [validator.isEmail, 'Email is not valid']
-  },
-  password: {
-    type: String,
-    required: [true, 'Password must be defined'],
-    validate: {
-      validator: function(val) {
-        return val.match(
-          /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{10,}$/
-        );
+const userSchema = new mongoose.Schema(
+  {
+    username: {
+      type: String,
+      required: [true, 'Username must be defined'],
+      unique: [true, 'An user with this username already existed'],
+      trim: true
+    },
+    email: {
+      type: String,
+      required: [true, 'Email must be defined'],
+      unique: [true, 'An user with this email already existed'],
+      trim: true,
+      validate: [validator.isEmail, 'Email is not valid']
+    },
+    password: {
+      type: String,
+      required: [true, 'Password must be defined'],
+      validate: {
+        validator: function(val) {
+          return val.match(
+            /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{10,}$/
+          );
+        },
+        message:
+          'Your password is not strong enough. Password must contain at least 10 characters, one uppercase letter, one lowercase letter, one number and one special character'
       },
-      message:
-        'Your password is not strong enough. Password must contain at least 10 characters, one uppercase letter, one lowercase letter, one number and one special character'
+      select: false
     },
-    select: false
-  },
-  passwordChangedAt: {
-    type: Date,
-    select: false
-  },
-  avatar: {
-    type: String,
-    default: '/img/users/avatars/default.jpg'
-  },
-  background: {
-    type: String,
-    default: '/img/users/backgrounds/default.jpg'
-  },
-  role: {
-    type: String,
-    default: 'user',
-    enum: {
-      values: ['user', 'admin'],
-      message: 'Invalid role. Please try again'
+    passwordChangedAt: {
+      type: Date,
+      select: false
     },
-    select: false
+    avatar: {
+      type: String,
+      default: '/img/users/avatars/default.jpg'
+    },
+    background: {
+      type: String,
+      default: '/img/users/backgrounds/default.jpg'
+    },
+    role: {
+      type: String,
+      default: 'user',
+      enum: {
+        values: ['user', 'admin'],
+        message: 'Invalid role. Please try again'
+      },
+      select: false
+    },
+    dateJoined: {
+      type: Date,
+      default: Date.now()
+    },
+    followersCount: {
+      type: Number,
+      default: 0
+    },
+    followingsCount: {
+      type: Number,
+      default: 0
+    }
   },
-  dateJoined: {
-    type: Date,
-    default: Date.now()
-  },
-  followersCount: {
-    type: Number,
-    default: 0
-  },
-  followingsCount: {
-    type: Number,
-    default: 0
+  {
+    toJSON: { virtuals: true },
+    toObject: { virtuals: true }
   }
+);
+
+userSchema.virtual('followings', {
+  ref: 'Follow',
+  localField: '_id',
+  foreignField: 'user',
+  select: 'id'
 });
 
 userSchema.pre('save', async function(next) {

@@ -7,8 +7,15 @@ const router = express.Router({ mergeParams: true });
 
 router.use(authController.protect);
 
+router.get(
+  '/mine',
+  tweetController.setMyTweetFilterQuery,
+  tweetController.getAllTweets
+);
+
 router
   .route('/')
+  .get(tweetController.getAllTweets)
   .post(
     tweetController.uploadImage,
     tweetController.resizeImage,
