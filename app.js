@@ -24,9 +24,8 @@ app.use(`${apiBasePath}/users`, userRouter);
 app.use(`${apiBasePath}/follows`, followRouter);
 app.use(`${apiBasePath}/tweets`, tweetRouter);
 app.all('*', (req, res, next) => {
-  next(new AppError(`Can not found ${req.url}`, 404));
+  next(new AppError(`Can't find ${req.originalUrl} on this server!`, 404));
 });
-
 app.use(errorController);
 
 module.exports = app;

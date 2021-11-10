@@ -4,7 +4,8 @@ const filterObject = require('../utils/filterObject');
 
 const createOne = (Model, docName, whiteList = []) =>
   catchAsync(async (req, res, next) => {
-    req.body = filterObject(req.body, ...whiteList);
+    req.body =
+      whiteList.length > 0 ? filterObject(req.body, ...whiteList) : req.body;
     const document = await Model.create(req.body);
 
     res.status(201).json({
