@@ -9,6 +9,7 @@ module.exports = (error, req, res, next) => {
   errorCopy.status = error.status || 'error';
   errorCopy.message = error.message;
   errorCopy.name = error.name;
+  errorCopy.stack = error.stack;
 
   if (environment === 'development')
     return handleDevelopmentError(errorCopy, req, res);
