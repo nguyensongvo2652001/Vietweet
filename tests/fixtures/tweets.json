@@ -1,0 +1,11 @@
+{
+  "tweetOne": {
+    "content": "Hello world"
+  },
+  "tweetTwo": {
+    "content": "Goodbye world"
+  },
+  "tweetThree": {
+    "content": "Interesting tweet !"
+  }
+}

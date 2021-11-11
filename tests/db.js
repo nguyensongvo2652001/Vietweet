@@ -3,6 +3,8 @@ const fs = require('fs');
 const mongoose = require('mongoose');
 
 const User = require('../models/userModel');
+const Follow = require('../models/followModel');
+const Tweet = require('../models/tweetModel');
 
 const users = JSON.parse(
   fs.readFileSync(`${__dirname}/fixtures/users.json`, 'utf-8')
@@ -19,6 +21,8 @@ const connectToDatabase = async () => {
 
 const initializeDatabase = async () => {
   await User.deleteMany();
+  await Tweet.deleteMany();
+  await Follow.deleteMany();
 
   await User.create(users.validUserOne);
 };
