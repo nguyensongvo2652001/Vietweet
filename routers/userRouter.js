@@ -11,4 +11,15 @@ router.use(authController.protect);
 router.get('/:id/followers', followController.getFollowers);
 router.get('/:id/followings', followController.getFollowings);
 
+router.post(
+  '/follow/:followingId',
+  followController.setFollowRequestBody,
+  followController.createFollow
+);
+router.delete(
+  '/unfollow/:followingId',
+  followController.checkFollowUser,
+  followController.deleteFollow
+);
+
 module.exports = router;

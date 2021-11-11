@@ -11,7 +11,12 @@ const setFollowRequestBody = (req, res, next) => {
 };
 
 const checkFollowUser = async (req, res, next) => {
-  const follow = await Follow.findById(req.params.id);
+  const follow =
+    (await Follow.findById(req.params.id)) ||
+    (await Follow.findOne({
+      user: req.user.id,
+      following: req.params.followingId
+    }));
 
   if (!follow)
     return next(
@@ -21,6 +26,7 @@ const checkFollowUser = async (req, res, next) => {
   if (!follow.user.equals(req.user.id))
     return next(new AppError(`You are not allowed to delete this follow`, 401));
 
+  req.params.id = follow.id;
   next();
 };
 
