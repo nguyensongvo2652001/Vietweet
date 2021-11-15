@@ -40,7 +40,6 @@ const resizeAndStoreAvatar = catchAsync(async (req, res, next) => {
   if (!req.files) return next();
   const { avatar } = req.files;
   if (!avatar) return next();
-  console.log(avatar[0]);
   req.body.avatar = `user_${req.user.id}_avatar.jpg`;
   await sharp(avatar[0].buffer)
     .resize(500, 500)

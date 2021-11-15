@@ -35,7 +35,7 @@ beforeEach(async () => {
 test('Should get tweets from userOne only', async () => {
   const response = await request(app)
     .get(`${apiBasePath}/users/${userOne.id}/tweets`)
-    .send('user', userOne.id)
+    .send({ user: userOne.id })
     .expect(200);
   expect(response.body.data.tweets.length).toEqual(2);
 });
