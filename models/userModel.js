@@ -10,6 +10,32 @@ const userSchema = new mongoose.Schema(
       unique: [true, 'An user with this username already existed'],
       trim: true
     },
+    name: {
+      type: String,
+      maxlength: [50, 'Your name is too long. Please use another one'],
+      trim: true,
+      default: function() {
+        return this.username;
+      }
+    },
+    bio: {
+      type: String,
+      maxlength: [160, 'Your biography is too long. Please try another one'],
+      trim: true
+    },
+    location: {
+      type: String,
+      maxlength: [30, 'Your location is too long. Please try another one'],
+      trim: true
+    },
+    website: {
+      type: String,
+      maxlength: [100, 'Your website url is too long. Please try another one'],
+      trim: true
+    },
+    dateOfBirth: {
+      type: Date
+    },
     email: {
       type: String,
       required: [true, 'Email must be defined'],
