@@ -15,6 +15,23 @@ const getAll = (Model, docsName) =>
     });
   });
 
+const getOne = (Model, docName) =>
+  catchAsync(async (req, res, next) => {
+    const doc = await Model.findById(req.params.id);
+
+    if (!doc)
+      return next(
+        new AppError(`No ${docName} was found with id = ${req.params.id}`, 404)
+      );
+
+    res.status(200).json({
+      status: 'success',
+      data: {
+        [docName]: doc
+      }
+    });
+  });
+
 const createOne = (Model, docName, whiteList = []) =>
   catchAsync(async (req, res, next) => {
     req.body =
@@ -43,4 +60,4 @@ const deleteOne = (Model, docName) =>
     });
   });
 
-module.exports = { getAll, createOne, deleteOne };
+module.exports = { getAll, getOne, createOne, deleteOne };
