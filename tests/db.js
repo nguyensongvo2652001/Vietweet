@@ -19,12 +19,23 @@ const connectToDatabase = async () => {
   await mongoose.connect(db);
 };
 
+const clearDatabase = async () => {
+  await User.deleteMany();
+  await Tweet.deleteMany();
+  await Follow.deleteMany();
+};
+
 const initializeDatabase = async () => {
   await User.deleteMany();
   await Tweet.deleteMany();
   await Follow.deleteMany();
 
-  await User.create(users.validUserOne);
+  const userOne = await User.create(users.validUserOne);
+};
+
+const setUpDatabase = () => {
+  beforeAll(connectToDatabase);
+  beforeEach(clearDatabase);
 };
 
 const apiVersion = process.env.API_VERSION;
@@ -34,5 +45,6 @@ module.exports = {
   connectToDatabase,
   initializeDatabase,
   users,
-  apiBasePath
+  apiBasePath,
+  setUpDatabase
 };

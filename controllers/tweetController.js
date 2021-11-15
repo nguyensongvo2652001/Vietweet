@@ -48,7 +48,7 @@ const createTweet = handlerFactory.createOne(Tweet, 'tweet', [
   'user'
 ]);
 
-const setMyTweetFilterQuery = catchAsync(async (req, res, next) => {
+const setFeedFilterQuery = catchAsync(async (req, res, next) => {
   const followDocs = await Follow.find({ user: req.user.id });
   const followings = followDocs.map(followDoc => followDoc.following);
 
@@ -61,6 +61,11 @@ const setMyTweetFilterQuery = catchAsync(async (req, res, next) => {
   next();
 });
 
+const setAllTweetsFilterQuery = (req, res, next) => {
+  if (req.params.userId) req.filterQuery = { user: req.params.userId };
+  next();
+};
+
 const getAllTweets = handlerFactory.getAll(Tweet, 'tweets');
 
 module.exports = {
@@ -68,6 +73,7 @@ module.exports = {
   uploadImage,
   resizeImage,
   setTweetUser,
-  setMyTweetFilterQuery,
+  setFeedFilterQuery,
+  setAllTweetsFilterQuery,
   getAllTweets
 };

@@ -9,13 +9,13 @@ router.use(authController.protect);
 
 router.get(
   '/feed',
-  tweetController.setMyTweetFilterQuery,
+  tweetController.setFeedFilterQuery,
   tweetController.getAllTweets
 );
 
 router
   .route('/')
-  .get(tweetController.getAllTweets)
+  .get(tweetController.setAllTweetsFilterQuery, tweetController.getAllTweets)
   .post(
     tweetController.uploadImage,
     tweetController.resizeImage,
