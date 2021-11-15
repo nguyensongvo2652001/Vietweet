@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Welcome To Twitter</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap"
+      rel="stylesheet"
+    />
+    <link href="../css//general.css" rel="stylesheet" />
+    <link href="../css//login.css" rel="stylesheet" />
+    <script
+      type="module"
+      src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"
+    ></script>
+    <script
+      nomodule
+      src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"
+    ></script>
+  </head>
+  <body>
+    <main class="login">
+      <div class="background">
+        <header class="background__header">
+          <h1 class="heading-primary">
+            <ion-icon
+              name="logo-twitter"
+              class="heading-primary__logo"
+            ></ion-icon>
+            <span class="heading-primary__name">Twitter</span>
+          </h1>
+          <p class="background__description">
+            See what's happening in the world right now
+          </p>
+        </header>
+
+        <ul class="features">
+          <li class="feature">
+            <ion-icon name="search-outline" class="feature__icon"></ion-icon>
+            <p class="feature__text">Follow your interests.</p>
+          </li>
+
+          <li class="feature">
+            <ion-icon name="people-outline" class="feature__icon"></ion-icon>
+            <p class="feature__text">Hear what other are talking about.</p>
+          </li>
+
+          <li class="feature">
+            <ion-icon
+              name="chatbubble-outline"
+              class="feature__icon"
+            ></ion-icon>
+            <p class="feature__text">Join the conversation</p>
+          </li>
+        </ul>
+
+        <div class="login-logo-container">
+          <ion-icon name="logo-twitter" class="login-logo"></ion-icon>
+        </div>
+      </div>
+
+      <div class="content">
+        <ul class="login-nav margin-bottom--large">
+          <li class="login-nav__item login-nav__item--active login-nav__signup">
+            Sign Up
+          </li>
+          <li class="login-nav__item login-nav__login">Login</li>
+        </ul>
+
+        <form class="form form-signup">
+          <div class="form__element">
+            <label class="form__label" for="email-input">Email</label>
+            <input
+              class="form__input"
+              id="email-input"
+              type="email"
+              required
+              placeholder="Enter your email here"
+            />
+          </div>
+
+          <div class="form__element">
+            <label class="form__label" for="username-input">Username</label>
+            <input
+              class="form__input"
+              id="username-input"
+              type="text"
+              required
+              placeholder="Enter your username here"
+            />
+          </div>
+
+          <div class="form__element margin-bottom--medium">
+            <label class="form__label" for="password-input">Password</label>
+            <input
+              class="form__input"
+              id="password-input"
+              type="password"
+              required
+              placeholder="●●●●●●●●"
+            />
+          </div>
+
+          <button class="btn btn--full form-signup__btn">
+            Create an account
+          </button>
+        </form>
+      </div>
+    </main>
+  </body>
+</html>

@@ -1,0 +1,130 @@
+/***********************/
+/* DESIGN SYSTEM     */
+/* COLORS           */
+/* MAIN COLOR:  #1DA1F2 */
+/* SHADE MAIN COLOR: #1a91da */
+/* BLACK: #14171A */
+/* DARK GREY: #657786 */
+/* LIGHT GREY: #AAB8C2 */
+/* REALLY LIGHT GREY: #E1E8ED */
+/* REALLY REALLY LIGHT GREY: #F5F8FA */
+
+/*********************/
+
+/***********************/
+/* GLOBAL RESET       */
+/*********************/
+*,
+*:after,
+*:before {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 62.5%;
+}
+
+body {
+  font-family: "Roboto", sans-serif;
+}
+
+/***********************/
+/* HEADINGS           */
+/*********************/
+.heading-primary {
+  font-size: 6.2rem;
+  font-weight: 500;
+  color: #f5f8fa;
+  display: flex;
+  align-items: center;
+  gap: 1.6rem;
+  text-transform: uppercase;
+  margin-bottom: 1.6rem;
+  letter-spacing: -0.75px;
+}
+
+/***********************/
+/* INPUTS           */
+/*********************/
+input:focus {
+  outline: none;
+  border: none;
+  box-shadow: 0 0 0 6.4px #1da1f2;
+}
+
+/***********************/
+/* HELPER CLASSES     */
+/*********************/
+.margin-bottom--large {
+  margin-bottom: 6.4rem !important;
+}
+
+.margin-bottom--medium {
+  margin-bottom: 3.2rem !important;
+}
+
+/***********************/
+/* BUTTONS          */
+/*********************/
+.btn,
+.btn:visited,
+.btn:link {
+  cursor: pointer;
+  background: none;
+  border: none;
+  padding: 2rem 2.4rem;
+  font-size: 1.8rem;
+  font-weight: 700;
+  display: inline-block;
+  border-radius: 11px;
+  transition: all 0.3s;
+}
+
+.btn--full,
+.btn--full:visited,
+.btn--full:link {
+  position: relative;
+  background: #1da1f2;
+  color: #f5f8fa;
+}
+
+.btn--full:hover,
+.btn--full:active {
+  background: #1a91da;
+}
+
+/***********************/
+/* FORMS        */
+/*********************/
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 2.4rem;
+}
+
+.form__element {
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+}
+
+.form__label {
+  color: #14171a;
+  font-size: 1.8rem;
+  font-weight: 500;
+}
+
+.form__input {
+  font-family: inherit;
+  font-size: 1.6rem;
+  font-weight: 500;
+  padding: 1.6rem 3.2rem;
+  border-radius: 9px;
+  border: 2px solid #aab8c2;
+}
+
+.form__input::placeholder {
+  color: #aab8c2;
+}
