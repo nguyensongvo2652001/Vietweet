@@ -10,7 +10,7 @@ const app = require('../../../app');
 const Tweet = require('../../../models/tweetModel');
 const User = require('../../../models/userModel');
 
-const { setUpDatabase, users, apiBasePath } = require('../../db');
+const { setUpDatabase, apiBasePath } = require('../../db');
 
 setUpDatabase();
 
