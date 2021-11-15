@@ -11,6 +11,14 @@ router.post('/login', authController.login);
 
 router.use(authController.protect);
 
+router.patch(
+  '/me',
+  userController.uploadImages,
+  userController.resizeAndStoreAvatar,
+  userController.resizeAndStoreBackground,
+  userController.updateMe
+);
+
 router.get('/:id', userController.getUser);
 router.get('/:id/followers', followController.getFollowers);
 router.get('/:id/followings', followController.getFollowings);

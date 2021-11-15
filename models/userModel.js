@@ -63,11 +63,11 @@ const userSchema = new mongoose.Schema(
     },
     avatar: {
       type: String,
-      default: '/img/users/avatars/default.jpg'
+      default: 'default.jpg'
     },
     background: {
       type: String,
-      default: '/img/users/backgrounds/default.jpg'
+      default: 'default.jpg'
     },
     role: {
       type: String,
