@@ -1,0 +1,104 @@
+.main__tweet-form-container {
+  border-bottom: 2px solid #e1e8ed;
+}
+
+.main__tweet-form {
+  margin-top: 3.2rem;
+  margin-bottom: 3.2rem;
+  margin-left: 2rem;
+  display: flex;
+  gap: 1.6rem;
+  width: 100%;
+}
+
+.main__tweet-form__input-section {
+  flex-basis: 70%;
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+}
+
+.main__tweet-form__input {
+  border: none;
+  outline: none;
+  background: none;
+  padding: 0.8rem;
+  font-family: inherit;
+  font-size: 2rem;
+  scrollbar-width: none;
+  line-height: 1.8;
+  resize: none;
+  height: 10rem;
+  width: 100%;
+}
+
+.main__tweet-form__input::-webkit-scrollbar {
+  display: none;
+}
+
+.main__tweet-form__input:focus {
+  border: none;
+}
+
+.main_tweet-form__buttons {
+  display: flex;
+  gap: 1.2rem;
+  /* justify-content: space-between; */
+  margin-left: 1.2rem;
+}
+
+.tweet-container {
+  border-bottom: 2px solid #e1e8ed;
+}
+
+.tweet {
+  padding: 1.6rem;
+  display: flex;
+  gap: 1.2rem;
+}
+
+.tweet__userdata {
+  display: flex;
+  gap: 1.6rem;
+  font-size: 1.4rem;
+  margin-bottom: 0.6rem;
+}
+
+.tweet__userdisplay {
+  display: flex;
+  gap: 0.4rem;
+}
+
+.tweet__date {
+  color: #aab8c2;
+}
+
+.tweet__content {
+  font-size: 1.5rem;
+  margin-bottom: 0.7rem;
+}
+
+.tweet__metadata {
+  display: flex;
+  gap: 3.2rem;
+}
+
+.tweet__data-container {
+  display: flex;
+  gap: 0.5rem;
+  color: #657786;
+  transition: all 0.3s;
+  cursor: pointer;
+}
+
+.tweet__data-container:hover {
+  color: #1da1f2;
+}
+
+.tweet__data__icon {
+  font-size: 2rem;
+}
+
+.tweet__data__number {
+  font-size: 1.4rem;
+}

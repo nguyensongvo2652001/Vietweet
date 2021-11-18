@@ -1,0 +1,17 @@
+.content {
+  border-right: 2px solid #e1e8ed;
+  border-left: 2px solid #e1e8ed;
+  grid-area: content;
+  min-height: 100vh;
+}
+
+.content__title {
+  font-size: 2rem;
+  margin-left: 2rem;
+  margin-top: 1.6rem;
+  margin-bottom: 1.6rem;
+}
+
+.content__title-container {
+  border-bottom: 2px solid #e1e8ed;
+}

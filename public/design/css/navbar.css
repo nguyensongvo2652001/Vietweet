@@ -1,0 +1,48 @@
+.nav {
+  padding-top: 2.4rem;
+  padding-left: 9.6rem;
+  padding-right: 3.6rem;
+
+  min-height: 100vh;
+  position: fixed;
+  grid-area: navbar;
+}
+
+.nav__icon {
+  color: #1da1f2;
+  font-size: 3.6rem;
+  margin-bottom: 3.2rem;
+}
+
+.nav__items {
+  display: flex;
+  flex-direction: column;
+  gap: 2.4rem;
+  margin-bottom: 3.6rem;
+}
+
+.nav__item {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  gap: 1.6rem;
+  padding: 0.8rem;
+  transition: all 0.3s;
+}
+
+.nav__item:hover {
+  background-color: #e1e8ed;
+  border-radius: 11px;
+}
+
+.nav__item--active {
+  font-weight: 700;
+}
+
+.nav__item__name {
+  font-size: 2rem;
+}
+
+.nav__item__icon {
+  font-size: 2.4rem;
+}

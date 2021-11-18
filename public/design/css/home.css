@@ -1,0 +1,5 @@
+.home {
+  display: grid;
+  grid-template-columns: 0.7fr 1.15fr 1fr;
+  grid-template-areas: 'navbar content sidebar';
+}
