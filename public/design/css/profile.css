@@ -1,0 +1,129 @@
+.profile {
+  position: relative;
+}
+
+.profile__background-container {
+  width: 100%;
+}
+
+.profile__background {
+  width: 100%;
+  height: 20rem;
+}
+
+.profile__avatar-container__spacer {
+  height: 8rem;
+  background-color: transparent;
+}
+
+.profile__avatar {
+  width: 13rem;
+  height: 13rem;
+  border-radius: 50%;
+  position: absolute;
+  top: 125px;
+  left: 20px;
+  box-shadow: 0 0 0 5px #f5f8fa;
+}
+
+.profile__btn {
+  position: absolute;
+  right: 20px;
+}
+
+.profile__info {
+  padding: 0 2.4rem;
+}
+
+.profile__name {
+  font-size: 2.2rem;
+  font-weight: 700;
+}
+
+.profile__username {
+  font-size: 1.6rem;
+  margin-bottom: 2.4rem;
+}
+
+.profile__bio {
+  font-size: 1.6rem;
+  margin-bottom: 0.8rem;
+}
+
+.profile__metadata {
+  list-style: none;
+  display: flex;
+  font-size: 1.6rem;
+  gap: 2.4rem;
+  color: #657786;
+  margin-bottom: 1.8rem;
+}
+
+.profile__metadata-item {
+  display: flex;
+  gap: 0.4rem;
+}
+
+.profile__website:link,
+.profile__website:visited {
+  color: #1da1f2;
+  text-decoration: none;
+  transition: all 0.3s;
+}
+
+.profile__website:hover,
+.profile__website:active {
+  text-decoration: underline;
+}
+
+.profile__follow-info {
+  list-style: none;
+  display: flex;
+  gap: 1.6rem;
+  font-size: 1.6rem;
+  margin-bottom: 2.4rem;
+}
+
+.profile__follow-info-item {
+  display: flex;
+  gap: 0.4rem;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.profile__follow-info-item:hover {
+  text-decoration: underline;
+}
+
+.profile__follow-info-item {
+  color: #657786;
+}
+
+.profile__follow-info-item .profile__follow-number {
+  color: #14171a;
+  font-weight: 700;
+}
+
+.profile__tabs {
+  display: flex;
+  font-size: 1.6rem;
+  color: #657786;
+  font-weight: 500;
+}
+
+.profile__tab {
+  width: 50%;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.3s;
+  padding-bottom: 1rem;
+}
+
+.profile__tab.profile__tab--active {
+  color: #14171a;
+  font-weight: 700;
+}
+
+.profile__tab--active {
+  border-bottom: 5px solid #1da1f2;
+}

@@ -87,6 +87,17 @@ input:focus {
   transition: all 0.3s;
 }
 
+.btn.btn--edit-profile {
+  border: 3px solid #657786;
+  padding: 1rem 1rem;
+  font-size: 1.4rem;
+  color: #495057;
+}
+
+.btn--edit-profile:hover {
+  background-color: #aab8c2;
+}
+
 .btn.btn--follow {
   font-size: 1.5rem;
   background-color: #14171a;
@@ -211,5 +222,64 @@ input:focus {
 }
 
 .username {
+  color: #657786;
+}
+
+/***********************/
+/* TWEETS    */
+/*********************/
+.tweet-container {
+  border-bottom: 2px solid #e1e8ed;
+}
+
+.tweet {
+  padding: 1.6rem;
+  display: flex;
+  gap: 1.2rem;
+}
+
+.tweet__userdata {
+  display: flex;
+  gap: 1.6rem;
+  font-size: 1.4rem;
+  margin-bottom: 0.6rem;
+}
+
+.tweet__userdisplay {
+  display: flex;
+  gap: 0.4rem;
+}
+
+.tweet__date {
   color: #aab8c2;
+}
+
+.tweet__content {
+  font-size: 1.5rem;
+  margin-bottom: 0.7rem;
+}
+
+.tweet__metadata {
+  display: flex;
+  gap: 3.2rem;
+}
+
+.tweet__data-container {
+  display: flex;
+  gap: 0.5rem;
+  color: #657786;
+  transition: all 0.3s;
+  cursor: pointer;
+}
+
+.tweet__data-container:hover {
+  color: #1da1f2;
+}
+
+.tweet__data__icon {
+  font-size: 2rem;
+}
+
+.tweet__data__number {
+  font-size: 1.4rem;
 }
