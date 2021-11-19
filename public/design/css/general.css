@@ -218,7 +218,7 @@ input:focus {
 }
 
 .name:hover {
-  border-bottom: 2px solid #000;
+  text-decoration: underline;
 }
 
 .username {
@@ -282,4 +282,36 @@ input:focus {
 
 .tweet__data__number {
   font-size: 1.4rem;
+}
+
+/***********************/
+/* PEOPLE    */
+/*********************/
+
+.people-container {
+  display: flex;
+  gap: 2.4rem;
+  align-items: center;
+  padding-left: 2rem;
+  padding-bottom: 1rem;
+  padding-top: 1rem;
+  border-bottom: 2px solid #e1e8ed;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.people-container:hover {
+  background-color: #cbd1d5;
+}
+
+.people__info {
+  font-size: 1.4rem;
+}
+
+.people__username {
+  margin-bottom: 1.6rem;
+}
+
+.people__info .people__bio {
+  font-size: 1.6rem;
 }
