@@ -70,6 +70,10 @@ input:focus {
   margin-bottom: 3.2rem !important;
 }
 
+.hidden {
+  display: none !important;
+}
+
 /***********************/
 /* BUTTONS          */
 /*********************/
@@ -314,4 +318,40 @@ input:focus {
 
 .people__info .people__bio {
   font-size: 1.6rem;
+}
+
+/***********************/
+/* ERROR   */
+/*********************/
+.error {
+  color: #e03131;
+  font-size: 1.6rem;
+  font-weight: 500;
+}
+
+/***********************/
+/* ALERT  */
+/*********************/
+.alert {
+  position: fixed;
+  top: 0;
+  left: 50%;
+  -webkit-transform: translateX(-50%);
+  transform: translateX(-50%);
+  z-index: 9999;
+  color: #f5f8fa;
+  font-size: 1.8rem;
+  font-weight: 400;
+  text-align: center;
+  border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 5px;
+  padding: 1.6rem 15rem;
+  -webkit-box-shadow: 0 2rem 4rem rgba(0, 0, 0, 0.25);
+  box-shadow: 0 2rem 4rem rgba(0, 0, 0, 0.25);
+}
+.alert--success {
+  background-color: #20bf6b;
+}
+.alert--error {
+  background-color: #e03131;
 }

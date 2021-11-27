@@ -9,6 +9,7 @@ head
   link(href='./css/login.css' rel='stylesheet')
   script(type='module' src='https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js')
   script(nomodule='' src='https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js')
+  script(type = 'module' src = './js/controllers/loginController.js')
 main.login
   .background
     header.background__header
@@ -34,27 +35,26 @@ main.login
       li.login-nav__item.login-nav__item--active.login-nav__signup
         | Sign Up
       li.login-nav__item.login-nav__login Login
-    form.form.form-signup
+    form.form.form-signup.hidden
       .form__element
         label.form__label(for='email-input') Email
-        input#email-input.form__input(type='email' required='' placeholder='Enter your email here')
+        input#email-input.form__input.email-input(type='email' required='' placeholder='Enter your email here')
       .form__element
         label.form__label(for='username-input') Username
-        input#username-input.form__input(type='text' required='' placeholder='Enter your username here')
+        input#username-input.form__input.username-input(type='text' required='' placeholder='Enter your username here')
       .form__element.margin-bottom--medium
         label.form__label(for='password-input') Password
-        input#password-input.form__input(type='password' required='' placeholder='●●●●●●●●')
+        input#password-input.form__input.password-input(type='password' required='' placeholder='●●●●●●●●')
       button.btn.btn--full.form-signup__btn
         | Create an account
-        
-    //- form.form.form-login
-    //-   .form__element
-    //-     label.form__label(for='email-input') Username
-    //-     input#email-input.form__input(type='email' required='' placeholder='Enter your email or username here')
-    //-   .form__element.margin-bottom--medium
-    //-     label.form__label(for='password-input') Password
-    //-     input#password-input.form__input(type='password' required='' placeholder='●●●●●●●●')
-    //-   button.btn.btn--full.form-signup__btn
-    //-     | Login
 
-    //- a.forget-password-link(href = '#') Forgot your password ? Click here !
+    form.form.form-login
+      .form__element
+        label.form__label(for='email-input') Username
+        input#email-input.form__input.username-input(required='' placeholder='Enter your email or username here')
+      .form__element.margin-bottom--medium
+        label.form__label(for='password-input') Password
+        input#password-input.form__input.password-input(type='password' required='' placeholder='●●●●●●●●')
+      button.btn.btn--full.form-login__btn
+        | Login
+      a.forget-password-link(href = '#') Forgot your password ? Click here !
