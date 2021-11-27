@@ -79,7 +79,7 @@
 }
 
 .login-nav__item::after {
-  content: "";
+  content: '';
   display: inline-block;
   background-color: #1da1f2;
   height: 5px;
@@ -100,6 +100,20 @@
 .form-signup,
 .form-login {
   width: 70%;
+  margin-bottom: 3.6rem;
+}
+
+.forget-password-link:link,
+.forget-password-link:visited {
+  color: #1da1f2;
+  font-size: 1.6rem;
+  text-decoration: none;
+  transition: all 0.3s;
+}
+
+.forget-password-link:hover,
+.forget-password-link:active {
+  text-decoration: underline;
 }
 
 /***********************/

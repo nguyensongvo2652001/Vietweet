@@ -1,0 +1,60 @@
+doctype html
+head
+  meta(charset='UTF-8')
+  meta(http-equiv='X-UA-Compatible' content='IE=edge')
+  meta(name='viewport' content='width=device-width, initial-scale=1.0')
+  title Welcome To Vietweet
+  link(href='https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap' rel='stylesheet')
+  link(href='./css/general.css' rel='stylesheet')
+  link(href='./css/login.css' rel='stylesheet')
+  script(type='module' src='https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js')
+  script(nomodule='' src='https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js')
+main.login
+  .background
+    header.background__header
+      h1.heading-primary
+        ion-icon.heading-primary__logo(name='logo-twitter')
+        span.heading-primary__name Vietweet
+      p.background__description
+        | See what&apos;s happening in the world right now
+    ul.features
+      li.feature
+        ion-icon.feature__icon(name='search-outline')
+        p.feature__text Follow your interests.
+      li.feature
+        ion-icon.feature__icon(name='people-outline')
+        p.feature__text Hear what other are talking about.
+      li.feature
+        ion-icon.feature__icon(name='chatbubble-outline')
+        p.feature__text Join the conversation
+    .login-logo-container
+      ion-icon.login-logo(name='logo-twitter')
+  .content
+    ul.login-nav.margin-bottom--large
+      li.login-nav__item.login-nav__item--active.login-nav__signup
+        | Sign Up
+      li.login-nav__item.login-nav__login Login
+    form.form.form-signup
+      .form__element
+        label.form__label(for='email-input') Email
+        input#email-input.form__input(type='email' required='' placeholder='Enter your email here')
+      .form__element
+        label.form__label(for='username-input') Username
+        input#username-input.form__input(type='text' required='' placeholder='Enter your username here')
+      .form__element.margin-bottom--medium
+        label.form__label(for='password-input') Password
+        input#password-input.form__input(type='password' required='' placeholder='●●●●●●●●')
+      button.btn.btn--full.form-signup__btn
+        | Create an account
+        
+    //- form.form.form-login
+    //-   .form__element
+    //-     label.form__label(for='email-input') Username
+    //-     input#email-input.form__input(type='email' required='' placeholder='Enter your email or username here')
+    //-   .form__element.margin-bottom--medium
+    //-     label.form__label(for='password-input') Password
+    //-     input#password-input.form__input(type='password' required='' placeholder='●●●●●●●●')
+    //-   button.btn.btn--full.form-signup__btn
+    //-     | Login
+
+    //- a.forget-password-link(href = '#') Forgot your password ? Click here !
