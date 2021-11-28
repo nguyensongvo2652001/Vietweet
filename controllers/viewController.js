@@ -4,4 +4,8 @@ const loginViewController = (req, res, next) => {
   res.status(200).render('login');
 };
 
-module.exports = { loginViewController };
+const homepageViewController = (req, res, next) => {
+  res.status(200).render('homepage');
+};
+
+module.exports = { loginViewController, homepageViewController };

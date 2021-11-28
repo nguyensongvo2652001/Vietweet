@@ -1,0 +1,41 @@
+extends content
+block content 
+    .content.main
+        .content__title-container
+            h2.content__title Home
+        .main__tweet-form-container
+            form.main__tweet-form
+                .main__tweet-form__avatar-container
+                    img.avatar--small(src='../../img/users/avatars/default.jpg' alt='User avatar')
+                .main__tweet-form__input-section
+                    .main__tweet-form__input-container
+                        textarea.main__tweet-form__input(placeholder="What's happening ?")
+                    .main_tweet-form__buttons
+                        label.btn.btn--upload
+                            input(type='file' style='display: none')
+                            |                   Upload image
+                        button.btn.btn--tweet Tweet
+        .tweets
+            .tweet-container
+                .tweet
+                    .tweet__avatar-container
+                        img.avatar--small(src='../../img/users/avatars/default.jpg' alt='User avatar')
+                    .tweet__info
+                        .tweet__userdata
+                            .tweet__userdisplay
+                                p.name Palash
+                                p.username @palashv2
+                            p.tweet__date Apr 26, 2020
+                        p.tweet__content
+                            | What&apos;s the object oriented way to become wealthy?
+                            br
+                            br
+                            |                     Inheritance
+                        .tweet__metadata
+                            .tweet__data-container
+                                ion-icon.tweet__data__icon(name='chatbox-outline')
+                                p.tweet__data__number 3
+                            .tweet__data-container
+                                ion-icon.tweet__data__icon(name='heart-outline')
+                                p.tweet__data__number 3
+
