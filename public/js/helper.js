@@ -12,3 +12,7 @@ export const sendRequest = async (url, method, body) => {
   const responseBody = await response.json();
   if (!response.ok) throw new Error(responseBody.message);
 };
+
+export const redirect = url => {
+  window.location.href = url;
+};
