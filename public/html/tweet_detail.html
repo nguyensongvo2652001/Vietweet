@@ -10,14 +10,13 @@
       rel="stylesheet"
     />
     <link href="../css/general.css" rel="stylesheet" />
-    <link href="../css/buttons.css" rel="stylesheet" />
+    <link href="../css/buttons.css" rel = 'stylesheet'/>
     <link href="../css/home.css" rel="stylesheet" />
+    <link href="../css/reply.css" rel = 'stylesheet'/>
     <link href="../css/navbar.css" rel="stylesheet" />
     <link href="../css/content.css" rel="stylesheet" />
-    <link href="../css/profile.css" rel="stylesheet" />
+    <link href="../css/main.css" rel="stylesheet" />
     <link href="../css/sidebar.css" rel="stylesheet" />
-    <link rel="stylesheet" href="../css/modal.css" />
-    <link rel="stylesheet" href="../css/edit_profile.css" />
     <script
       type="module"
       src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"
@@ -29,90 +28,6 @@
   </head>
 
   <body>
-    <div class="backdrop"></div>
-    <div class="modal edit-profile">
-      <header class="edit-profile__header">
-        <ion-icon name="close-outline" class="edit-profile__close"></ion-icon>
-        <h2 class="edit-profile__title">Edit profile</h2>
-        <button class="btn btn--save-profile">Save</button>
-      </header>
-      <div class="edit-profile__images">
-        <div class="edit-profile__background-container">
-          <img
-            class="edit-profile__background"
-            src="../img/users/backgrounds/default.jpg"
-          />
-          <label>
-            <input type="file" style="display: none" />
-            <ion-icon
-              name="camera-outline"
-              class="edit-profile__background-change-icon"
-            ></ion-icon>
-          </label>
-        </div>
-
-        <div class="edit-profile__avatar-container">
-          <img
-            class="edit-profile__avatar"
-            src="../img/users/avatars/default.jpg"
-          />
-          <label>
-            <input type="file" style="display: none" />
-            <ion-icon
-              name="camera-outline"
-              class="edit-profile__avatar-change-icon"
-            ></ion-icon>
-          </label>
-        </div>
-        <div class="edit-profile__avatar-spacer"></div>
-      </div>
-
-      <form class="edit-profile__form">
-        <div class="edit-profile__form-element">
-          <label class="edit-profile__form-label" for="name">Name</label>
-          <input
-            class="edit-profile__form-input"
-            id="name"
-            type="text"
-            class="name-input"
-          />
-        </div>
-
-        <div class="edit-profile__form-element">
-          <label class="edit-profile__form-label" for="bio">Bio</label>
-          <input
-            class="edit-profile__form-input"
-            id="bio"
-            type="text"
-            class="bio-input"
-          />
-        </div>
-
-        <div class="edit-profile__form-element">
-          <label class="edit-profile__form-label" for="location"
-            >Location</label
-          >
-          <input
-            class="edit-profile__form-input"
-            id="location"
-            type="text"
-            class="location-input"
-          />
-        </div>
-
-        <div class="edit-profile__form-element">
-          <label class="edit-profile__form-label" for="website">Website</label>
-          <input
-            class="edit-profile__form-input"
-            id="website"
-            type="text"
-            class="website-input"
-          />
-        </div>
-      </form>
-
-      <button class="btn btn--delete-account">Delete account</button>
-    </div>
     <main class="home">
       <nav class="nav">
         <ion-icon name="logo-twitter" class="nav__icon"></ion-icon>
@@ -167,80 +82,76 @@
         </button>
       </nav>
 
-      <div class="content">
-            <div class = 'profile'>
-                <div class = 'profile__background-container'>
-                    <img class = 'profile__background' src = '../img/users/backgrounds/default.jpg'>
-                </div>
-                <div class = 'profile__avatar-container'>
-                    <img class = 'profile__avatar' src = '../img/users/avatars/default.jpg'/>
-                    <div class="profile__avatar-container__spacer"></div>
-                </div>
-                <button class = 'btn btn--edit-profile profile__btn'>Edit profile</button>
-                <div class = 'profile__info'>
-                    <p class = 'profile__name'>Rosario Hackett</p>
-                    <p class = 'profile__username username'>@helloWorld</p>
-                    <p class = 'profile__bio'>Hello World</p>
-                    <ul class = 'profile__metadata'>
-                        <li class = 'profile__metadata-item proflile__location-container'>
-                            <ion-icon name="location-outline"></ion-icon>
-                            <p class = 'profile__location'>Nottingham, UK</p>
-                        </li>
-                        <li class = 'profile__metadata-item proflile__website-container'>
-                            <ion-icon name="link-outline"></ion-icon>
-                            <a class = 'profile__website' href = 'https://www.justforjoke.com'>justforjoke.com</a>
-                        </li>
-                        <li class = 'profile__metadata-item proflile__date-joined-container'>
-                            <ion-icon name="calendar-outline"></ion-icon>
-                            <p class = 'date-joined__website'>Joined August 2020</p>
-                        </li>
-                    </ul>
-                    <ul class = 'profile__follow-info'>
-                        <li class = 'profile__follow-info-item'>
-                            <p class = 'profile__follow-number'>69</p>
-                            followers
-                        </li>
-                        <li class = 'profile__follow-info-item'>
-                            <p class = 'profile__follow-number'>120</p>
-                            followings
-                        </li>
-                    </ul>
-                </div>
+      <div class="content main">
+        <div class="content__title-container">
+          <h2 class="content__title">Tweet</h2>
+        </div>
 
-                <div class = 'profile__content'>
-                    <div class = 'profile__tabs'>
-                        <div class = 'profile__tab profile__tab--active profile__tweets-tab'>
-                            <p>Tweets</p>
-                        </div>
-                        <div class = 'profile__tab profile__liked-tab'>
-                            <p>Liked</p>
-                        </div>
-                    </div>
+        <div class = 'reply'>
+            <div class = 'reply__avatar-container'>
+                <img class = 'reply__avatar avatar--small' src = '../img/users/avatars/default.jpg'/>
+                <div class = 'reply__names'>
+                    <p class = 'reply__name name'>Battle Beast</p>
+                    <p class = 'reply__username username'>@battleBeast</p>
+                </div>
+            </div>
 
-                    
-        <div class="tweets">
-            <div class="tweet-container">
-              <div class="tweet">
-                <div class="tweet__avatar-container">
+            <p class = 'reply__content'>This battle is beneath me. There is no honor in killing insects</p>
+            <p class = 'reply__date'>Nov 27th, 2021</p>
+            <div class = 'reply__info'>
+                <p class = 'reply__likes'>
+                  <span class = 'reply__info-number'>5</span>likes</p>
+                <p class = 'reply__replies'>  <span class = 'reply__info-number'>10</span>replies</p>
+            </div>
+
+            <div class = 'reply-form-container'>
+              <form class="reply-form">
+                <div class="reply-form__avatar-container">
                   <img
                     class="avatar--small"
                     src="../img/users/avatars/default.jpg"
                     alt="User avatar"
                   />
                 </div>
+                <div class="reply-form__input-section">
+                  <div class="reply-form__input-container">
+                    <textarea
+                      placeholder="Tweet your reply"
+                      class="reply-form__input"
+                    ></textarea>
+                  </div>
+                  <div class="main_tweet-form__buttons">
+                    <label class="btn btn--upload">
+                      <input type="file" style="display: none" />
+                      Upload image
+                    </label>
+                    <button class="btn btn--tweet">Reply</button>
+                  </div>
+                </div>
+              </form>
+            </div>
+
+            <div class="tweets">
+              <div class="tweet-container">
+                <div class="tweet">
+                  <div class="tweet__avatar-container">
+                    <img
+                      class="avatar--small"
+                      src="../img/users/avatars/default.jpg"
+                      alt="User avatar"
+                    />
+                  </div>
+
                   <div class="tweet__info">
                     <div class="tweet__userdata">
                       <div class = "tweet__userdisplay">
-                        <p class="name">Palash</p>
-                        <p class="username">@palashv2</p>
+                        <p class="name">Omniman</p>
+                        <p class="username">@</p>
                       </div>
                       <p class="tweet__date">Apr 26, 2020</p>
                     </div>
                     <p class="tweet__content">
-                      What's the object oriented way to become wealthy?
-                      <br />
-                      <br />
-                      Inheritance
+                      Not stronger than me.
                     </p>
                     <div class="tweet__metadata">
                       <div class="tweet__data-container">
@@ -261,13 +172,53 @@
                     </div>
                   </div>
                 </div>
-       
+
+              </div>
+
+              <div class = 'tweet-container'>
+                
+                <div class="tweet">
+                  <div class="tweet__avatar-container">
+                    <img
+                      class="avatar--small"
+                      src="../img/users/avatars/default.jpg"
+                      alt="User avatar"
+                    />
+                  </div>
+
+                  <div class="tweet__info">
+                    <div class="tweet__userdata">
+                      <div class = "tweet__userdisplay">
+                        <p class="name">Invincible</p>
+                        <p class="username">@invincible</p>
+                      </div>
+                      <p class="tweet__date">Apr 26, 2020</p>
+                    </div>
+                    <p class="tweet__content">
+                      He's right!
+                    </p>
+                    <div class="tweet__metadata">
+                      <div class="tweet__data-container">
+                        <ion-icon
+                          name="chatbox-outline"
+                          class="tweet__data__icon"
+                        ></ion-icon>
+                        <p class="tweet__data__number">3</p>
+                      </div>
   
-              
-            </div>
-          </div>
+                      <div class="tweet__data-container">
+                        <ion-icon
+                          name="heart-outline"
+                          class="tweet__data__icon"
+                        ></ion-icon>
+                        <p class="tweet__data__number">3</p>
+                      </div>
+                    </div>
+                  </div>
                 </div>
+              </div>
             </div>
+        </div>
 
       </div>
 
@@ -320,7 +271,7 @@
                 <div class="who-to-follow__user-avatar-container">
                   <img
                     class="avatar--small"
-                    src="../../img/users/avatars/default.jpg"
+                    src="../img/users/avatars/default.jpg"
                     alt="User avatar"
                   />
                 </div>
@@ -337,7 +288,7 @@
                 <div class="who-to-follow__user-avatar-container">
                   <img
                     class="avatar--small"
-                    src="../../img/users/avatars/default.jpg"
+                    src="../img/users/avatars/default.jpg"
                     alt="User avatar"
                   />
                 </div>
