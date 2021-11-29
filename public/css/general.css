@@ -200,6 +200,12 @@ input:focus {
   font-size: 1.4rem;
 }
 
+.tweet__image {
+  width: 30rem;
+  height: 20rem;
+  border-radius: 9px;
+}
+
 /***********************/
 /* PEOPLE    */
 /*********************/

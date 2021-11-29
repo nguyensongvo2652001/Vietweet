@@ -4,6 +4,8 @@ const jwt = require('jsonwebtoken');
 
 const catchAsync = require('../utils/catchAsync');
 const User = require('../models/userModel');
+const Follow = require('../models/followModel');
+const Tweet = require('../models/tweetModel');
 
 const isLogin = catchAsync(async (req, res, next) => {
   const token = req.cookies.jwt;
@@ -44,9 +46,19 @@ const loginViewController = (req, res, next) => {
   res.status(200).render('login');
 };
 
-const homepageViewController = (req, res, next) => {
-  res.status(200).render('homepage');
-};
+const homepageViewController = catchAsync(async (req, res, next) => {
+  const followDocs = await Follow.find({ user: req.user.id });
+  const followings = followDocs.map(followDoc => followDoc.following);
+
+  const tweets = await Tweet.find({
+    $or: [{ user: { $in: followings } }, { user: req.user.id }]
+  })
+    .sort('-dateTweeted')
+    .populate('user');
+  res.status(200).render('homepage', {
+    tweets
+  });
+});
 
 module.exports = {
   loginViewController,

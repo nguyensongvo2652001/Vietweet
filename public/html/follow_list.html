@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Home/Twitter</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap"
+      rel="stylesheet"
+    />
+    <link href="../css/general.css" rel="stylesheet" />
+    <link href="../css/home.css" rel="stylesheet" />
+    <link href="../css/navbar.css" rel="stylesheet" />
+    <link href="../css/content.css" rel="stylesheet" />
+    <link href="../css/follow_list.css" rel="stylesheet" />
+    <link href="../css/sidebar.css" rel="stylesheet" />
+    <script
+      type="module"
+      src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"
+    ></script>
+    <script
+      nomodule
+      src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"
+    ></script>
+  </head>
+
+  <body>
+    <main class="home">
+        <nav class="nav">
+            <ion-icon name="logo-twitter" class="nav__icon"></ion-icon>
+            <ul class="nav__items">
+                <li class="nav__item nav__item--active">
+                <ion-icon name="home" class="nav__item__icon"></ion-icon>
+                <p class="nav__item__name">Home</p>
+                </li>
+
+                <li class="nav__item">
+                <ion-icon
+                    name="telescope-outline"
+                    class="nav__item__icon"
+                ></ion-icon>
+                <p class="nav__item__name">Explore</p>
+                </li>
+
+                <li class="nav__item">
+                <ion-icon
+                    name="notifications-outline"
+                    class="nav__item__icon"
+                ></ion-icon>
+                <p class="nav__item__name">Notifications</p>
+                </li>
+
+                <li class="nav__item">
+                <ion-icon name="mail-outline" class="nav__item__icon"></ion-icon>
+                <p class="nav__item__name">Messages</p>
+                </li>
+
+                <li class="nav__item">
+                <ion-icon
+                    name="bookmark-outline"
+                    class="nav__item__icon"
+                ></ion-icon>
+                <p class="nav__item__name">Bookmarks</p>
+                </li>
+
+                <li class="nav__item">
+                <ion-icon name="list-outline" class="nav__item__icon"></ion-icon>
+                <p class="nav__item__name">Lists</p>
+                </li>
+
+                <li class="nav__item">
+                <ion-icon name="person-outline" class="nav__item__icon"></ion-icon>
+                <p class="nav__item__name">Profile</p>
+                </li>
+            </ul>
+
+            <button class="btn btn--logout">
+                Logout
+            </button>
+        </nav>
+
+        <div class="content">
+            <div class="follow__tabs">
+            <div class="follow__tab  follow__followers-tab">
+                <p>Followers</p>
+            </div>
+            <div class="follow__tab  follow__tab--active follow__followings-tab">
+                <p>Followings</p>
+            </div>
+            </div>
+            <div class="people-list">
+            <div class="people-container">
+                <div class="avatar-container">
+                <img
+                    class="avatar--small"
+                    src="../img/users/avatars/default.jpg"
+                />
+                </div>
+                <div class="people__info">
+                <p class="name people__name">John China</p>
+                <p class="username people__username">@johnChina</p>
+                <p class="people__bio">You can't see me.</p>
+                </div>
+            </div>
+            </div>
+        </div>
+
+        <div class="sidebar">
+            <div class = 'searchbar'>
+            <ion-icon name="search-outline" class = 'searchbar__icon'></ion-icon>
+            <input type = 'text' placeholder="Search Twitter" class = 'searchbar__input'/>
+            </div>
+
+            <div class = 'happening-section'>
+            <h3 class = 'happening-section__title'>What's happening</h3>
+            <ul class = 'happenings'>
+                <li class = 'happening'>
+                    <p class = 'happening__trending'>Trending in Africa</p>
+                    <p class = 'happening__name'>Rick And Morty</p>
+                    <p class = 'happening__tweet-number'>1669 tweets</p>
+                </li>
+
+                <li class = 'happening'>
+                    <p class = 'happening__trending'>Trending in Africa</p>
+                    <p class = 'happening__name'>Rick And Morty</p>
+                    <p class = 'happening__tweet-number'>1669 tweets</p>
+                </li>
+
+                <li class = 'happening'>
+                    <p class = 'happening__trending'>Trending in Africa</p>
+                    <p class = 'happening__name'>Rick And Morty</p>
+                    <p class = 'happening__tweet-number'>1669 tweets</p>
+                </li>
+
+                <li class = 'happening'>
+                    <p class = 'happening__trending'>Trending in Africa</p>
+                    <p class = 'happening__name'>Rick And Morty</p>
+                    <p class = 'happening__tweet-number'>1669 tweets</p>
+                </li>
+
+                <li class = 'happening'>
+                    <p class = 'happening__trending'>Trending in Africa</p>
+                    <p class = 'happening__name'>Rick And Morty</p>
+                    <p class = 'happening__tweet-number'>1669 tweets</p>
+                </li>
+                </ul>
+            
+            </div>
+
+            <div class = 'who-to-follow-section'>
+            <h3 class = 'who-to-follow-section__title'>Who to follow</h3>
+            <ul class = 'who-to-follow__users'>
+                <li class = 'who-to-follow__user'>
+                    <div class="who-to-follow__user-avatar-container">
+                    <img
+                        class="avatar--small"
+                        src="../../img/users/avatars/default.jpg"
+                        alt="User avatar"
+                    />
+                    </div>
+                    <div class = 'who-to-follow__user-info'>
+                    <div>
+                        <p class = 'name'>John Xina</p>
+                        <p class = 'username'>@johnXina</p>
+                    </div>
+                    <button class = 'btn btn--follow'>Follow</button>
+                    </div>
+                </li>
+                
+                <li class = 'who-to-follow__user'>
+                    <div class="who-to-follow__user-avatar-container">
+                    <img
+                        class="avatar--small"
+                        src="../../img/users/avatars/default.jpg"
+                        alt="User avatar"
+                    />
+                    </div>
+                    <div class = 'who-to-follow__user-info'>
+                    <div>
+                        <p class = 'name'>The Wock</p>
+                        <p class = 'username'>@theWock</p>
+                    </div>
+                    <button class = 'btn btn--follow'>Follow</button>
+                    </div>
+                </li>
+            </div>
+        </div>
+    </main>
+  </body>
+</html>

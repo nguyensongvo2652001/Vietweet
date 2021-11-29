@@ -1,5 +1,10 @@
 extends content
+block append head 
+    script(type = 'module' src='./js/controllers/tweetCreateController.js')
+
 block content 
+    include _tweet
+
     .content.main
         .content__title-container
             h2.content__title Home
@@ -12,30 +17,10 @@ block content
                         textarea.main__tweet-form__input(placeholder="What's happening ?")
                     .main_tweet-form__buttons
                         label.btn.btn--upload
-                            input(type='file' style='display: none')
+                            input.image-input(type='file' style='display: none' accept = 'image/*' name = 'image')
                             |                   Upload image
                         button.btn.btn--tweet Tweet
         .tweets
-            .tweet-container
-                .tweet
-                    .tweet__avatar-container
-                        img.avatar--small(src='../../img/users/avatars/default.jpg' alt='User avatar')
-                    .tweet__info
-                        .tweet__userdata
-                            .tweet__userdisplay
-                                p.name Palash
-                                p.username @palashv2
-                            p.tweet__date Apr 26, 2020
-                        p.tweet__content
-                            | What&apos;s the object oriented way to become wealthy?
-                            br
-                            br
-                            |                     Inheritance
-                        .tweet__metadata
-                            .tweet__data-container
-                                ion-icon.tweet__data__icon(name='chatbox-outline')
-                                p.tweet__data__number 3
-                            .tweet__data-container
-                                ion-icon.tweet__data__icon(name='heart-outline')
-                                p.tweet__data__number 3
+            each tweet in tweets
+                +tweet(tweet.user.avatar, tweet.user.name, tweet.user.username, tweet.dateTweeted, tweet.content)
 
