@@ -49,6 +49,11 @@
   background: #1a91da;
 }
 
+.btn--tweet:disabled {
+  background: #a5d8ff;
+  cursor: not-allowed;
+}
+
 .btn.btn--upload {
   position: relative;
   background-color: #e03131;

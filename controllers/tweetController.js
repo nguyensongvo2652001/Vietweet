@@ -42,11 +42,12 @@ const setTweetUser = (req, res, next) => {
   next();
 };
 
-const createTweet = handlerFactory.createOne(Tweet, 'tweet', [
-  'content',
-  'image',
-  'user'
-]);
+const createTweet = handlerFactory.createOne(
+  Tweet,
+  'tweet',
+  ['content', 'image', 'user'],
+  { path: 'user' }
+);
 
 const setFeedFilterQuery = catchAsync(async (req, res, next) => {
   const followDocs = await Follow.find({ user: req.user.id });

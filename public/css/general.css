@@ -146,6 +146,12 @@ input:focus {
 /*********************/
 .tweet-container {
   border-bottom: 2px solid #e1e8ed;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.tweet-container:hover {
+  background-color: #e1e8ed;
 }
 
 .tweet {
@@ -201,8 +207,8 @@ input:focus {
 }
 
 .tweet__image {
-  width: 30rem;
-  height: 20rem;
+  height: 40rem;
+  width: auto;
   border-radius: 9px;
 }
 

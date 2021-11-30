@@ -20,6 +20,7 @@ export const sendRequest = async (url, method, body, isFormData = false) => {
 
   const responseBody = await response.json();
   if (!response.ok) throw new Error(responseBody.message);
+  return responseBody;
 };
 
 export const redirect = url => {

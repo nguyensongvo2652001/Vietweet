@@ -7,7 +7,14 @@ export const createTweet = async data => {
     const formData = new FormData();
     formData.append('content', data.content);
     if (data.image) formData.append('image', data.image);
-    await sendRequest('/api/v1/tweets', 'POST', formData, true);
+    const responseData = await sendRequest(
+      '/api/v1/tweets',
+      'POST',
+      formData,
+      true
+    );
+    const { tweet } = responseData.data;
+    return tweet;
   } catch (e) {
     throw e;
   }
