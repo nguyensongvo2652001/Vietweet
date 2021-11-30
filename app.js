@@ -8,6 +8,7 @@ const AppError = require('./utils/appError');
 const userRouter = require('./routers/userRouter');
 const followRouter = require('./routers/followRouter');
 const tweetRouter = require('./routers/tweetRouter');
+const likeRouter = require('./routers/likeRouter');
 
 const app = express();
 const apiVersion = process.env.API_VERSION;
@@ -23,6 +24,7 @@ app.use(express.static('public'));
 app.use(`${apiBasePath}/users`, userRouter);
 app.use(`${apiBasePath}/follows`, followRouter);
 app.use(`${apiBasePath}/tweets`, tweetRouter);
+app.use(`${apiBasePath}/likes`, likeRouter);
 app.all('*', (req, res, next) => {
   next(new AppError(`Can't find ${req.originalUrl} on this server!`, 404));
 });

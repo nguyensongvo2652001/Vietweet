@@ -45,7 +45,8 @@ const setTweetUser = (req, res, next) => {
 const createTweet = handlerFactory.createOne(Tweet, 'tweet', [
   'content',
   'image',
-  'user'
+  'user',
+  'likeCounts'
 ]);
 
 const setFeedFilterQuery = catchAsync(async (req, res, next) => {
