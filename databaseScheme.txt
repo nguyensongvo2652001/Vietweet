@@ -25,3 +25,4 @@ NOTE2: We will use document middleware to update the followingCount and follower
 + content: (200 max characters)
 + image: At most 1 image
 + date tweeted
++likeCounts

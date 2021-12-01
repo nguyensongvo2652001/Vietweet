@@ -8,6 +8,7 @@ const AppError = require('./utils/appError');
 const userRouter = require('./routers/userRouter');
 const followRouter = require('./routers/followRouter');
 const tweetRouter = require('./routers/tweetRouter');
+const likeRouter = require('./routers/likeRouter');
 const viewRouter = require('./routers/viewRouter');
 
 const app = express();
@@ -27,7 +28,9 @@ app.set('views', `${__dirname}/public/views`);
 app.use(`${apiBasePath}/users`, userRouter);
 app.use(`${apiBasePath}/follows`, followRouter);
 app.use(`${apiBasePath}/tweets`, tweetRouter);
+app.use(`${apiBasePath}/likes`, likeRouter);
 app.use('/', viewRouter);
+
 app.all('*', (req, res, next) => {
   next(new AppError(`Can't find ${req.originalUrl} on this server!`, 404));
 });
