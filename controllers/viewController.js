@@ -60,9 +60,40 @@ const homepageViewController = catchAsync(async (req, res, next) => {
   });
 });
 
+const setCurrentUser = (req, res, next) => {
+  req.params.username = req.user.username;
+  next();
+};
+
+const profileViewController = catchAsync(async (req, res, next) => {
+  const user = await User.findOne({ username: req.params.username });
+  if (!user) {
+    console.log('Not found');
+    return next();
+  }
+  const tweets = await Tweet.find({ user: user._id })
+    .sort('-dateTweeted')
+    .populate('user');
+
+  const isLogInUser = req.user._id.equals(user._id);
+  const followed = await Follow.findOne({
+    user: req.user._id,
+    following: user._id
+  });
+
+  res.status(200).render('profile', {
+    user,
+    tweets,
+    isLogInUser,
+    followed
+  });
+});
+
 module.exports = {
   loginViewController,
   homepageViewController,
+  setCurrentUser,
+  profileViewController,
   isLogin,
   redirectIfLogin,
   redirectIfNotLogin

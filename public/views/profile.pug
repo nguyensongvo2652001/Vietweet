@@ -1,0 +1,93 @@
+extends content 
+
+block append head 
+    link(href='/css/profile.css' rel='stylesheet')
+    link(rel='stylesheet' href='/css/modal.css')
+    link(rel='stylesheet' href='/css/edit_profile.css')
+
+block content 
+    include _tweet
+    .backdrop
+    .modal.edit-profile
+        header.edit-profile__header
+            ion-icon.edit-profile__close(name='close-outline')
+            h2.edit-profile__title Edit profile
+            button.btn.btn--save-profile Save
+        .edit-profile__images
+            .edit-profile__background-container
+                img.edit-profile__background(src=`/img/users/backgrounds/${user.background}`)
+                label
+                    input(type='file' style='display: none')
+                    ion-icon.edit-profile__background-change-icon(name='camera-outline')
+            .edit-profile__avatar-container
+                img.edit-profile__avatar(src=`/img/users/avatars/${user.avatar}`)
+                label
+                    input(type='file' style='display: none')
+                    ion-icon.edit-profile__avatar-change-icon(name='camera-outline')
+            .edit-profile__avatar-spacer
+        form.edit-profile__form
+            .edit-profile__form-element
+                label.edit-profile__form-label(for='name') Name
+                input#name.edit-profile__form-input.name-input(type='text')
+            .edit-profile__form-element
+                label.edit-profile__form-label(for='bio') Bio
+                input#bio.edit-profile__form-input.bio-input(type='text')
+            .edit-profile__form-element
+                label.edit-profile__form-label(for='location') Location
+                input#location.edit-profile__form-input.location-input(type='text')
+            .edit-profile__form-element
+                label.edit-profile__form-label.website-input(for='website') Website
+                input#website.edit-profile__form-input(type='text')
+        button.btn.btn--delete-account Delete account
+
+    .content
+        .profile
+            .profile__background-container
+                img.profile__background(src=`/img/users/backgrounds/${user.background}`)
+            .profile__avatar-container
+                img.profile__avatar(src=`/img/users/avatars/${user.avatar}`)
+                .profile__avatar-container__spacer
+            
+            - if (isLogInUser)
+                button.btn.btn--edit-profile.profile__btn Edit profile
+            - else if (followed)
+                button.btn.btn--unfollow.profile__btn Following
+            - else 
+                button.btn.btn--follow.profile__btn Follow
+            .profile__info
+                p.profile__name #{user.name}
+                p.profile__username.username @#{user.username}
+                - if (user.bio)
+                    p.profile__bio #{user.bio}
+                ul.profile__metadata
+                    - if (user.location) 
+                        li.profile__metadata-item.proflile__location-container
+                            ion-icon(name='location-outline')
+                            p.profile__location #{user.location}
+                    - if (user.website)
+                        li.profile__metadata-item.proflile__website-container
+                            ion-icon(name='link-outline')
+                            a.profile__website(href=`${user.website}`) #{user.website}
+
+                    li.profile__metadata-item.proflile__date-joined-container
+                        ion-icon(name='calendar-outline')
+                        p.date-joined__website Joined #{new Date(user.dateJoined).toLocaleDateString({year: 'numeric', month: 'long', day: 'numeric'})}
+                ul.profile__follow-info
+                    li.profile__follow-info-item
+                        p.profile__follow-number #{user.followersCount}
+                        |                             followers
+                    li.profile__follow-info-item
+                        p.profile__follow-number #{user.followingsCount}
+                        |                             followings
+            .profile__content
+                .profile__tabs
+                    .profile__tab.profile__tab--active.profile__tweets-tab
+                        p Tweets
+                    .profile__tab.profile__liked-tab
+                        p Liked
+            .tweets
+                each tweet in tweets
+                    +tweet(tweet.user.avatar, tweet.user.name, tweet.user.username, tweet.dateTweeted, tweet.content,
+                     tweet.id,tweet.image)
+               
+

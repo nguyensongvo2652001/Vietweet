@@ -26,3 +26,6 @@ export const sendRequest = async (url, method, body, isFormData = false) => {
 export const redirect = url => {
   window.location.href = url;
 };
+
+export const getRelativeUrl = () =>
+  window.location.pathname + window.location.search;
