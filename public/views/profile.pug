@@ -4,41 +4,76 @@ block append head
     link(href='/css/profile.css' rel='stylesheet')
     link(rel='stylesheet' href='/css/modal.css')
     link(rel='stylesheet' href='/css/edit_profile.css')
+    link(rel='stylesheet' href='/css/confirm_delete.css')
+    link(rel='stylesheet' href='/css/change_password.css')
 
 block content 
     include _tweet
-    .backdrop
-    .modal.edit-profile
-        header.edit-profile__header
-            ion-icon.edit-profile__close(name='close-outline')
-            h2.edit-profile__title Edit profile
-            button.btn.btn--save-profile Save
-        .edit-profile__images
-            .edit-profile__background-container
-                img.edit-profile__background(src=`/img/users/backgrounds/${user.background}`)
-                label
+    .change-password-container.hidden
+        .backdrop
+        .modal.change-password
+            header.change-password__header
+                ion-icon.change-password__icon(name='logo-twitter')
+                h2.change-password__title Change password
+            p.change-password__message Enter your current password and your new password to change your password.
+            form.change-password__form
+                .change-password__form-item
+                    label.change-password__form-label(for='current_password') Current password
+                    input#current_password.change-password__form-input(type='password' placeholder='●●●●●●●●' required='true')
+                .change-password__form-item
+                    label.change-password__form-label(for='new_password') New password
+                    input#new_password.change-password__form-input(type='password' placeholder='●●●●●●●●' required='true')
+                .change-password__buttons
+                    button.btn.btn--change-password Change my password
+                    button.btn.btn--cancel Cancel
+
+    .edit-profile-container.hidden
+        .confirm-delete-container.hidden
+            .backdrop.confirm-delete-backdrop
+            .modal.confirm-delete
+                header.confirm-delete__header
+                    ion-icon.confirm-delete__icon(name='logo-twitter')
+                    h2.confirm-delete__title Delete your account
+                p.confirm-delete__message Enter your password again to confirm that you want to delete your account. Please keep in mind that you will not be able to revert this action.
+                form.confirm-delete__form
+                    .confirm-delete__form-item
+                        label.confirm-delete__form-label(for='password') Password
+                        input#password.confirm-delete__form-input(type='password' placeholder='●●●●●●●●' required='true')
+                    .confirm-delete__buttons
+                        button.btn.btn--delete-account Delete my account
+                        button.btn.btn--cancel Cancel
+        .backdrop
+        .modal.edit-profile
+            header.edit-profile__header
+                ion-icon.edit-profile__close(name='close-outline')
+                h2.edit-profile__title Edit profile
+                button.btn.btn--save-profile Save
+            .edit-profile__images
+                .edit-profile__background-container
+                    img.edit-profile__background(src='/img/users/backgrounds/default.jpg')
+                    label
                     input(type='file' style='display: none')
                     ion-icon.edit-profile__background-change-icon(name='camera-outline')
-            .edit-profile__avatar-container
-                img.edit-profile__avatar(src=`/img/users/avatars/${user.avatar}`)
-                label
+                .edit-profile__avatar-container
+                    img.edit-profile__avatar(src='/img/users/avatars/default.jpg')
+                    label
                     input(type='file' style='display: none')
                     ion-icon.edit-profile__avatar-change-icon(name='camera-outline')
-            .edit-profile__avatar-spacer
-        form.edit-profile__form
-            .edit-profile__form-element
-                label.edit-profile__form-label(for='name') Name
-                input#name.edit-profile__form-input.name-input(type='text')
-            .edit-profile__form-element
-                label.edit-profile__form-label(for='bio') Bio
-                input#bio.edit-profile__form-input.bio-input(type='text')
-            .edit-profile__form-element
-                label.edit-profile__form-label(for='location') Location
-                input#location.edit-profile__form-input.location-input(type='text')
-            .edit-profile__form-element
-                label.edit-profile__form-label.website-input(for='website') Website
-                input#website.edit-profile__form-input(type='text')
-        button.btn.btn--delete-account Delete account
+                .edit-profile__avatar-spacer
+            form.edit-profile__form
+                .edit-profile__form-element
+                    label.edit-profile__form-label(for='name') Name
+                    input#name.edit-profile__form-input.name-input(type='text')
+                .edit-profile__form-element
+                    label.edit-profile__form-label(for='bio') Bio
+                    input#bio.edit-profile__form-input.bio-input(type='text')
+                .edit-profile__form-element
+                    label.edit-profile__form-label(for='location') Location
+                    input#location.edit-profile__form-input.location-input(type='text')
+                .edit-profile__form-element
+                    label.edit-profile__form-label(for='website') Website
+                    input#website.edit-profile__form-input.website-input(type='text')
+            button.btn.btn--delete-account Delete account
 
     .content
         .profile
@@ -50,6 +85,7 @@ block content
             
             - if (isLogInUser)
                 button.btn.btn--edit-profile.profile__btn Edit profile
+                button.btn.btn--change-password.profile__btn--change-password Change password
             - else if (followed)
                 button.btn.btn--unfollow.profile__btn Following
             - else 

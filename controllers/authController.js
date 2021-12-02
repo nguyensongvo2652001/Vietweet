@@ -71,6 +71,15 @@ const login = catchAsync(async (req, res, next) => {
   await createAndSendToken({ user, statusCode: 200, req, res });
 });
 
+const logout = (req, res, next) => {
+  res.cookie('jwt', 'loggedout', {
+    expires: new Date(Date.now()),
+    httpOnly: true,
+    secure: req.secure || req.header('x-forwarded-proto') === 'https'
+  });
+  res.status(200).json({ status: 'success' });
+};
+
 const protect = catchAsync(async (req, res, next) => {
   let token;
   if (
@@ -111,4 +120,4 @@ const protect = catchAsync(async (req, res, next) => {
   next();
 });
 
-module.exports = { signUp, login, protect };
+module.exports = { signUp, login, logout, protect };

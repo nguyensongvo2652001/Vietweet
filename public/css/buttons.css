@@ -90,6 +90,26 @@
   background-color: #ca2c2c;
 }
 
+.btn.btn--cancel {
+  background-color: #000;
+  color: #fff;
+  font-weight: 700;
+  font-size: 1.5rem;
+  padding: 1.2rem 1.2rem;
+  margin-left: 2rem;
+  border-radius: 9px;
+}
+
+.btn.btn--change-password {
+  background-color: #000;
+  color: #fff;
+  font-weight: 700;
+  font-size: 1.5rem;
+  padding: 1.2rem 1.2rem;
+  margin-left: 2rem;
+  border-radius: 9px;
+}
+
 .btn.btn--logout {
   padding: 1.6rem 1.6rem;
 }
@@ -115,4 +135,15 @@
 .btn--full:hover,
 .btn--full:active {
   background: #1a91da;
+}
+
+.btn.btn--reset-password,
+.btn.btn--forgot-password {
+  background-color: #1da1f2;
+  color: #f5f8fa;
+}
+
+.btn.btn--forgot-password,
+.btn.btn--reset-password:hover {
+  background-color: #1a91da;
 }

@@ -31,6 +31,11 @@
   right: 20px;
 }
 
+.profile__btn--change-password {
+  position: absolute;
+  right: 150px;
+}
+
 .profile__info {
   padding: 0 2.4rem;
 }

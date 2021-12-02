@@ -16,6 +16,7 @@
     <link href="../css/content.css" rel="stylesheet" />
     <link href="../css/profile.css" rel="stylesheet" />
     <link href="../css/sidebar.css" rel="stylesheet" />
+    <link href="../css/confirm_delete.css" rel="stylesheet" />
     <link rel="stylesheet" href="../css/modal.css" />
     <link rel="stylesheet" href="../css/edit_profile.css" />
     <script
@@ -29,89 +30,123 @@
   </head>
 
   <body>
-    <div class="backdrop"></div>
-    <div class="modal edit-profile">
-      <header class="edit-profile__header">
-        <ion-icon name="close-outline" class="edit-profile__close"></ion-icon>
-        <h2 class="edit-profile__title">Edit profile</h2>
-        <button class="btn btn--save-profile">Save</button>
-      </header>
-      <div class="edit-profile__images">
-        <div class="edit-profile__background-container">
-          <img
-            class="edit-profile__background"
-            src="../img/users/backgrounds/default.jpg"
-          />
-          <label>
-            <input type="file" style="display: none" />
-            <ion-icon
-              name="camera-outline"
-              class="edit-profile__background-change-icon"
-            ></ion-icon>
-          </label>
+    <div class = 'edit-profile-container hidden'>
+      <div class="backdrop"></div>
+      <div class="modal edit-profile">
+        <div class="confirm-delete-container hidden">
+          <div class="backdrop confirm-delete-backdrop"></div>
+          <div class="modal confirm-delete">
+            <header class="confirm-delete__header">
+              <ion-icon name="logo-twitter" class="confirm-delete__icon"></ion-icon>
+              <h2 class="confirm-delete__title">Delete your account</h2>
+            </header>
+            <p class="confirm-delete__message">
+              Enter your password again to confirm that you want to delete your
+              account. Please keep in mind that you will not be able to revert this
+              action.
+            </p>
+            <form class="confirm-delete__form">
+              <div class="confirm-delete__form-item">
+                <label class="confirm-delete__form-label" for="password"
+                  >Password</label
+                >
+                <input
+                  type="password"
+                  class="confirm-delete__form-input"
+                  id="password"
+                  placeholder="●●●●●●●●"
+                  required="true"
+                />
+              </div>
+              <div class="confirm-delete__buttons">
+                <button class="btn btn--delete-account">Delete my account</button>
+                <button class="btn btn--cancel">Cancel</button>
+              </div>
+            </form>
+          </div>
+        </div>
+        <header class="edit-profile__header">
+          <ion-icon name="close-outline" class="edit-profile__close"></ion-icon>
+          <h2 class="edit-profile__title">Edit profile</h2>
+          <button class="btn btn--save-profile">Save</button>
+        </header>
+        <div class="edit-profile__images">
+          <div class="edit-profile__background-container">
+            <img
+              class="edit-profile__background"
+              src="../img/users/backgrounds/default.jpg"
+            />
+            <label>
+              <input type="file" style="display: none" />
+              <ion-icon
+                name="camera-outline"
+                class="edit-profile__background-change-icon"
+              ></ion-icon>
+            </label>
+          </div>
+
+          <div class="edit-profile__avatar-container">
+            <img
+              class="edit-profile__avatar"
+              src="../img/users/avatars/default.jpg"
+            />
+            <label>
+              <input type="file" style="display: none" />
+              <ion-icon
+                name="camera-outline"
+                class="edit-profile__avatar-change-icon"
+              ></ion-icon>
+            </label>
+          </div>
+          <div class="edit-profile__avatar-spacer"></div>
         </div>
 
-        <div class="edit-profile__avatar-container">
-          <img
-            class="edit-profile__avatar"
-            src="../img/users/avatars/default.jpg"
-          />
-          <label>
-            <input type="file" style="display: none" />
-            <ion-icon
-              name="camera-outline"
-              class="edit-profile__avatar-change-icon"
-            ></ion-icon>
-          </label>
-        </div>
-        <div class="edit-profile__avatar-spacer"></div>
+        <form class="edit-profile__form">
+          <div class="edit-profile__form-element">
+            <label class="edit-profile__form-label" for="name">Name</label>
+            <input
+              class="edit-profile__form-input"
+              id="name"
+              type="text"
+              class="name-input"
+            />
+          </div>
+
+          <div class="edit-profile__form-element">
+            <label class="edit-profile__form-label" for="bio">Bio</label>
+            <input
+              class="edit-profile__form-input"
+              id="bio"
+              type="text"
+              class="bio-input"
+            />
+          </div>
+
+          <div class="edit-profile__form-element">
+            <label class="edit-profile__form-label" for="location"
+              >Location</label
+            >
+            <input
+              class="edit-profile__form-input"
+              id="location"
+              type="text"
+              class="location-input"
+            />
+          </div>
+
+          <div class="edit-profile__form-element">
+            <label class="edit-profile__form-label" for="website">Website</label>
+            <input
+              class="edit-profile__form-input"
+              id="website"
+              type="text"
+              class="website-input"
+            />
+          </div>
+        </form>
+
+        <button class="btn btn--delete-account">Delete account</button>
       </div>
-
-      <form class="edit-profile__form">
-        <div class="edit-profile__form-element">
-          <label class="edit-profile__form-label" for="name">Name</label>
-          <input
-            class="edit-profile__form-input"
-            id="name"
-            type="text"
-            class="name-input"
-          />
-        </div>
-
-        <div class="edit-profile__form-element">
-          <label class="edit-profile__form-label" for="bio">Bio</label>
-          <input
-            class="edit-profile__form-input"
-            id="bio"
-            type="text"
-            class="bio-input"
-          />
-        </div>
-
-        <div class="edit-profile__form-element">
-          <label class="edit-profile__form-label" for="location"
-            >Location</label
-          >
-          <input
-            class="edit-profile__form-input"
-            id="location"
-            type="text"
-            class="location-input"
-          />
-        </div>
-
-        <div class="edit-profile__form-element">
-          <label class="edit-profile__form-label" for="website">Website</label>
-          <input
-            class="edit-profile__form-input"
-            id="website"
-            type="text"
-            class="website-input"
-          />
-        </div>
-      </form>
-
-      <button class="btn btn--delete-account">Delete account</button>
     </div>
     <main class="home">
       <nav class="nav">
@@ -176,7 +211,10 @@
                     <img class = 'profile__avatar' src = '../img/users/avatars/default.jpg'/>
                     <div class="profile__avatar-container__spacer"></div>
                 </div>
+                
+                <button class = 'btn btn--change-password profile__btn--change-password'>Change password</button>
                 <button class = 'btn btn--edit-profile profile__btn'>Edit profile</button>
+
                 <div class = 'profile__info'>
                     <p class = 'profile__name'>Rosario Hackett</p>
                     <p class = 'profile__username username'>@helloWorld</p>
