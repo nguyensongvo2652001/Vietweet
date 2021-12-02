@@ -1,4 +1,5 @@
 const { promisify } = require('util');
+const crypto = require('crypto');
 
 const jwt = require('jsonwebtoken');
 
@@ -130,7 +131,6 @@ const forgotPassword = catchAsync(async (req, res, next) => {
 
   //2. Find account corresponding to that email/username
   const user = await User.findOne({ $or: [{ username }, { email: username }] });
-  //2.1 Returns an error if there are no such accounts
   if (!user)
     return next(
       new AppError(
@@ -138,9 +138,11 @@ const forgotPassword = catchAsync(async (req, res, next) => {
         400
       )
     );
+
   //3.Create a passwordResetToken and passwordResetTokenExpiredAt field
   const resetToken = user.createPasswordResetToken();
   await user.save({ validateBeforeSave: false });
+
   //4. Send email
   try {
     const resetURL = `${req.protocol}://${req.get(
@@ -154,7 +156,6 @@ const forgotPassword = catchAsync(async (req, res, next) => {
       message: `We have sent an email to ${user.email}. Please check your email for instructions.`
     });
   } catch (e) {
-    console.log(e);
     user.passwordResetToken = undefined;
     user.passwordResetTokenExpiresAt = undefined;
     await user.save({ validateBeforeSave: false });
@@ -163,7 +164,41 @@ const forgotPassword = catchAsync(async (req, res, next) => {
       message: 'Something went wrong sending the email. Please try again later.'
     });
   }
-  //4.1 Delete passwordResetToken and passwordResetTokenExpiredAt field if fail to send email
 });
 
-module.exports = { signUp, login, logout, protect, forgotPassword };
+const resetPassword = catchAsync(async (req, res, next) => {
+  //1. Check if the passwordResetToken is valid
+  let { token } = req.params;
+  token = crypto
+    .createHash('sha256')
+    .update(token)
+    .digest('hex');
+
+  const user = await User.findOne({
+    passwordResetToken: token,
+    passwordResetTokenExpiresAt: { $gt: Date.now() }
+  }).select('passwordResetTokenExpiresAt');
+
+  if (!user)
+    return next(
+      new AppError('Password reset token is invalid or expired.', 400)
+    );
+  //2. Update password
+  const { password } = req.body;
+  if (!password)
+    return next(new AppError('Please provide your new password', 400));
+
+  user.password = password;
+  await user.save();
+  //3. Log the user in
+  createAndSendToken({ user, statusCode: 200, req, res });
+});
+
+module.exports = {
+  signUp,
+  login,
+  logout,
+  protect,
+  forgotPassword,
+  resetPassword
+};
