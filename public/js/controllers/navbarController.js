@@ -1,6 +1,8 @@
 /*eslint-disable*/
 
 import navbarView from '../views/navbarView.js';
+import * as navbarModel from '../models/navbarModel.js';
+import { showAlert } from '../alert.js';
 import { getRelativeUrl, redirect } from '../helper.js';
 
 const setActiveLink = () => {
@@ -25,10 +27,20 @@ const profileItemClickHandler = () => {
   setActiveLink();
 };
 
+const logoutButtonClickHandler = async () => {
+  try {
+    await navbarModel.logout();
+    redirect('/');
+  } catch (e) {
+    showAlert('error', 'Something went wrong', 2);
+  }
+};
+
 const init = () => {
   setActiveLink();
   navbarView.addHomeClickListener(homeItemClickHandler);
   navbarView.addProfileClickListener(profileItemClickHandler);
+  navbarView.addLogoutClickListener(logoutButtonClickHandler);
 };
 
 init();

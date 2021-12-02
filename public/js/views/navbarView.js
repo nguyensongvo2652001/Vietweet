@@ -5,6 +5,7 @@ class Navbar {
     this.parentElement = document.querySelector('.nav');
     this.homeItem = this.parentElement.querySelector('.nav__home');
     this.profileItem = this.parentElement.querySelector('.nav__profile');
+    this.logoutButton = this.parentElement.querySelector('.btn--logout');
   }
 
   setNavItemInactive(item) {
@@ -25,6 +26,10 @@ class Navbar {
 
   addProfileClickListener(handler) {
     this.profileItem.addEventListener('click', handler);
+  }
+
+  addLogoutClickListener(handler) {
+    this.logoutButton.addEventListener('click', handler);
   }
 }
 
