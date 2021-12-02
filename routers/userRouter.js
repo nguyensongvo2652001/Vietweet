@@ -9,6 +9,8 @@ const router = express.Router();
 router.post('/signup', authController.signUp);
 router.post('/login', authController.login);
 
+router.patch('/users/change-password', authController.changePassword);
+
 router.use(authController.protect);
 router.get('/logout', authController.logout);
 
