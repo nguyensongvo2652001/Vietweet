@@ -4,6 +4,7 @@ const jwt = require('jsonwebtoken');
 
 const User = require('../models/userModel');
 const AppError = require('../utils/appError');
+const Email = require('../utils/email');
 const catchAsync = require('../utils/catchAsync');
 const filterObject = require('../utils/filterObject');
 
@@ -120,4 +121,49 @@ const protect = catchAsync(async (req, res, next) => {
   next();
 });
 
-module.exports = { signUp, login, logout, protect };
+const forgotPassword = catchAsync(async (req, res, next) => {
+  //1. Get email or username from user
+  const { username } = req.body;
+
+  if (!username)
+    return next(new AppError('Please provide your username or email.', 400));
+
+  //2. Find account corresponding to that email/username
+  const user = await User.findOne({ $or: [{ username }, { email: username }] });
+  //2.1 Returns an error if there are no such accounts
+  if (!user)
+    return next(
+      new AppError(
+        'No accounts found with this username. Please try again',
+        400
+      )
+    );
+  //3.Create a passwordResetToken and passwordResetTokenExpiredAt field
+  const resetToken = user.createPasswordResetToken();
+  await user.save({ validateBeforeSave: false });
+  //4. Send email
+  try {
+    const resetURL = `${req.protocol}://${req.get(
+      'host'
+    )}/resetPassword/${resetToken}`;
+
+    await new Email(user, resetURL).sendPasswordReset();
+
+    res.status(200).json({
+      status: 'success',
+      message: `We have sent an email to ${user.email}. Please check your email for instructions.`
+    });
+  } catch (e) {
+    console.log(e);
+    user.passwordResetToken = undefined;
+    user.passwordResetTokenExpiresAt = undefined;
+    await user.save({ validateBeforeSave: false });
+    res.status(500).json({
+      status: 'fail',
+      message: 'Something went wrong sending the email. Please try again later.'
+    });
+  }
+  //4.1 Delete passwordResetToken and passwordResetTokenExpiredAt field if fail to send email
+});
+
+module.exports = { signUp, login, logout, protect, forgotPassword };
