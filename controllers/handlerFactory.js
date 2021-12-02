@@ -1,7 +1,6 @@
 const catchAsync = require('../utils/catchAsync');
 const AppError = require('../utils/appError');
 const filterObject = require('../utils/filterObject');
-const { listenerCount } = require('../models/tweetModel');
 
 const getAll = (Model, docsName) =>
   catchAsync(async (req, res, next) => {

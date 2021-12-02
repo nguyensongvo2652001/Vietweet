@@ -24,7 +24,9 @@ likeSchema.pre('save', async function(next) {
   if (!user)
     return next(new AppError(`Can not find user with id = ${this.user}`, 400));
   if (!tweet)
-    return next(new AppError(`Can not find user with id = ${this.tweet}`, 400));
+    return next(
+      new AppError(`Can not find tweet with id = ${this.tweet}`, 400)
+    );
 });
 
 likeSchema.post('save', async function(doc, next) {

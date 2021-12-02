@@ -30,8 +30,8 @@ const uploadImage = upload.single('image');
 const resizeImage = catchAsync(async (req, res, next) => {
   if (!req.file) return next();
 
-  req.body.image = `tweet_${req.user.id}_${Date.now()}.jpeg`;
-  const filePath = `public/img/tweets/${req.body.image}`;
+  req.body.image = `reply_${req.user.id}_${Date.now()}.jpeg`;
+  const filePath = `public/img/replies/${req.body.image}`;
   await sharp(req.file.buffer)
     .resize(900, 1350)
     .jpeg()
@@ -40,13 +40,8 @@ const resizeImage = catchAsync(async (req, res, next) => {
   next();
 });
 
-const checkReply = async (req, res, next) => {
-  const reply =
-    (await Reply.findById(req.params.id)) ||
-    (await Reply.findOne({
-      user: req.user.id,
-      tweet: req.params.tweetID
-    }));
+const checkReply = catchAsync(async (req, res, next) => {
+  const reply = await Reply.findById(req.params.id);
 
   if (!reply)
     return next(
@@ -56,17 +51,11 @@ const checkReply = async (req, res, next) => {
   if (!reply.user.equals(req.user.id))
     return next(new AppError(`You are not allowed to delete this reply`, 401));
 
-  req.params.id = reply.id;
   next();
-};
+});
 
 const setReplyUser = (req, res, next) => {
   req.body.user = req.user.id;
-  next();
-};
-
-const setReplyTweet = (req, res, next) => {
-  req.body.tweet = req.params.tweet || req.body.tweet;
   next();
 };
 
@@ -79,31 +68,27 @@ const createReply = handlerFactory.createOne(Reply, 'reply', [
 
 const deleteReply = handlerFactory.deleteOne(Reply, 'reply');
 
-const setReplyFilterQuery = catchAsync(async (req, res, next) => {
-  const replies = await Tweet.find({ tweet: req.body.tweet });
-  const replyUsers = replies.map(reply => reply.user);
+// const setReplyFilterQuery = catchAsync(async (req, res, next) => {
+//   const replies = await Tweet.find({ tweet: req.body.tweet });
+//   const replyUsers = replies.map(reply => reply.user);
 
-  req.filterQuery = {
-    $and: [{ user: { $in: replyUsers } }, { tweet: req.body.tweet }]
-  };
+//   req.filterQuery = {
+//     $and: [{ user: { $in: replyUsers } }, { tweet: req.body.tweet }]
+//   };
 
-  req.query.sort = 'dateReplied';
+//   req.query.sort = '-dateReplied';
 
-  next();
-});
+//   next();
+// });
 
-const getAllReplies = handlerFactory.getAll(Reply, 'reply');
+// const getAllReplies = handlerFactory.getAll(Reply, 'reply');
 
 module.exports = {
   uploadImage,
   resizeImage,
   setReplyUser,
-  setReplyTweet,
 
   checkReply,
   createReply,
-  deleteReply,
-
-  getAllReplies,
-  setReplyFilterQuery
+  deleteReply
 };

@@ -9,6 +9,7 @@ const userRouter = require('./routers/userRouter');
 const followRouter = require('./routers/followRouter');
 const tweetRouter = require('./routers/tweetRouter');
 const likeRouter = require('./routers/likeRouter');
+const replyRouter = require('./routers/replyRouter');
 const viewRouter = require('./routers/viewRouter');
 
 const app = express();
@@ -29,6 +30,7 @@ app.use(`${apiBasePath}/users`, userRouter);
 app.use(`${apiBasePath}/follows`, followRouter);
 app.use(`${apiBasePath}/tweets`, tweetRouter);
 app.use(`${apiBasePath}/likes`, likeRouter);
+app.use(`${apiBasePath}/replies`, replyRouter);
 app.use('/', viewRouter);
 
 app.all('*', (req, res, next) => {
