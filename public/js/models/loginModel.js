@@ -3,7 +3,7 @@ import { sendRequest } from '../helper.js';
 
 export const state = {
   isLogin: false,
-  alertWaitSeconds: 3
+  alertWaitSeconds: 1.5
 };
 
 export const toggleIsLoginState = () => {
