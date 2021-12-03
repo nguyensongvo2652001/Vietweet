@@ -53,13 +53,8 @@ const checkIfLikedTweet = async (req, tweet) => {
   return like._id;
 };
 
-const homepageViewController = catchAsync(async (req, res, next) => {
-  const followDocs = await Follow.find({ user: req.user.id });
-  const followings = followDocs.map(followDoc => followDoc.following);
-
-  let tweets = await Tweet.find({
-    $or: [{ user: { $in: followings } }, { user: req.user.id }]
-  })
+const getAllTweets = async (req, query) => {
+  let tweets = await Tweet.find(query)
     .sort('-dateTweeted')
     .populate('user');
 
@@ -76,6 +71,17 @@ const homepageViewController = catchAsync(async (req, res, next) => {
     };
   });
 
+  return tweets;
+};
+
+const homepageViewController = catchAsync(async (req, res, next) => {
+  const followDocs = await Follow.find({ user: req.user.id });
+  const followings = followDocs.map(followDoc => followDoc.following);
+
+  const tweets = await getAllTweets(req, {
+    $or: [{ user: { $in: followings } }, { user: req.user.id }]
+  });
+
   res.status(200).render('homepage', {
     tweets
   });
@@ -89,12 +95,10 @@ const setCurrentUser = (req, res, next) => {
 const profileViewController = catchAsync(async (req, res, next) => {
   const user = await User.findOne({ username: req.params.username });
   if (!user) {
-    console.log('Not found');
     return next();
   }
-  const tweets = await Tweet.find({ user: user._id })
-    .sort('-dateTweeted')
-    .populate('user');
+
+  const tweets = await getAllTweets(req, { user: user._id });
 
   const isLogInUser = req.user._id.equals(user._id);
   const followed = await Follow.findOne({
