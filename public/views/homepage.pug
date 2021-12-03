@@ -1,6 +1,6 @@
 extends content
 block append head 
-    script(type = 'module' src='./js/controllers/tweetCreateController.js')
+    script(type = 'module' src='/js/controllers/tweetCreateController.js')
 
 block content 
     include _tweet
@@ -11,7 +11,7 @@ block content
         .main__tweet-form-container
             form.main__tweet-form
                 .main__tweet-form__avatar-container
-                    img.avatar--small(src='../../img/users/avatars/default.jpg' alt='User avatar')
+                    img.avatar--small(src=`img/users/avatars/${user.avatar}` alt='User avatar')
                 .main__tweet-form__input-section
                     .main__tweet-form__input-container
                         textarea.main__tweet-form__input(placeholder="What's happening ?")

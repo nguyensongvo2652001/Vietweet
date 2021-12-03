@@ -4,6 +4,7 @@ import navbarView from '../views/navbarView.js';
 import * as navbarModel from '../models/navbarModel.js';
 import { showAlert } from '../alert.js';
 import { getRelativeUrl, redirect } from '../helper.js';
+import changePasswordView from '../views/changePasswordView.js';
 
 const setActiveLink = () => {
   const relativePath = getRelativeUrl();
@@ -32,7 +33,7 @@ const logoutButtonClickHandler = async () => {
     await navbarModel.logout();
     redirect('/');
   } catch (e) {
-    showAlert('error', 'Something went wrong', 2);
+    showAlert('error', 'Something went wrong', 1.5);
   }
 };
 

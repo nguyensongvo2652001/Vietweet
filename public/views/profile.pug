@@ -6,6 +6,7 @@ block append head
     link(rel='stylesheet' href='/css/edit_profile.css')
     link(rel='stylesheet' href='/css/confirm_delete.css')
     link(rel='stylesheet' href='/css/change_password.css')
+    script(src = '/js/controllers/changePasswordController.js' type = 'module')
 
 block content 
     include _tweet
@@ -19,12 +20,12 @@ block content
             form.change-password__form
                 .change-password__form-item
                     label.change-password__form-label(for='current_password') Current password
-                    input#current_password.change-password__form-input(type='password' placeholder='●●●●●●●●' required='true')
+                    input#current_password.change-password__form-input.change-password__form-input--currentPassword(type='password' placeholder='●●●●●●●●' required='true')
                 .change-password__form-item
                     label.change-password__form-label(for='new_password') New password
-                    input#new_password.change-password__form-input(type='password' placeholder='●●●●●●●●' required='true')
+                    input#new_password.change-password__form-input.change-password__form-input--newPassword(type='password' placeholder='●●●●●●●●' required='true')
                 .change-password__buttons
-                    button.btn.btn--change-password Change my password
+                    button.btn.btn--submit Submit
                     button.btn.btn--cancel Cancel
 
     .edit-profile-container.hidden

@@ -111,13 +111,13 @@ const protect = catchAsync(async (req, res, next) => {
     decoded.iat
   );
 
-  if (changedPasswordAfter)
-    return next(
-      new AppError(
-        'Users with this token already changed their password. Please login again',
-        400
-      )
-    );
+  // if (changedPasswordAfter)
+  //   return next(
+  //     new AppError(
+  //       'Users with this token already changed their password. Please login again',
+  //       400
+  //     )
+  //   );
 
   req.user = user;
   next();
@@ -212,7 +212,7 @@ const changePassword = catchAsync(async (req, res, next) => {
 
   // 3) If so, update password
   user.password = newPassword;
-  user.passwordChangedAt = new Date();
+  user.passwordChangedAt = Date.now() - 1000;
   await user.save();
   // User.findByIdAndUpdate will NOT work as intended!
 

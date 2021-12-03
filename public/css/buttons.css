@@ -44,7 +44,8 @@
   color: #1da1f2;
 }
 
-.btn.btn--tweet {
+.btn.btn--tweet,
+.btn.btn--submit {
   position: relative;
   background: #1da1f2;
   color: #f5f8fa;
@@ -52,7 +53,8 @@
   font-size: 1.4rem;
 }
 
-.btn--tweet:hover {
+.btn--tweet:hover,
+.btn--submit:hover {
   background: #1a91da;
 }
 

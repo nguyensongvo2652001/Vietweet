@@ -23,7 +23,6 @@ export const signUp = async (email, username, password) => {
 };
 
 export const login = async (username, password) => {
-  console.log(username, password);
   try {
     await sendRequest('/api/v1/users/login', 'POST', {
       username,
