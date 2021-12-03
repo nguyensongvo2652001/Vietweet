@@ -13,7 +13,7 @@ router.patch('/resetPassword/:token', authController.resetPassword);
 
 router.use(authController.protect);
 router.get('/logout', authController.logout);
-
+router.patch('/changePassword', authController.changePassword);
 router.patch(
   '/me',
   userController.uploadImages,

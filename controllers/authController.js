@@ -67,6 +67,7 @@ const login = catchAsync(async (req, res, next) => {
   const user = await User.findOne({
     $or: [{ username }, { email: username }]
   }).select('+password');
+
   if (!user || !(await user.checkPassword(password, user.password)))
     return next(new AppError('Incorrect username or password', 400));
 
@@ -194,11 +195,37 @@ const resetPassword = catchAsync(async (req, res, next) => {
   createAndSendToken({ user, statusCode: 200, req, res });
 });
 
+const changePassword = catchAsync(async (req, res, next) => {
+  const { currentPassword, newPassword } = req.body;
+  if (!currentPassword)
+    return next(new AppError('Current password must be defined', 400));
+  if (!newPassword)
+    return next(new AppError('New password must be defined', 400));
+
+  // 1) Get user from collection
+  const user = await User.findById(req.user._id).select('+password');
+
+  // 2) Check if PATCHed current password is correct
+  if (!(await user.checkPassword(currentPassword, user.password))) {
+    return next(new AppError('Your current password is wrong.', 400));
+  }
+
+  // 3) If so, update password
+  user.password = newPassword;
+  user.passwordChangedAt = new Date();
+  await user.save();
+  // User.findByIdAndUpdate will NOT work as intended!
+
+  // 4) Log user in, send JWT
+  await createAndSendToken({ user, statusCode: 200, req, res });
+});
+
 module.exports = {
   signUp,
   login,
   logout,
   protect,
+  resetPassword,
   forgotPassword,
-  resetPassword
+  changePassword
 };
