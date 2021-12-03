@@ -18,8 +18,16 @@ export const sendRequest = async (url, method, body, isFormData = false) => {
     body: sentData
   });
 
-  const responseBody = await response.json();
-  if (!response.ok) throw new Error(responseBody.message);
+  let responseBody = null;
+
+  try {
+    responseBody = await response.json();
+
+    if (!response.ok) throw new Error(responseBody.message);
+  } catch (e) {
+    console.log(response);
+    if (!response.ok) throw new Error('Something went wrong');
+  }
   return responseBody;
 };
 

@@ -22,6 +22,5 @@ block content
                         button.btn.btn--tweet Tweet
         .tweets
             each tweet in tweets
-                +tweet(tweet.user.avatar, tweet.user.name, tweet.user.username, tweet.dateTweeted, tweet.content, tweet.id,
-                tweet.image)
+                +tweet(tweet)
 

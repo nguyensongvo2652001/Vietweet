@@ -6,6 +6,7 @@ const catchAsync = require('../utils/catchAsync');
 const User = require('../models/userModel');
 const Follow = require('../models/followModel');
 const Tweet = require('../models/tweetModel');
+const Like = require('../models/likeModel');
 
 const isLogin = catchAsync(async (req, res, next) => {
   const token = req.cookies.jwt;
@@ -46,15 +47,35 @@ const loginViewController = (req, res, next) => {
   res.status(200).render('login');
 };
 
+const checkIfLikedTweet = async (req, tweet) => {
+  const like = await Like.findOne({ tweet: tweet._id, user: req.user._id });
+  if (!like) return false;
+  return like._id;
+};
+
 const homepageViewController = catchAsync(async (req, res, next) => {
   const followDocs = await Follow.find({ user: req.user.id });
   const followings = followDocs.map(followDoc => followDoc.following);
 
-  const tweets = await Tweet.find({
+  let tweets = await Tweet.find({
     $or: [{ user: { $in: followings } }, { user: req.user.id }]
   })
     .sort('-dateTweeted')
     .populate('user');
+
+  tweets = tweets.map(tweet => tweet.toObject());
+
+  const liked = await Promise.all(
+    tweets.map(async tweet => await checkIfLikedTweet(req, tweet))
+  );
+
+  tweets = tweets.map((tweet, index) => {
+    return {
+      ...tweet,
+      liked: liked[index]
+    };
+  });
+
   res.status(200).render('homepage', {
     tweets
   });

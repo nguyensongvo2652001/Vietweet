@@ -198,6 +198,11 @@ input:focus {
   color: #1da1f2;
 }
 
+.tweet__data-container.tweet__data-container--liked {
+  color: #1a91da;
+  font-weight: 700;
+}
+
 .tweet__data__icon {
   font-size: 2rem;
 }
