@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Home/Twitter</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap"
+      rel="stylesheet"
+    />
+    <link href="../css/general.css" rel="stylesheet" />
+    <link href="../css/buttons.css" rel = 'stylesheet'/>
+    <link href="../css/home.css" rel="stylesheet" />
+    <link href="../css/reply.css" rel = 'stylesheet'/>
+    <link href="../css/navbar.css" rel="stylesheet" />
+    <link href="../css/content.css" rel="stylesheet" />
+    <link href="../css/sidebar.css" rel="stylesheet" />
+    <script
+      type="module"
+      src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"
+    ></script>
+    <script
+      nomodule
+      src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"
+    ></script>
+  </head>
+
+  <body>
+    <main class="home">
+      <nav class="nav">
+        <ion-icon name="logo-twitter" class="nav__icon"></ion-icon>
+        <ul class="nav__items">
+          <li class="nav__item nav__item--active">
+            <ion-icon name="home" class="nav__item__icon"></ion-icon>
+            <p class="nav__item__name">Home</p>
+          </li>
+
+          <li class="nav__item">
+            <ion-icon
+              name="telescope-outline"
+              class="nav__item__icon"
+            ></ion-icon>
+            <p class="nav__item__name">Explore</p>
+          </li>
+
+          <li class="nav__item">
+            <ion-icon
+              name="notifications-outline"
+              class="nav__item__icon"
+            ></ion-icon>
+            <p class="nav__item__name">Notifications</p>
+          </li>
+
+          <li class="nav__item">
+            <ion-icon name="mail-outline" class="nav__item__icon"></ion-icon>
+            <p class="nav__item__name">Messages</p>
+          </li>
+
+          <li class="nav__item">
+            <ion-icon
+              name="bookmark-outline"
+              class="nav__item__icon"
+            ></ion-icon>
+            <p class="nav__item__name">Bookmarks</p>
+          </li>
+
+          <li class="nav__item">
+            <ion-icon name="list-outline" class="nav__item__icon"></ion-icon>
+            <p class="nav__item__name">Lists</p>
+          </li>
+
+          <li class="nav__item">
+            <ion-icon name="person-outline" class="nav__item__icon"></ion-icon>
+            <p class="nav__item__name">Profile</p>
+          </li>
+        </ul>
+
+        <button class="btn btn--logout">
+          Logout
+        </button>
+      </nav>
+
+      <div class="content main">
+        <div class="content__title-container">
+          <h2 class="content__title">Tweet</h2>
+        </div>
+
+        <div class = 'reply'>
+            <div class = 'reply__avatar-container'>
+                <img class = 'reply__avatar avatar--small' src = '../img/users/avatars/default.jpg'/>
+                <div class = 'reply__names'>
+                    <p class = 'reply__name name'>Battle Beast</p>
+                    <p class = 'reply__username username'>@battleBeast</p>
+                </div>
+            </div>
+
+            <p class = 'reply__content'>This battle is beneath me. There is no honor in killing insects</p>
+            <p class = 'reply__date'>Nov 27th, 2021</p>
+            <div class = 'reply__info'>
+                <p class = 'reply__likes'>
+                  <span class = 'reply__info-number'>5</span>likes</p>
+                <p class = 'reply__replies'>  <span class = 'reply__info-number'>10</span>replies</p>
+            </div>
+
+            <div class = 'reply-form-container'>
+              <form class="reply-form">
+                <div class="reply-form__avatar-container">
+                  <img
+                    class="avatar--small"
+                    src="../img/users/avatars/default.jpg"
+                    alt="User avatar"
+                  />
+                </div>
+                <div class="reply-form__input-section">
+                  <div class="reply-form__input-container">
+                    <textarea
+                      placeholder="Tweet your reply"
+                      class="reply-form__input"
+                    ></textarea>
+                  </div>
+                  <div class="reply-form__buttons">
+                    <label class="btn btn--upload">
+                      <input type="file" style="display: none" />
+                      Upload image
+                    </label>
+                    <button class="btn btn--tweet">Reply</button>
+                  </div>
+                </div>
+              </form>
+            </div>
+
+            <div class="tweets">
+              <div class="tweet-container">
+                <div class="tweet">
+                  <div class="tweet__avatar-container">
+                    <img
+                      class="avatar--small"
+                      src="../img/users/avatars/default.jpg"
+                      alt="User avatar"
+                    />
+                  </div>
+
+                  <div class="tweet__info">
+                    <div class="tweet__userdata">
+                      <div class = "tweet__userdisplay">
+                        <p class="name">Omniman</p>
+                        <p class="username">@</p>
+                      </div>
+                      <p class="tweet__date">Apr 26, 2020</p>
+                    </div>
+                    <p class="tweet__content">
+                      Not stronger than me.
+                    </p>
+                    <div class="tweet__metadata">
+                      <div class="tweet__data-container">
+                        <ion-icon
+                          name="chatbox-outline"
+                          class="tweet__data__icon"
+                        ></ion-icon>
+                        <p class="tweet__data__number">3</p>
+                      </div>
+  
+                      <div class="tweet__data-container">
+                        <ion-icon
+                          name="heart-outline"
+                          class="tweet__data__icon"
+                        ></ion-icon>
+                        <p class="tweet__data__number">3</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+
+              <div class = 'tweet-container'>
+                
+                <div class="tweet">
+                  <div class="tweet__avatar-container">
+                    <img
+                      class="avatar--small"
+                      src="../img/users/avatars/default.jpg"
+                      alt="User avatar"
+                    />
+                  </div>
+
+                  <div class="tweet__info">
+                    <div class="tweet__userdata">
+                      <div class = "tweet__userdisplay">
+                        <p class="name">Invincible</p>
+                        <p class="username">@invincible</p>
+                      </div>
+                      <p class="tweet__date">Apr 26, 2020</p>
+                    </div>
+                    <p class="tweet__content">
+                      He's right!
+                    </p>
+                    <div class="tweet__metadata">
+                      <div class="tweet__data-container">
+                        <ion-icon
+                          name="chatbox-outline"
+                          class="tweet__data__icon"
+                        ></ion-icon>
+                        <p class="tweet__data__number">3</p>
+                      </div>
+  
+                      <div class="tweet__data-container">
+                        <ion-icon
+                          name="heart-outline"
+                          class="tweet__data__icon"
+                        ></ion-icon>
+                        <p class="tweet__data__number">3</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+        </div>
+
+      </div>
+
+      <div class="sidebar">
+        <div class = 'searchbar'>
+          <ion-icon name="search-outline" class = 'searchbar__icon'></ion-icon>
+          <input type = 'text' placeholder="Search Twitter" class = 'searchbar__input'/>
+        </div>
+
+        <div class = 'happening-section'>
+          <h3 class = 'happening-section__title'>What's happening</h3>
+          <ul class = 'happenings'>
+              <li class = 'happening'>
+                <p class = 'happening__trending'>Trending in Africa</p>
+                <p class = 'happening__name'>Rick And Morty</p>
+                <p class = 'happening__tweet-number'>1669 tweets</p>
+              </li>
+
+              <li class = 'happening'>
+                <p class = 'happening__trending'>Trending in Africa</p>
+                <p class = 'happening__name'>Rick And Morty</p>
+                <p class = 'happening__tweet-number'>1669 tweets</p>
+              </li>
+
+              <li class = 'happening'>
+                <p class = 'happening__trending'>Trending in Africa</p>
+                <p class = 'happening__name'>Rick And Morty</p>
+                <p class = 'happening__tweet-number'>1669 tweets</p>
+              </li>
+
+              <li class = 'happening'>
+                <p class = 'happening__trending'>Trending in Africa</p>
+                <p class = 'happening__name'>Rick And Morty</p>
+                <p class = 'happening__tweet-number'>1669 tweets</p>
+              </li>
+
+              <li class = 'happening'>
+                <p class = 'happening__trending'>Trending in Africa</p>
+                <p class = 'happening__name'>Rick And Morty</p>
+                <p class = 'happening__tweet-number'>1669 tweets</p>
+              </li>
+            </ul>
+         
+        </div>
+
+        <div class = 'who-to-follow-section'>
+          <h3 class = 'who-to-follow-section__title'>Who to follow</h3>
+          <ul class = 'who-to-follow__users'>
+              <li class = 'who-to-follow__user'>
+                <div class="who-to-follow__user-avatar-container">
+                  <img
+                    class="avatar--small"
+                    src="../img/users/avatars/default.jpg"
+                    alt="User avatar"
+                  />
+                </div>
+                <div class = 'who-to-follow__user-info'>
+                  <div>
+                    <p class = 'name'>John Xina</p>
+                    <p class = 'username'>@johnXina</p>
+                  </div>
+                  <button class = 'btn btn--follow'>Follow</button>
+                </div>
+              </li>
+              
+              <li class = 'who-to-follow__user'>
+                <div class="who-to-follow__user-avatar-container">
+                  <img
+                    class="avatar--small"
+                    src="../img/users/avatars/default.jpg"
+                    alt="User avatar"
+                  />
+                </div>
+                <div class = 'who-to-follow__user-info'>
+                  <div>
+                    <p class = 'name'>The Wock</p>
+                    <p class = 'username'>@theWock</p>
+                  </div>
+                  <button class = 'btn btn--follow'>Follow</button>
+                </div>
+              </li>
+        </div>
+      </div>
+    </main>
+  </body>
+</html>

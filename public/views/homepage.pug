@@ -1,0 +1,27 @@
+extends content
+block append head 
+    script(type = 'module' src='./js/controllers/tweetCreateController.js')
+
+block content 
+    include _tweet
+
+    .content.main
+        .content__title-container
+            h2.content__title Home
+        .main__tweet-form-container
+            form.main__tweet-form
+                .main__tweet-form__avatar-container
+                    img.avatar--small(src='../../img/users/avatars/default.jpg' alt='User avatar')
+                .main__tweet-form__input-section
+                    .main__tweet-form__input-container
+                        textarea.main__tweet-form__input(placeholder="What's happening ?")
+                    .main_tweet-form__buttons
+                        label.btn.btn--upload
+                            input.image-input(type='file' style='display: none' accept = 'image/*' name = 'image')
+                            |                   Upload image
+                        button.btn.btn--tweet Tweet
+        .tweets
+            each tweet in tweets
+                +tweet(tweet.user.avatar, tweet.user.name, tweet.user.username, tweet.dateTweeted, tweet.content, tweet.id,
+                tweet.image)
+

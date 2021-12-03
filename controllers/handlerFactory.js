@@ -32,12 +32,14 @@ const getOne = (Model, docName) =>
     });
   });
 
-const createOne = (Model, docName, whiteList = []) =>
+const createOne = (Model, docName, whiteList = [], populateOptions) =>
   catchAsync(async (req, res, next) => {
     req.body =
       whiteList.length > 0 ? filterObject(req.body, ...whiteList) : req.body;
-    const document = await Model.create(req.body);
-
+    let document = await Model.create(req.body);
+    if (populateOptions) {
+      document = await Model.findById(document.id).populate(populateOptions);
+    }
     res.status(201).json({
       status: 'success',
       data: {

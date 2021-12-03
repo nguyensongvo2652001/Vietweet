@@ -4,6 +4,21 @@ const viewController = require('../controllers/viewController');
 
 const router = express.Router();
 
-router.get('/', viewController.loginViewController);
+router.use(viewController.isLogin);
+
+router.get(
+  '/',
+  viewController.redirectIfLogin,
+  viewController.loginViewController
+);
+
+router.use(viewController.redirectIfNotLogin);
+router.get('/homepage', viewController.homepageViewController);
+router.get(
+  '/profile/me',
+  viewController.setCurrentUser,
+  viewController.profileViewController
+);
+router.get('/profile/:username', viewController.profileViewController);
 
 module.exports = router;

@@ -16,6 +16,14 @@ const tweetSchema = new mongoose.Schema({
   dateTweeted: {
     type: Date,
     default: new Date()
+  },
+  likeCounts: {
+    type: Number,
+    default: 0
+  },
+  replyCounts: {
+    type: Number,
+    default: 0
   }
 });
 

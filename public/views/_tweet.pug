@@ -1,0 +1,23 @@
+mixin tweet(avatar, name, username, tweetDate, tweetContent, tweetId, image) 
+    .tweet-container(data-username=`${username}` data-tweet-id = `${tweetId}`)
+        .tweet
+            .tweet__avatar-container
+                img.avatar--small.tweet__avatar(src=`/img/users/avatars/${avatar}` alt='User avatar')
+            .tweet__info
+                .tweet__userdata
+                    .tweet__userdisplay
+                        p.name.tweet__name #{name}
+                        p.username @#{username}
+                    p.tweet__date #{tweetDate.toLocaleDateString(undefined, {year: 'numeric', month: 'long', day: 'numeric'})}
+                p.tweet__content #{tweetContent}
+                - if (image)
+                    img.tweet__image(alt = 'tweet image' src = `/img/tweets/${image}`)
+
+                .tweet__metadata
+                    .tweet__data-container
+                        ion-icon.tweet__data__icon(name='chatbox-outline')
+                        p.tweet__data__number 3
+                    .tweet__data-container
+                        ion-icon.tweet__data__icon(name='heart-outline')
+                        p.tweet__data__number 3
+

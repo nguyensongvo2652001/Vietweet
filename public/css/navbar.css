@@ -40,6 +40,8 @@
 }
 
 .nav__item__name {
+  color: #000;
+  text-decoration: none;
   font-size: 2rem;
 }
 

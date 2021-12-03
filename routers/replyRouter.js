@@ -7,15 +7,15 @@ const router = express.Router({ mergeParams: true });
 
 router.use(authController.protect);
 router
-  .route('/:id')
+  .route('/')
   .post(
     replyController.uploadImage,
     replyController.resizeImage,
-    replyController.setReplyTweet,
     replyController.setReplyUser,
     replyController.createReply
-  )
-  .delete(replyController.checkReply, replyController.deleteReply)
-  .get(replyController.setReplyFilterQuery, replyController.getAllReplies);
+  );
+router
+  .route('/:id')
+  .delete(replyController.checkReply, replyController.deleteReply);
 
 module.exports = router;
