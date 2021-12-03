@@ -9,6 +9,21 @@ const filterObject = require('../utils/filterObject');
 
 const getUser = handlerFactory.getOne(User, 'user');
 
+const deleteUser = catchAsync(async (req, res, next) => {
+  const user = getUser();
+  if (user.checkPassword(user.password, req.body.password)) {
+    User.findByIdAndDelete(req.user.id);
+    res.status(200).json({
+      status: 'success'
+    });
+  } else {
+    res.status(200).json({
+      status: 'failed'
+    });
+  }
+  next();
+});
+
 const storage = multer.memoryStorage();
 const fileFilter = function(req, file, cb) {
   const fileType = file.mimetype.split('/')[0];
@@ -88,6 +103,7 @@ const updateMe = catchAsync(async (req, res, next) => {
 
 module.exports = {
   getUser,
+  deleteUser,
   updateMe,
   uploadImages,
   resizeAndStoreAvatar,
