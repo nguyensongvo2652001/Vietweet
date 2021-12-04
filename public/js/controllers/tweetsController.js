@@ -8,6 +8,10 @@ const goToProfile = username => {
   redirect(`/profile/${username}`);
 };
 
+const goToTweetDetail = id => {
+  redirect(`/tweet/${id}`);
+};
+
 const clickLikeIconHandler = async (likeContainer, tweetId) => {
   try {
     if (likeContainer.classList.contains('tweet__data-container--liked'))
@@ -44,7 +48,7 @@ export const setTweetsListener = () => {
 
   tweetsView.setTweetsAvatarClickListeners(goToProfile);
   tweetsView.setTweetsNameClickListeners(goToProfile);
-  tweetsView.setTweetsClickListeners();
+  tweetsView.setTweetsClickListeners(goToTweetDetail);
 
   tweetsView.setTweetsLikeIconClickListeners(clickLikeIconHandler);
 };

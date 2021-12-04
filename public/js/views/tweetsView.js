@@ -30,13 +30,16 @@ class TweetsView {
     this.tweets.forEach(this.setTweetNameClickListener.bind(this, handler));
   }
 
-  setTweetsClickListeners(e) {
+  setTweetsClickListeners(handler) {
     if (!this.tweets) return;
-    this.tweets.forEach(this.setTweetClickListener.bind(this));
+    this.tweets.forEach(this.setTweetClickListener.bind(this, handler));
   }
 
-  setTweetClickListener(tweet) {
-    tweet.addEventListener('click', this.tweetClickHandler.bind(this, tweet));
+  setTweetClickListener(handler, tweet) {
+    tweet.addEventListener(
+      'click',
+      this.tweetClickHandler.bind(this, handler, tweet)
+    );
   }
 
   setTweetAvatarClickListener(handler, tweet) {
@@ -55,6 +58,7 @@ class TweetsView {
 
   setTweetLikeIconClickListener(handler, tweet) {
     const likeContainer = tweet.querySelector('.like-container');
+    if (!likeContainer) return;
     const { tweetId } = tweet.dataset;
     const { likeId } = likeContainer.dataset;
     likeContainer.addEventListener(
@@ -63,13 +67,14 @@ class TweetsView {
     );
   }
 
-  tweetClickHandler(tweet, e) {
+  tweetClickHandler(handler, tweet, e) {
     if (
       !e.target.classList.contains('tweet__container') &&
       !e.target.classList.contains('tweet')
     )
       return;
-    this.goToTweetDetail(tweet.dataset.tweetId);
+    if (e.target.classList.contains('tweet--reply')) return;
+    handler(tweet.dataset.tweetId);
   }
 
   updateLikeContainerUI(likeContainer, likeId) {
@@ -87,14 +92,6 @@ class TweetsView {
 
     //Update likeId
     likeContainer.dataset.likeId = likeId;
-  }
-
-  goToProfile(username) {
-    console.log(username);
-  }
-
-  goToTweetDetail(id) {
-    console.log(id);
   }
 }
 

@@ -30,5 +30,6 @@ router.get(
   viewController.profileViewController
 );
 router.get('/profile/:username', viewController.profileViewController);
+router.get('/tweet/:id', viewController.tweetDetailViewController);
 
 module.exports = router;

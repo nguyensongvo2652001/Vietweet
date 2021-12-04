@@ -11,6 +11,7 @@ class ChangePasswordView {
   }
 
   addChangePasswordButtonClickHandler() {
+    if (!this.changePasswordButton) return;
     this.changePasswordButton.addEventListener(
       'click',
       this.changePasswordButtonClickHandler.bind(this)

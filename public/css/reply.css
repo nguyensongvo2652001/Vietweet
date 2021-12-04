@@ -98,7 +98,9 @@
 }
 
 .reply__image {
-  height: 40rem;
+  max-height: 60rem;
+  max-width: 40rem;
   width: auto;
+  height: auto;
   border-radius: 9px;
 }

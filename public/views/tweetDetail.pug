@@ -1,0 +1,40 @@
+extends content 
+
+block content 
+  include _reply
+
+  .content.main
+    .content__title-container
+      h2.content__title Tweet
+    .reply
+      .reply__avatar-container
+        img.reply__avatar.avatar--small(src=`/img/users/avatars/${tweet.user.avatar}`)
+        .reply__names
+          p.reply__name.name #{tweet.user.name}
+          p.reply__username.username @#{tweet.user.username}
+      p.reply__content #{tweet.content}
+      - if (tweet.image)
+            img.reply__image(alt = 'tweet image' src = `/img/tweets/${tweet.image}`)
+      p.reply__date #{tweet.dateTweeted.toLocaleDateString(undefined, {year: 'numeric', month: 'long', day: 'numeric'})}
+      .reply__info
+        p.reply__likes
+          span.reply__info-number #{tweet.likeCounts}
+          | likes
+        p.reply__replies
+          span.reply__info-number #{tweet.replyCounts}
+          | replies
+      .reply-form-container
+        form.reply-form
+          .reply-form__avatar-container
+            img.avatar--small(src=`/img/users/avatars/${user.avatar}` alt='User avatar')
+          .reply-form__input-section
+            .reply-form__input-container
+              textarea.reply-form__input(placeholder='Tweet your reply')
+            .reply-form__buttons
+              label.btn.btn--upload
+                input(type='file' style='display: none')
+                |                       Upload image
+              button.btn.btn--tweet Reply
+      .tweets
+        each reply in replies 
+            +reply(reply)

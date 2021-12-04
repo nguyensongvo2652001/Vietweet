@@ -8,6 +8,7 @@ const User = require('../models/userModel');
 const Follow = require('../models/followModel');
 const Tweet = require('../models/tweetModel');
 const Like = require('../models/likeModel');
+const Reply = require('../models/replyModel');
 
 const isLogin = catchAsync(async (req, res, next) => {
   const token = req.cookies.jwt;
@@ -136,6 +137,21 @@ const resetPasswordViewController = catchAsync(async (req, res, next) => {
   });
 });
 
+const tweetDetailViewController = catchAsync(async (req, res, next) => {
+  const tweet = await Tweet.findById(req.params.id).populate('user');
+  if (!tweet) {
+    console.log('No tweet found');
+  }
+
+  const replies = await Reply.find({ tweet: req.params.id }).populate('user');
+
+  res.status(200).render('tweetDetail', {
+    tweet,
+    replies,
+    user: req.user
+  });
+});
+
 module.exports = {
   loginViewController,
   homepageViewController,
@@ -145,5 +161,6 @@ module.exports = {
   resetPasswordViewController,
   isLogin,
   redirectIfLogin,
-  redirectIfNotLogin
+  redirectIfNotLogin,
+  tweetDetailViewController
 };

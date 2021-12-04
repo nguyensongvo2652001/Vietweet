@@ -1,0 +1,15 @@
+mixin reply(reply) 
+    .tweet-container(data-username=`${reply.user.username}`).tweet--reply
+        .tweet.tweet--reply
+            .tweet__avatar-container
+                img.avatar--small.tweet__avatar(src=`/img/users/avatars/${reply.user.avatar}` alt='User avatar')
+            .tweet__info
+                .tweet__userdata
+                    .tweet__userdisplay
+                        p.name.tweet__name #{reply.user.name}
+                        p.username @#{reply.user.username}
+                    p.tweet__date #{reply.dateReplied.toLocaleDateString(undefined, {year: 'numeric', month: 'long', day: 'numeric'})}
+                p.tweet__content #{reply.content}
+                - if (reply.image)
+                    img.tweet__image(alt = 'reply image' src = `/img/replies/${reply.image}`)
+
