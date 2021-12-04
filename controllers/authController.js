@@ -221,7 +221,29 @@ const changePassword = catchAsync(async (req, res, next) => {
   await createAndSendToken({ user, statusCode: 200, req, res });
 });
 
+const deleteMe = catchAsync(async (req, res, next) => {
+  const user = await User.findById(req.user._id).select('+password');
+  const { password } = req.body;
+
+  if (!password) return next(new AppError('Please provide your password', 400));
+
+  const isCorrectPassword = await user.checkPassword(password, user.password);
+
+  if (!isCorrectPassword)
+    return next(
+      new AppError('Your password is incorrect. Please try again', 400)
+    );
+
+  await User.findByIdAndDelete(req.user._id);
+
+  res.status(204).json({
+    status: 'success',
+    message: 'Account delete successfully'
+  });
+});
+
 module.exports = {
+  deleteMe,
   signUp,
   login,
   logout,
