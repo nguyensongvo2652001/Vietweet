@@ -111,13 +111,13 @@ const protect = catchAsync(async (req, res, next) => {
     decoded.iat
   );
 
-  // if (changedPasswordAfter)
-  //   return next(
-  //     new AppError(
-  //       'Users with this token already changed their password. Please login again',
-  //       400
-  //     )
-  //   );
+  if (changedPasswordAfter)
+    return next(
+      new AppError(
+        'Users with this token already changed their password. Please login again',
+        400
+      )
+    );
 
   req.user = user;
   next();
@@ -154,7 +154,8 @@ const forgotPassword = catchAsync(async (req, res, next) => {
 
     res.status(200).json({
       status: 'success',
-      message: `We have sent an email to ${user.email}. Please check your email for instructions.`
+      message: `We have sent an email to ${user.email}. 
+      Please check your email for instructions. Keep in mind that this email is only valid for 10 minutes`
     });
   } catch (e) {
     user.passwordResetToken = undefined;

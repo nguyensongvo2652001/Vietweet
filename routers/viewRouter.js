@@ -11,6 +11,11 @@ router.get(
   viewController.redirectIfLogin,
   viewController.loginViewController
 );
+router.get(
+  '/forgotPassword',
+  viewController.redirectIfLogin,
+  viewController.forgotPasswordViewController
+);
 
 router.use(viewController.redirectIfNotLogin);
 router.get('/homepage', viewController.homepageViewController);

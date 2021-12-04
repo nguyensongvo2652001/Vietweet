@@ -10,6 +10,7 @@
   display: inline-block;
   border-radius: 11px;
   transition: all 0.3s;
+  text-decoration: none;
 }
 
 .btn.btn--edit-profile {
@@ -143,9 +144,10 @@
 .btn.btn--forgot-password {
   background-color: #1da1f2;
   color: #f5f8fa;
+  margin-bottom: 1.6rem;
 }
 
-.btn.btn--forgot-password,
+.btn.btn--forgot-password:hover,
 .btn.btn--reset-password:hover {
   background-color: #1a91da;
 }

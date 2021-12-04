@@ -114,11 +114,16 @@ const profileViewController = catchAsync(async (req, res, next) => {
   });
 });
 
+const forgotPasswordViewController = (req, res, next) => {
+  res.status(200).render('forgotPassword');
+};
+
 module.exports = {
   loginViewController,
   homepageViewController,
   setCurrentUser,
   profileViewController,
+  forgotPasswordViewController,
   isLogin,
   redirectIfLogin,
   redirectIfNotLogin
