@@ -1,4 +1,5 @@
 const { promisify } = require('util');
+const crypto = require('crypto');
 
 const jwt = require('jsonwebtoken');
 
@@ -118,12 +119,30 @@ const forgotPasswordViewController = (req, res, next) => {
   res.status(200).render('forgotPassword');
 };
 
+const resetPasswordViewController = catchAsync(async (req, res, next) => {
+  const token = crypto
+    .createHash('sha256')
+    .update(req.params.token)
+    .digest('hex');
+
+  const valid = await User.findOne({
+    passwordResetToken: token,
+    passwordResetTokenExpiresAt: { $gt: Date.now() }
+  });
+
+  res.status(200).render('resetPassword', {
+    valid,
+    token: req.params.token
+  });
+});
+
 module.exports = {
   loginViewController,
   homepageViewController,
   setCurrentUser,
   profileViewController,
   forgotPasswordViewController,
+  resetPasswordViewController,
   isLogin,
   redirectIfLogin,
   redirectIfNotLogin
