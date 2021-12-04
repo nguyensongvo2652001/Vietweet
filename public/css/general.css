@@ -71,6 +71,10 @@ input:focus {
   margin-bottom: 3.2rem !important;
 }
 
+.margin-bottom--small {
+  margin-bottom: 1.6rem !important;
+}
+
 .hidden {
   display: none !important;
 }

@@ -10,6 +10,7 @@ block append head
 
 block content 
     include _tweet
+
     .change-password-container.hidden
         .backdrop
         .modal.change-password
@@ -74,7 +75,7 @@ block content
                 .edit-profile__form-element
                     label.edit-profile__form-label(for='website') Website
                     input#website.edit-profile__form-input.website-input(type='text')
-            button.btn.btn--delete-account Delete account
+            button.btn.btn--delete-account.margin-bottom--small Delete account
 
     .content
         .profile

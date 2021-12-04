@@ -96,3 +96,9 @@
   gap: 1.2rem;
   margin-left: 1.2rem;
 }
+
+.reply__image {
+  height: 40rem;
+  width: auto;
+  border-radius: 9px;
+}

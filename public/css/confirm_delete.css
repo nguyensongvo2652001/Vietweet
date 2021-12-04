@@ -57,4 +57,9 @@
 .confirm-delete__buttons {
   display: flex;
   justify-content: center;
+  margin-bottom: 2rem;
+}
+
+.confirm-delete__form-error {
+  text-align: center;
 }
