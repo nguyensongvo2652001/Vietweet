@@ -33,7 +33,6 @@ const resizeImage = catchAsync(async (req, res, next) => {
   req.body.image = `reply_${req.user.id}_${Date.now()}.jpeg`;
   const filePath = `public/img/replies/${req.body.image}`;
   await sharp(req.file.buffer)
-    .resize(900, 1350)
     .jpeg()
     .toFile(filePath);
 
@@ -59,12 +58,12 @@ const setReplyUser = (req, res, next) => {
   next();
 };
 
-const createReply = handlerFactory.createOne(Reply, 'reply', [
-  'user',
-  'tweet',
-  'content',
-  'image'
-]);
+const createReply = handlerFactory.createOne(
+  Reply,
+  'reply',
+  ['user', 'tweet', 'content', 'image'],
+  { path: 'user' }
+);
 
 const deleteReply = handlerFactory.deleteOne(Reply, 'reply');
 

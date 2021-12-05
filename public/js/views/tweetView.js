@@ -3,7 +3,7 @@
 class TweetView {
   getTweetHTML(tweet) {
     const imageEl = tweet.image
-      ? `<img alt = 'Tweet image' src = './img/tweets/${tweet.image}' class = 'tweet__image'/>`
+      ? `<img alt = 'Tweet image' src = '/img/tweets/${tweet.image}' class = 'tweet__image'/>`
       : '';
     return `
     <div class="tweet-container" data-username='${
@@ -13,7 +13,7 @@ class TweetView {
       <div class="tweet__avatar-container">
         <img
           class="avatar--small tweet__avatar"
-          src = "./img/users/avatars/${tweet.user.avatar}"
+          src = "/img/users/avatars/${tweet.user.avatar}"
           alt="User avatar"
         />
       </div>
@@ -55,6 +55,43 @@ class TweetView {
         </div>
       </div>
   </div>`;
+  }
+
+  getReplyHTML(reply) {
+    console.log(reply);
+    const imageEl = reply.image
+      ? `<img alt = 'Reply image' src = '/img/replies/${reply.image}' class = 'reply__image'/>`
+      : '';
+    return `
+  <div class="tweet-container tweet--reply" data-username='${
+    reply.user.username
+  }'>
+  <div class="tweet tweet--reply">
+    <div class="tweet__avatar-container">
+      <img
+        class="avatar--small tweet__avatar"
+        src = '/img/users/avatars/${reply.user.avatar}'
+        alt="User avatar"
+      />
+    </div>
+      <div class="tweet__info">
+        <div class="tweet__userdata">
+          <div class = "tweet__userdisplay">
+            <p class="name tweet__name">${reply.user.name}</p>
+            <p class="username ">@${reply.user.username}</p>
+          </div>
+          <p class="tweet__date">${new Date(
+            reply.dateReplied
+          ).toLocaleDateString(undefined, {
+            year: 'numeric',
+            month: 'long',
+            day: 'numeric'
+          })}</p>
+        </div>
+        <p class="tweet__content">
+          ${reply.content}
+        </p>
+        ${imageEl}`;
   }
 }
 

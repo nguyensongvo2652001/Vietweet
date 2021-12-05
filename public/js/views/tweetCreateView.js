@@ -1,8 +1,12 @@
 /*eslint-disable*/
 
-class TweetCreateView {
+export class TweetCreateView {
   constructor() {
     this.parentElement = document.querySelector('.main__tweet-form');
+    if (this.parentElement) this.findElements();
+  }
+
+  findElements() {
     this.textInput = this.parentElement.querySelector(
       '.main__tweet-form__input'
     );

@@ -1,5 +1,8 @@
 extends content 
 
+block append head 
+  script(type = 'module' src='/js/controllers/replyCreateController.js')
+
 block content 
   include _reply
 
@@ -21,18 +24,18 @@ block content
           span.reply__info-number #{tweet.likeCounts}
           | likes
         p.reply__replies
-          span.reply__info-number #{tweet.replyCounts}
+          span.reply__info-number.reply__replies-number #{tweet.replyCounts}
           | replies
-      .reply-form-container
+      .reply-form-container(data-tweet-id = `${tweet._id}`)
         form.reply-form
           .reply-form__avatar-container
             img.avatar--small(src=`/img/users/avatars/${user.avatar}` alt='User avatar')
           .reply-form__input-section
             .reply-form__input-container
-              textarea.reply-form__input(placeholder='Tweet your reply')
+              textarea.reply-form__input.reply__text-input(placeholder='Tweet your reply')
             .reply-form__buttons
               label.btn.btn--upload
-                input(type='file' style='display: none')
+                input.reply__image-input(type='file' style='display: none')
                 |                       Upload image
               button.btn.btn--tweet Reply
       .tweets

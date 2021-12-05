@@ -143,7 +143,9 @@ const tweetDetailViewController = catchAsync(async (req, res, next) => {
     console.log('No tweet found');
   }
 
-  const replies = await Reply.find({ tweet: req.params.id }).populate('user');
+  const replies = await Reply.find({ tweet: req.params.id })
+    .populate('user')
+    .sort('-dateReplied');
 
   res.status(200).render('tweetDetail', {
     tweet,
