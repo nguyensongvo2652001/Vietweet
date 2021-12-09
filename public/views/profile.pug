@@ -7,10 +7,11 @@ block append head
     link(rel='stylesheet' href='/css/confirm_delete.css')
     link(rel='stylesheet' href='/css/change_password.css')
     script(src = '/js/controllers/changePasswordController.js' type = 'module')
+    script(src = '/js/controllers/followButtonController.js' type = 'module')
 
 block content 
     include _tweet
-    .change-password-container
+    .change-password-container.hidden
         .backdrop
         .modal.change-password
             header.change-password__header
@@ -79,7 +80,7 @@ block content
 
 
     .content
-        .profile
+        .profile(data-user-id = `${user._id}`)
             .profile__background-container
                 img.profile__background(src=`/img/users/backgrounds/${user.background}`)
             .profile__avatar-container
@@ -90,9 +91,9 @@ block content
                 button.btn.btn--edit-profile.profile__btn Edit profile
                 button.btn.btn--change-password.profile__btn--change-password Change password
             - else if (followed)
-                button.btn.btn--unfollow.profile__btn Following
+                button.btn.btn--unfollow.profile__btn.profile__follow-btn(data-follow-id=`${followed._id}`) Following
             - else 
-                button.btn.btn--follow.profile__btn Follow
+                button.btn.btn--follow.profile__btn.profile__follow-btn Follow
             .profile__info
                 p.profile__name #{user.name}
                 p.profile__username.username @#{user.username}
@@ -113,7 +114,7 @@ block content
                         p.date-joined__website Joined #{new Date(user.dateJoined).toLocaleDateString({year: 'numeric', month: 'long', day: 'numeric'})}
                 ul.profile__follow-info
                     li.profile__follow-info-item
-                        p.profile__follow-number #{user.followersCount}
+                        p.profile__follow-number.profile__followers-number #{user.followersCount}
                         |                             followers
                     li.profile__follow-info-item
                         p.profile__follow-number #{user.followingsCount}
