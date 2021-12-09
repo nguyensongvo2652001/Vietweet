@@ -1,0 +1,8 @@
+mixin people(people)
+    .people-container(data-username=`${people.username}`)
+        .avatar-container.people__avatar
+            img.avatar--small(src=`/img/users/avatars/${people.avatar}`)
+        .people__info
+            p.name.people__name #{people.name}
+            p.username.people__username @#{people.username}
+            p.people__bio #{people.bio}

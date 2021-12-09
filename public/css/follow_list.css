@@ -11,6 +11,12 @@
   cursor: pointer;
   transition: all 0.3s;
   padding-bottom: 1rem;
+  padding-top: 1rem;
+  margin-bottom: 2rem;
+}
+
+.follow__tab:hover {
+  background-color: #e1e8ed;
 }
 
 .follow__tab.follow__tab--active {

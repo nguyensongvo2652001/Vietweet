@@ -81,7 +81,7 @@ block content
 
 
     .content
-        .profile(data-user-id = `${user._id}`)
+        .profile(data-user-id = `${user._id}` data-username = `${user.username}`)
             .profile__background-container
                 img.profile__background(src=`/img/users/backgrounds/${user.background}`)
             .profile__avatar-container
@@ -114,10 +114,10 @@ block content
                         ion-icon(name='calendar-outline')
                         p.date-joined__website Joined #{new Date(user.dateJoined).toLocaleDateString({year: 'numeric', month: 'long', day: 'numeric'})}
                 ul.profile__follow-info
-                    li.profile__follow-info-item
+                    li.profile__follow-info-item.profile__followers-info
                         p.profile__follow-number.profile__followers-number #{user.followersCount}
                         |                             followers
-                    li.profile__follow-info-item
+                    li.profile__follow-info-item.profile__followings-info
                         p.profile__follow-number #{user.followingsCount}
                         |                             followings
             .profile__content

@@ -172,6 +172,26 @@ const tweetDetailViewController = catchAsync(async (req, res, next) => {
   });
 });
 
+const followListViewController = catchAsync(async (req, res, next) => {
+  const user = await User.findOne({ username: req.params.username });
+
+  if (!user) {
+    console.log('haha');
+    return;
+  }
+
+  const followers = await Follow.find({ following: user._id }).populate('user');
+  const followings = await Follow.find({ user: user._id }).populate(
+    'following'
+  );
+  const following = req.query.following === 'true';
+  res.status(200).render('followList', {
+    followers,
+    followings,
+    following
+  });
+});
+
 module.exports = {
   loginViewController,
   homepageViewController,
@@ -182,5 +202,6 @@ module.exports = {
   isLogin,
   redirectIfLogin,
   redirectIfNotLogin,
-  tweetDetailViewController
+  tweetDetailViewController,
+  followListViewController
 };

@@ -1,0 +1,31 @@
+extends content 
+
+block append head 
+    script(type='module' src = '/js/controllers/followListController.js')
+
+block content
+    include _people
+
+    .content
+        .follow__tabs
+            .follow__tab.follow__followers-tab(class = `${following ? '' : 'follow__tab--active'}`)
+                p Followers
+            .follow__tab.follow__followings-tab(class = `${following ? 'follow__tab--active' : ''}`)
+                p Followings
+        .people-list.followers-list(class = `${following ? 'hidden' : ''}`)
+            - if (followers.length > 0)
+                each follower in followers
+                    +people(follower.user)
+            - else 
+                p.info This user does not have any followers.
+
+        .people-list.followings-list(class = `${following ? '' : 'hidden'}`)
+            - if (followings.length > 0)
+                each following in followings
+                    +people(following.following)
+            - else 
+                p.info This user hasn't followed anyone yet.
+    
+
+
+

@@ -5,7 +5,19 @@ class ProfileView {
     this.profileTabs = document.querySelectorAll('.profile__tab');
     this.ownTweets = document.querySelector('.own-tweets');
     this.likedTweets = document.querySelector('.liked-tweets');
+    this.profileFollowItems = document.querySelectorAll(
+      '.profile__follow-info-item'
+    );
     this.addClickTabsListener();
+  }
+
+  addProfileFollowItemsClickListener(handler) {
+    const { username } = this.profile.dataset;
+
+    this.profileFollowItems.forEach(item => {
+      const following = item.classList.contains('profile__followings-info');
+      item.addEventListener('click', handler.bind(null, username, following));
+    });
   }
 
   addClickTabsListener() {
