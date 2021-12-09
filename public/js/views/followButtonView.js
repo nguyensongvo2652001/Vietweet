@@ -12,6 +12,7 @@ class FollowButtonView {
   }
 
   addUnfollowButtonHoverEffect() {
+    if (!this.followButton) return;
     this.followButton.addEventListener(
       'mouseover',
       this.unfollowButtonHoverHandler.bind(this)
@@ -19,6 +20,7 @@ class FollowButtonView {
   }
 
   addUnfollowButtonMouseOutEffect() {
+    if (!this.followButton) return;
     this.followButton.addEventListener(
       'mouseout',
       this.unfollowButtonMouseOutHandler.bind(this)
@@ -26,6 +28,7 @@ class FollowButtonView {
   }
 
   addFollowButtonClickHandler(handler) {
+    if (!this.followButton) return;
     this.followButton.addEventListener(
       'click',
       this.followButtonHandler.bind(this, handler)
@@ -33,6 +36,7 @@ class FollowButtonView {
   }
 
   unfollowButtonHoverHandler() {
+    if (!this.followButton) return;
     if (!this.followButton.classList.contains('btn--unfollow')) return;
     this.followButton.textContent = 'Unfollow';
     this.followButton.style.color = '#e03131';
@@ -40,6 +44,7 @@ class FollowButtonView {
   }
 
   unfollowButtonMouseOutHandler() {
+    if (!this.followButton) return;
     if (!this.followButton.classList.contains('btn--unfollow')) return;
     this.followButton.textContent = 'Following';
     this.followButton.style.color = '#1da1f2';
@@ -47,6 +52,7 @@ class FollowButtonView {
   }
 
   followButtonHandler(handler) {
+    if (!this.followButton) return;
     if (this.followButton.classList.contains('btn--follow'))
       handler(false, { following: this.profile.dataset.userId });
     else handler(true, { followId: this.followButton.dataset.followId });

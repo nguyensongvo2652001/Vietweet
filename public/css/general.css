@@ -309,3 +309,13 @@ input:focus {
     transform: rotate(360deg);
   }
 }
+
+/***********************/
+/* INFO */
+/*********************/
+.info {
+  font-size: 2.4rem;
+  font-weight: 700;
+  color: #000;
+  text-align: center;
+}

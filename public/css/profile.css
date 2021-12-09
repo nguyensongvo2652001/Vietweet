@@ -121,7 +121,13 @@
   text-align: center;
   cursor: pointer;
   transition: all 0.3s;
+  padding-top: 1rem;
   padding-bottom: 1rem;
+  margin-bottom: 2.4rem;
+}
+
+.profile__tab:hover {
+  background-color: #e1e8ed;
 }
 
 .profile__tab.profile__tab--active {

@@ -76,6 +76,22 @@ const getAllTweets = async (req, query) => {
   return tweets;
 };
 
+const getAllLikedTweet = async query => {
+  const likes = await Like.find(query).sort('-dateLiked');
+  let tweets = await Promise.all(
+    likes.map(async like => await Tweet.findById(like.tweet).populate('user'))
+  );
+
+  tweets = tweets.map(tweet => tweet.toObject());
+  tweets = tweets.map((tweet, index) => {
+    return {
+      ...tweet,
+      liked: likes[index]._id
+    };
+  });
+  return tweets;
+};
+
 const homepageViewController = catchAsync(async (req, res, next) => {
   const followDocs = await Follow.find({ user: req.user.id });
   const followings = followDocs.map(followDoc => followDoc.following);
@@ -101,6 +117,7 @@ const profileViewController = catchAsync(async (req, res, next) => {
   }
 
   const tweets = await getAllTweets(req, { user: user._id });
+  const likedTweets = await getAllLikedTweet({ user: user._id });
 
   const isLogInUser = req.user._id.equals(user._id);
   const followed = await Follow.findOne({
@@ -111,6 +128,7 @@ const profileViewController = catchAsync(async (req, res, next) => {
   res.status(200).render('profile', {
     user,
     tweets,
+    likedTweets,
     isLogInUser,
     followed
   });

@@ -8,6 +8,7 @@ block append head
     link(rel='stylesheet' href='/css/change_password.css')
     script(src = '/js/controllers/changePasswordController.js' type = 'module')
     script(src = '/js/controllers/followButtonController.js' type = 'module')
+    script(src = '/js/controllers/profileController.js' type = 'module')
 
 block content 
     include _tweet
@@ -125,8 +126,18 @@ block content
                         p Tweets
                     .profile__tab.profile__liked-tab
                         p Liked
-            .tweets
-                each tweet in tweets
-                    +tweet(tweet)
+            .tweets.own-tweets
+                - if (tweets.length === 0)
+                    p.info This user hasn't tweeted anything yet
+                - else
+                    each tweet in tweets
+                        +tweet(tweet)
+
+            .tweets.liked-tweets.hidden
+                - if (likedTweets.length === 0)
+                    p.info This user hasn't liked any tweets yet.
+                - else
+                    each tweet in likedTweets 
+                        +tweet(tweet)
                
 
