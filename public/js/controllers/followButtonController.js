@@ -11,7 +11,6 @@ const createFolllow = async following => {
     followButtonView.updateFollowersCount(1);
     followButtonView.addFollowIdToFollowButton(follow._id);
   } catch (e) {
-    console.log(e);
     throw e;
   }
 };

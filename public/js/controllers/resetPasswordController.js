@@ -13,7 +13,6 @@ const resetPassword = async (password, token) => {
       redirect('/homepage');
     }, 1500);
   } catch (e) {
-    console.log(e.message);
     resetPasswordView.insertError(e.message);
   }
 };

@@ -39,7 +39,6 @@ const submitEditProfileFormHandler = async data => {
     editProfileFormView.closeForm();
   } catch (e) {
     editProfileFormView.insertErrorToEditProfileForm(e.message);
-    console.log(e);
   }
 };
 

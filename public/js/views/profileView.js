@@ -136,7 +136,6 @@ class ProfileView {
   }
 
   updateProfileUI(user) {
-    console.log(user);
     this.profileBackgroundEl.src = `/img/users/backgrounds/${
       user.background
     }?${new Date().getTime()}`; //We have to add new Date().getTime() to force the image element to reload if it is the same url (this is just a hack)

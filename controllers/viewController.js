@@ -111,9 +111,14 @@ const setCurrentUser = (req, res, next) => {
 };
 
 const profileViewController = catchAsync(async (req, res, next) => {
-  const user = await User.findOne({ username: req.params.username });
-  if (!user) {
-    return next();
+  let user;
+  try {
+    user = await User.findOne({ username: req.params.username });
+    if (!user) {
+      return res.status(200).render('404');
+    }
+  } catch (e) {
+    return res.status(200).render('404');
   }
 
   const tweets = await getAllTweets(req, { user: user._id });
@@ -156,9 +161,14 @@ const resetPasswordViewController = catchAsync(async (req, res, next) => {
 });
 
 const tweetDetailViewController = catchAsync(async (req, res, next) => {
-  const tweet = await Tweet.findById(req.params.id).populate('user');
-  if (!tweet) {
-    console.log('No tweet found');
+  let tweet;
+  try {
+    tweet = await Tweet.findById(req.params.id).populate('user');
+    if (!tweet) {
+      return res.status(200).render('404');
+    }
+  } catch (e) {
+    return res.status(200).render('404');
   }
 
   const replies = await Reply.find({ tweet: req.params.id })
@@ -176,8 +186,7 @@ const followListViewController = catchAsync(async (req, res, next) => {
   const user = await User.findOne({ username: req.params.username });
 
   if (!user) {
-    console.log('haha');
-    return;
+    return res.status(200).render('404');
   }
 
   const followers = await Follow.find({ following: user._id }).populate('user');

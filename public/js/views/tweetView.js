@@ -58,7 +58,6 @@ class TweetView {
   }
 
   getReplyHTML(reply) {
-    console.log(reply);
     const imageEl = reply.image
       ? `<img alt = 'Reply image' src = '/img/replies/${reply.image}' class = 'reply__image'/>`
       : '';

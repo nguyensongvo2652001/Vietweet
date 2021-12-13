@@ -52,8 +52,6 @@ class EditProfileFormView {
   }
 
   addDeleteAccountButtonClickListener() {
-    console.log(this.deleteAccountForm);
-    console.log(this.deleteAccountButton);
     this.deleteAccountButton.addEventListener(
       'click',
       this.showDeleteAccountForm.bind(this)

@@ -102,7 +102,6 @@ class TweetsView {
     const tweetUserNameEl = tweetEl.querySelector('.tweet__name');
     const tweetUserAvatarEl = tweetEl.querySelector('.tweet__avatar');
 
-    console.log(tweetUserNameEl, tweetUserAvatarEl);
     tweetUserAvatarEl.src = `/img/users/avatars/${
       user.avatar
     }?${new Date().getTime()}`; //new Date().getTime() is just a hack to force image to reload even if the source is not different

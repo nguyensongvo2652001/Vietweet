@@ -27,7 +27,6 @@ const likeTweet = async (likeContainer, tweetId) => {
     const like = await tweetModel.likeTweet(tweetId);
     tweetsView.updateLikeContainerUI(likeContainer, like._id);
   } catch (e) {
-    console.log(e);
     showAlert('error', e, 1.5);
   }
 };
@@ -38,7 +37,6 @@ const dislikeTweet = async likeContainer => {
     await tweetModel.dislikeTweet(likeId);
     tweetsView.updateLikeContainerUI(likeContainer);
   } catch (e) {
-    console.log(e);
     showAlert('error', e, 1.5);
   }
 };
