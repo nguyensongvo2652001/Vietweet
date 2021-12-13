@@ -35,3 +35,11 @@ export const redirect = url => {
 
 export const getRelativeUrl = () =>
   window.location.pathname + window.location.search;
+
+export const logout = async () => {
+  try {
+    await sendRequest('/api/v1/users/logout', 'GET');
+  } catch (e) {
+    throw e;
+  }
+};

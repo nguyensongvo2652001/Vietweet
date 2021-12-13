@@ -2,6 +2,10 @@
 class EditProfileFormView {
   constructor() {
     this.editProfileForm = document.querySelector('.edit-profile-container');
+    this.deleteAccountForm = document.querySelector(
+      '.confirm-delete-container'
+    );
+
     this.editProfileBackdrop = this.editProfileForm.querySelector(
       '.edit-profile__backdrop'
     );
@@ -23,6 +27,10 @@ class EditProfileFormView {
     );
 
     this.saveButton = this.editProfileForm.querySelector('.btn--save-profile');
+    this.deleteAccountButton = this.editProfileForm.querySelector(
+      '.edit-profile__delete-account-btn'
+    );
+
     this.nameInput = this.editProfileForm.querySelector('.name-input');
     this.bioInput = this.editProfileForm.querySelector('.bio-input');
     this.locationInput = this.editProfileForm.querySelector('.location-input');
@@ -36,10 +44,20 @@ class EditProfileFormView {
     this.addEditProfileBackdropClickListener();
     this.addBackgroundInputChangeHandler();
     this.addAvatarInputChangeHandler();
+    this.addDeleteAccountButtonClickListener();
   }
 
   closeForm() {
     this.editProfileForm.classList.add('hidden');
+  }
+
+  addDeleteAccountButtonClickListener() {
+    console.log(this.deleteAccountForm);
+    console.log(this.deleteAccountButton);
+    this.deleteAccountButton.addEventListener(
+      'click',
+      this.showDeleteAccountForm.bind(this)
+    );
   }
 
   addEditProfileBackdropClickListener() {
@@ -121,6 +139,10 @@ class EditProfileFormView {
       'beforeend',
       this.editProfileErrorEl
     );
+  }
+
+  showDeleteAccountForm() {
+    this.deleteAccountForm.classList.remove('hidden');
   }
 }
 

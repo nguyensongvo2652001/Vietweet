@@ -41,7 +41,7 @@ block content
                 form.confirm-delete__form
                     .confirm-delete__form-item
                         label.confirm-delete__form-label(for='password') Password
-                        input#password.confirm-delete__form-input(type='password' placeholder='●●●●●●●●' required='true')
+                        input#password.confirm-delete__form-input.password-input(type='password' placeholder='●●●●●●●●' required='true')
                     .confirm-delete__buttons
                         button.btn.btn--delete-account Delete my account
                         button.btn.btn--cancel Cancel
@@ -77,7 +77,7 @@ block content
                 .edit-profile__form-element
                     label.edit-profile__form-label(for='website') Website
                     input#website.edit-profile__form-input.website-input(type='text')
-            button.btn.btn--delete-account.margin-bottom--small Delete account
+            button.btn.btn--delete-account.margin-bottom--small.edit-profile__delete-account-btn Delete account
 
 
     .content
