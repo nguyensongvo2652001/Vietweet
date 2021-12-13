@@ -68,7 +68,7 @@ export class TweetCreateView {
 
     const content = this.textInput.value;
     let image;
-    if (this.imageInput.files) image = this.imageInput.files[0];
+    if (this.imageInput.files.length > 0) image = this.imageInput.files[0];
 
     handler(content, image);
   }

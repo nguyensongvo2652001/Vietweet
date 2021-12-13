@@ -93,6 +93,21 @@ class TweetsView {
     //Update likeId
     likeContainer.dataset.likeId = likeId;
   }
+
+  updateTweetsUI(user) {
+    this.tweets.forEach(tweet => this.updateTweetUI(tweet, user));
+  }
+
+  updateTweetUI(tweetEl, user) {
+    const tweetUserNameEl = tweetEl.querySelector('.tweet__name');
+    const tweetUserAvatarEl = tweetEl.querySelector('.tweet__avatar');
+
+    console.log(tweetUserNameEl, tweetUserAvatarEl);
+    tweetUserAvatarEl.src = `/img/users/avatars/${
+      user.avatar
+    }?${new Date().getTime()}`; //new Date().getTime() is just a hack to force image to reload even if the source is not different
+    tweetUserNameEl.textContent = user.name;
+  }
 }
 
 export default new TweetsView();

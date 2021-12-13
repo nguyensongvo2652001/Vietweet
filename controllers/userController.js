@@ -56,7 +56,6 @@ const resizeAndStoreBackground = catchAsync(async (req, res, next) => {
 
   req.body.background = `user_${req.user.id}_background.jpg`;
   await sharp(background[0].buffer)
-    .resize(2000, 3000)
     .jpeg()
     .toFile(`public/img/users/backgrounds/${req.body.background}`);
 

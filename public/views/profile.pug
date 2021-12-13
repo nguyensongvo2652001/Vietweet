@@ -46,7 +46,7 @@ block content
                         button.btn.btn--delete-account Delete my account
                         button.btn.btn--cancel Cancel
                     
-        .backdrop
+        .backdrop.edit-profile__backdrop
         .modal.edit-profile
             header.edit-profile__header
                 ion-icon.edit-profile__close(name='close-outline')
@@ -54,15 +54,15 @@ block content
                 button.btn.btn--save-profile Save
             .edit-profile__images
                 .edit-profile__background-container
-                    img.edit-profile__background(src='/img/users/backgrounds/default.jpg')
+                    img.edit-profile__background(src=`/img/users/backgrounds/${user.background}`)
                     label
-                    input(type='file' style='display: none')
-                    ion-icon.edit-profile__background-change-icon(name='camera-outline')
+                        input.edit-profile__background-input(type='file' style='display: none'  accept = 'image/*')
+                        ion-icon.edit-profile__background-change-icon(name='camera-outline')
                 .edit-profile__avatar-container
-                    img.edit-profile__avatar(src='/img/users/avatars/default.jpg')
+                    img.edit-profile__avatar(src=`/img/users/avatars/${user.avatar}`)
                     label
-                    input(type='file' style='display: none')
-                    ion-icon.edit-profile__avatar-change-icon(name='camera-outline')
+                        input.edit-profile__avatar-input(type='file' style='display: none'  accept = 'image/*')
+                        ion-icon.edit-profile__avatar-change-icon(name='camera-outline')
                 .edit-profile__avatar-spacer
             form.edit-profile__form
                 .edit-profile__form-element
