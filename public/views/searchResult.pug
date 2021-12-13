@@ -1,0 +1,31 @@
+extends content 
+
+block append head 
+    link(href='/css/search.css' rel = 'stylesheet')
+    script(src = '/js/controllers/searchResultController.js' type = 'module')
+
+block content 
+    include _tweet
+    include _people
+
+    .content
+        .search__tabs
+            .search__tab.search__tweets-tab.search__tab--active
+                p Tweets
+            .search__tab.search__people-tab
+                p People
+
+        .tweets 
+            - if (tweets.length > 0)
+                each tweet in tweets 
+                    +tweet(tweet)
+
+            - else 
+                p.info No tweets were found with your keyword.
+
+        .people-list.hidden
+            - if (users.length > 0)
+                each user in users 
+                    +people(user)
+            - else 
+                p.info No users were found with your keyword.

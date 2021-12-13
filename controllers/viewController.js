@@ -192,6 +192,35 @@ const followListViewController = catchAsync(async (req, res, next) => {
   });
 });
 
+const searchResultViewController = catchAsync(async (req, res, next) => {
+  const query = req.query.q;
+  let tweets = [];
+  let users = [];
+
+  if (!query) {
+    return res.status(200).render('searchResult', { tweets, users });
+  }
+
+  const regexPartialQueryObject = { $regex: query, $options: 'i' };
+
+  tweets = await getAllTweets(req, {
+    content: regexPartialQueryObject
+  });
+  users = await User.find({
+    $or: [
+      { name: regexPartialQueryObject },
+      { username: regexPartialQueryObject },
+      { bio: regexPartialQueryObject },
+      { location: regexPartialQueryObject },
+      { website: regexPartialQueryObject }
+    ]
+  });
+  res.status(200).render('searchResult', {
+    tweets,
+    users
+  });
+});
+
 module.exports = {
   loginViewController,
   homepageViewController,
@@ -203,5 +232,6 @@ module.exports = {
   redirectIfLogin,
   redirectIfNotLogin,
   tweetDetailViewController,
-  followListViewController
+  followListViewController,
+  searchResultViewController
 };

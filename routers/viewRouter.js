@@ -23,6 +23,7 @@ router.get(
 );
 
 router.use(viewController.redirectIfNotLogin);
+router.get('/search', viewController.searchResultViewController);
 router.get('/homepage', viewController.homepageViewController);
 router.get(
   '/profile/me',

@@ -3,7 +3,7 @@ const Tweet = require('../models/tweetModel');
 const User = require('../models/userModel');
 
 const search = catchAsync(async (req, res, next) => {
-  const query = req.query.q;
+  const query = req.query.q || '';
   const regexPartialQueryObject = { $regex: query, $options: 'i' };
   const tweets = await Tweet.find({
     content: regexPartialQueryObject

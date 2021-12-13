@@ -11,6 +11,7 @@
   cursor: pointer;
   transition: all 0.3s;
   padding-bottom: 1rem;
+  margin-bottom: 1.6rem;
 }
 
 .search__tab.search__tab--active {
