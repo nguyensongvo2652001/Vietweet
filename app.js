@@ -20,6 +20,8 @@ const apiBasePath = `/api/v${apiVersion}`;
 
 if (process.env.NODE_ENV === 'development') app.use(morgan('dev'));
 
+app.enable('trust proxy');
+
 app.use(compression());
 app.use(cookieParser());
 
