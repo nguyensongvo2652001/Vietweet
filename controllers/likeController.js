@@ -5,7 +5,6 @@ const handlerFactory = require('./handlerFactory');
 
 const setLikeRequestBody = (req, res, next) => {
   req.body.user = req.user.id;
-  req.body.tweet = req.params.tweetId || req.body.tweet;
   next();
 };
 

@@ -14,7 +14,6 @@ class ReplyCreateView extends TweetCreateView {
   }
 
   createLiveImageElement(imageSrc) {
-    if (this.liveImageEl) return (this.liveImageEl.src = imageSrc);
     this.liveImageEl = document.createElement('img');
     this.liveImageEl.classList.add('reply__image');
     this.liveImageEl.src = imageSrc;

@@ -4,6 +4,8 @@ import tweetCreateView from '../views/tweetCreateView.js';
 import tweetView from '../views/tweetView.js';
 import { setTweetsListener } from './tweetsController.js';
 import * as tweetCreateModel from '../models/tweetCreateModel.js';
+import { redirect } from '../helper.js';
+import { showAlert } from '../alert.js';
 
 const insertTweetToFeed = tweet => {
   const tweetHtml = tweetView.getTweetHTML(tweet);
@@ -27,14 +29,19 @@ const submitHandler = async (content, image) => {
 
     tweetCreateView.clear();
   } catch (e) {
-    console.log(e);
+    showAlert('error', 'Something went wrong', 1.5);
   }
+};
+
+const goToProfile = () => {
+  redirect('/profile/me');
 };
 
 const init = () => {
   tweetCreateView.setImageInputLivePreview();
   tweetCreateView.addOnSubmitHandler(submitHandler);
   tweetCreateView.setTweetContentOnChange();
+  tweetCreateView.setTweetFormAvatarClickHandler(goToProfile);
   tweetCreateView.clear();
 };
 

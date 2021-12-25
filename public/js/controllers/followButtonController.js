@@ -6,9 +6,11 @@ import { showAlert } from '../alert.js';
 
 const createFolllow = async following => {
   try {
-    const follow = await followButtonModel.createNewFollow(following);
     followButtonView.updateFollowButtonUI();
     followButtonView.updateFollowersCount(1);
+    followButtonView.toggleDisableButton();
+    const follow = await followButtonModel.createNewFollow(following);
+    followButtonView.toggleDisableButton();
     followButtonView.addFollowIdToFollowButton(follow._id);
   } catch (e) {
     throw e;
@@ -17,9 +19,11 @@ const createFolllow = async following => {
 
 const unfollow = async followId => {
   try {
-    await followButtonModel.unfollow(followId);
     followButtonView.updateFollowButtonUI();
     followButtonView.updateFollowersCount(-1);
+    followButtonView.toggleDisableButton();
+    await followButtonModel.unfollow(followId);
+    followButtonView.toggleDisableButton();
   } catch (e) {
     throw e;
   }

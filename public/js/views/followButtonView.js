@@ -39,16 +39,14 @@ class FollowButtonView {
     if (!this.followButton) return;
     if (!this.followButton.classList.contains('btn--unfollow')) return;
     this.followButton.textContent = 'Unfollow';
-    this.followButton.style.color = '#e03131';
-    this.followButton.style.borderColor = '#e03131';
+    this.followButton.classList.add('btn--unfollow--hover');
   }
 
   unfollowButtonMouseOutHandler() {
     if (!this.followButton) return;
     if (!this.followButton.classList.contains('btn--unfollow')) return;
     this.followButton.textContent = 'Following';
-    this.followButton.style.color = '#1da1f2';
-    this.followButton.style.borderColor = '#1da1f2';
+    this.followButton.classList.remove('btn--unfollow--hover');
   }
 
   followButtonHandler(handler) {
@@ -68,8 +66,8 @@ class FollowButtonView {
 
     this.followButton.classList.add('btn--follow');
     this.followButton.classList.remove('btn--unfollow');
-    this.followButton.style.color = '#fff';
     this.followButton.textContent = 'Follow';
+    this.followButton.classList.remove('btn--unfollow--hover'); //This is just to make sure that we are not in the hover state
   }
 
   updateFollowersCount(number) {
@@ -79,6 +77,10 @@ class FollowButtonView {
 
   addFollowIdToFollowButton(followId) {
     this.followButton.dataset.followId = followId;
+  }
+
+  toggleDisableButton() {
+    this.followButton.disabled = !this.followButton.disabled;
   }
 }
 

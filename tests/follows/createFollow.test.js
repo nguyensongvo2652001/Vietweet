@@ -22,8 +22,13 @@ beforeEach(initializeDatabase);
 let token, userOne, userTwo;
 
 beforeEach(async function() {
-  userOne = await User.findOne({ email: users.validUserOne.email });
+  userOne = await User.findOne({ email: users.validUserOne.email })
+    .populate('followersCount')
+    .populate('followingsCount');
   userTwo = await User.create(users.validUserTwo);
+
+  userTwo = await userTwo.populate('followersCount');
+  userTwo = await userTwo.populate('followingsCount');
 
   const response = await request(app)
     .post(`${apiBasePath}/users/login`)
@@ -32,8 +37,8 @@ beforeEach(async function() {
   ({ token } = response.body.data);
 });
 
-test('Should create a new follow document successfully', async () => {
-  const response = await request(app)
+test('Should be able to follow someone you have not followed successfully', async () => {
+  await request(app)
     .post(`${apiBasePath}/follows`)
     .send({
       following: userTwo.id
@@ -95,7 +100,7 @@ test('Should not create a new follow document (without jwt)', async () => {
     .send({
       following: userTwo.id
     })
-    .expect(400);
+    .expect(401);
 
   checkFollowersCount(userTwo, await User.findOne({ email: userTwo.email }), 0);
   checkFollowingsCount(

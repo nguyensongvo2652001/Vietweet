@@ -19,7 +19,10 @@ export class TweetCreateView {
   clear() {
     this.textInput.value = '';
     this.tweetButton.disabled = true;
-    if (this.liveImageEl) this.liveImageEl.remove();
+    this.imageInput.files = new DataTransfer().files; //This is to clear all the old uploaded images.
+    if (this.liveImageEl) {
+      this.liveImageEl.remove();
+    }
   }
 
   setTweetContentOnChange() {
@@ -36,17 +39,23 @@ export class TweetCreateView {
     );
   }
 
+  setTweetFormAvatarClickHandler(handler) {
+    const tweetAvatar = this.parentElement.querySelector('.avatar--small');
+    tweetAvatar.addEventListener('click', handler);
+  }
+
   imageInputLivePreviewHandler() {
     const imageUrl = URL.createObjectURL(this.imageInput.files[0]);
     this.createLiveImageElement(imageUrl);
   }
 
   createLiveImageElement(imageSrc) {
-    if (this.liveImageEl) return (this.liveImageEl.src = imageSrc);
-    this.liveImageEl = document.createElement('img');
-    this.liveImageEl.classList.add('tweet__image');
+    if (!this.liveImageEl) {
+      this.liveImageEl = document.createElement('img');
+      this.liveImageEl.classList.add('tweet__image');
+      this.textInput.insertAdjacentElement('afterend', this.liveImageEl);
+    }
     this.liveImageEl.src = imageSrc;
-    this.textInput.insertAdjacentElement('afterend', this.liveImageEl);
   }
 
   addOnSubmitHandler(handler) {

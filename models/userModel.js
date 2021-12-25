@@ -84,14 +84,6 @@ const userSchema = new mongoose.Schema(
       type: Date,
       default: Date.now()
     },
-    followersCount: {
-      type: Number,
-      default: 0
-    },
-    followingsCount: {
-      type: Number,
-      default: 0
-    },
     passwordResetToken: {
       type: String,
       select: false
@@ -114,6 +106,20 @@ userSchema.virtual('followings', {
   select: 'id'
 });
 
+userSchema.virtual('followersCount', {
+  ref: 'Follow',
+  localField: '_id',
+  foreignField: 'following',
+  count: true
+});
+
+userSchema.virtual('followingsCount', {
+  ref: 'Follow',
+  localField: '_id',
+  foreignField: 'user',
+  count: true
+});
+
 userSchema.pre('save', async function(next) {
   if (!this.isNew && !this.isModified('password')) return next();
 
@@ -122,6 +128,11 @@ userSchema.pre('save', async function(next) {
     Number(process.env.PASSWORD_BCRYPT_SALT_NUMBER)
   );
 
+  next();
+});
+
+userSchema.pre(/^find/, function(next) {
+  this.populate('followersCount').populate('followingsCount');
   next();
 });
 

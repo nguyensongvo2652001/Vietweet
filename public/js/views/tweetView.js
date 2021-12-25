@@ -41,7 +41,7 @@ class TweetView {
                 name="chatbox-outline"
                 class="tweet__data__icon"
               ></ion-icon>
-              <p class="tweet__data__number">3</p>
+              <p class="tweet__data__number">0</p>
             </div>
 
             <div class="tweet__data-container">
@@ -49,7 +49,7 @@ class TweetView {
                 name="heart-outline"
                 class="tweet__data__icon"
               ></ion-icon>
-              <p class="tweet__data__number">3</p>
+              <p class="tweet__data__number">0</p>
             </div>
           </div>
         </div>

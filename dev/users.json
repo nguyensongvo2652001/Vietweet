@@ -1,0 +1,103 @@
+[
+  {
+    "username": "people1",
+    "name": "Elizabeth Turner",
+    "bio": "Dumb like a fox",
+    "location": "Almost there",
+    "email": "people1@example.com",
+    "password": "Vietweet911!",
+    "avatar": "people1.jpg",
+    "background": "background1.jpg"
+  },
+  {
+    "username": "people2",
+    "name": "Johnny BigBall",
+    "bio": "Nothing to see here",
+    "location": "Berlin, Germany",
+    "email": "people2@example.com",
+    "password": "Vietweet911!",
+    "avatar": "people2.jpg",
+    "background": "background2.jpg"
+  },
+  {
+    "username": "people3",
+    "name": "Alisa",
+    "bio": "Dumb like a fox",
+    "location": "No where to be found",
+    "website": "alisa.com",
+    "email": "people3@example.com",
+    "password": "Vietweet911!",
+    "avatar": "people3.jpg",
+    "background": "background3.jpg"
+  },
+  {
+    "username": "people4",
+    "name": "Adam Gold",
+    "bio": "Profession tatoo artist",
+    "location": "Toronto, Canada",
+    "email": "people4@example.com",
+    "password": "Vietweet911!",
+    "avatar": "people4.jpg",
+    "background": "background4.jpg"
+  },
+  {
+    "username": "people5",
+    "name": "Jon Dang",
+    "bio": "Masterchef winner season 69",
+    "location": "Now living in Hawaii",
+    "website": "learntocook.com",
+    "email": "people5@example.com",
+    "password": "Vietweet911!",
+    "avatar": "people5.jpg",
+    "background": "background5.jpg"
+  },
+  {
+    "username": "people6",
+    "name": "Jacob Chubawa",
+    "location": "Nigeria",
+    "email": "people6@example.com",
+    "password": "Vietweet911!",
+    "avatar": "people6.jpg",
+    "background": "background6.jpg"
+  },
+  {
+    "username": "people7",
+    "name": "Joe Logan",
+    "bio": "Train by day, Joe Logan podcast by night, all day",
+    "location": "Austin, Texas",
+    "website": "joelogan.com",
+    "email": "people7@example.com",
+    "password": "Vietweet911!",
+    "avatar": "people7.jpg",
+    "background": "background7.jpg"
+  },
+  {
+    "username": "people8",
+    "name": "Dwight Johnson",
+    "bio": "Greater everyday",
+    "email": "people8@example.com",
+    "password": "Vietweet911!",
+    "avatar": "people8.jpg",
+    "background": "background8.jpg"
+  },
+  {
+    "username": "people9",
+    "name": "Tung Nguyen",
+    "bio": "Khong thich noi chuyen",
+    "location": "Ha Noi",
+    "email": "people9@example.com",
+    "password": "Vietweet911!",
+    "avatar": "people9.jpg",
+    "background": "background9.jpg"
+  },
+  {
+    "username": "people10",
+    "name": "Eric ColdBall",
+    "bio": "I am really cold right now",
+    "location": "In Alaska",
+    "email": "people10@example.com",
+    "password": "Vietweet911!",
+    "avatar": "people10.jpg",
+    "background": "background10.jpg"
+  }
+]

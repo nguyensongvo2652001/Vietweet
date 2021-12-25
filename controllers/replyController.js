@@ -67,21 +67,6 @@ const createReply = handlerFactory.createOne(
 
 const deleteReply = handlerFactory.deleteOne(Reply, 'reply');
 
-// const setReplyFilterQuery = catchAsync(async (req, res, next) => {
-//   const replies = await Tweet.find({ tweet: req.body.tweet });
-//   const replyUsers = replies.map(reply => reply.user);
-
-//   req.filterQuery = {
-//     $and: [{ user: { $in: replyUsers } }, { tweet: req.body.tweet }]
-//   };
-
-//   req.query.sort = '-dateReplied';
-
-//   next();
-// });
-
-// const getAllReplies = handlerFactory.getAll(Reply, 'reply');
-
 module.exports = {
   uploadImage,
   resizeImage,

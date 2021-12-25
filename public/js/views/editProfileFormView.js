@@ -47,6 +47,13 @@ class EditProfileFormView {
     this.addDeleteAccountButtonClickListener();
   }
 
+  clearForm() {
+    this.nameInput.value = '';
+    this.bioInput.value = '';
+    this.locationInput.value = '';
+    this.websiteInput.value = '';
+  }
+
   closeForm() {
     this.editProfileForm.classList.add('hidden');
   }

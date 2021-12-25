@@ -1,6 +1,7 @@
 const express = require('express');
 const morgan = require('morgan');
 const cookieParser = require('cookie-parser');
+const compression = require('compression');
 
 const errorController = require('./controllers/errorController');
 const AppError = require('./utils/appError');
@@ -19,6 +20,7 @@ const apiBasePath = `/api/v${apiVersion}`;
 
 if (process.env.NODE_ENV === 'development') app.use(morgan('dev'));
 
+app.use(compression());
 app.use(cookieParser());
 
 app.use(express.json({ limit: process.env.REQUEST_BODY_MAX_SIZE }));

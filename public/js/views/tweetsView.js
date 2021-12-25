@@ -8,6 +8,13 @@ class TweetsView {
     this.tweets = document.querySelectorAll('.tweet-container');
   }
 
+  setTweetsReplyIconClickListeners(handler) {
+    if (!this.tweets) return;
+    this.tweets.forEach(
+      this.setTweetReplyIconClickListener.bind(this, handler)
+    );
+  }
+
   setTweetsLikeIconClickListeners(handler) {
     if (!this.tweets) return;
     this.tweets.forEach(this.setTweetLikeIconClickListener.bind(this, handler));
@@ -67,17 +74,25 @@ class TweetsView {
     );
   }
 
+  setTweetReplyIconClickListener(handler, tweet) {
+    const replyContainer = tweet.querySelector('.tweet__data-reply-container');
+    if (!replyContainer) return;
+    const { tweetId } = tweet.dataset;
+    replyContainer.addEventListener('click', handler.bind(null, tweetId));
+  }
+
   tweetClickHandler(handler, tweet, e) {
-    if (
-      !e.target.classList.contains('tweet__container') &&
-      !e.target.classList.contains('tweet')
-    )
-      return;
-    if (e.target.classList.contains('tweet--reply')) return;
+    if (e.target.classList.contains('tweet__avatar')) return;
+    if (e.target.classList.contains('tweet__name')) return;
+    if (e.target.closest('.tweet--reply')) return;
+    if (e.target.classList.contains('like-container')) return;
+    if (e.target.classList.contains('tweet__data-reply-container')) return;
+    if (e.target.classList.contains('tweet__data__icon')) return;
+
     handler(tweet.dataset.tweetId);
   }
 
-  updateLikeContainerUI(likeContainer, likeId) {
+  updateLikeContainerUI(likeContainer, increase) {
     likeContainer.classList.toggle('tweet__data-container--liked');
     const icon = likeContainer.querySelector('.tweet__data__icon');
 
@@ -86,12 +101,17 @@ class TweetsView {
     else icon.name = 'heart';
 
     //Update count
-    const increase = likeId ? 1 : -1;
     const likeNumberEl = likeContainer.querySelector('.tweet__data__number');
     likeNumberEl.textContent = Number(likeNumberEl.textContent) + increase;
+  }
 
+  setLikeContainerLikeId(likeContainer, likeId) {
     //Update likeId
     likeContainer.dataset.likeId = likeId;
+  }
+
+  toggleDisabledLikeContainer(likeContainer) {
+    likeContainer.disabled = !likeContainer.disabled;
   }
 
   updateTweetsUI(user) {

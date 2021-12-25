@@ -49,11 +49,11 @@ const createTweet = handlerFactory.createOne(
 );
 
 const setFeedFilterQuery = catchAsync(async (req, res, next) => {
-  const followDocs = await Follow.find({ user: req.user.id });
+  const followDocs = await Follow.find({ user: req.user._id });
   const followings = followDocs.map(followDoc => followDoc.following);
 
   req.filterQuery = {
-    $or: [{ user: { $in: followings } }, { user: req.user.id }]
+    $or: [{ user: { $in: followings } }, { user: req.user._id }]
   };
 
   req.query.sort = 'dateTweeted';

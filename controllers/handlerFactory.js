@@ -37,9 +37,8 @@ const createOne = (Model, docName, whiteList = [], populateOptions) =>
     req.body =
       whiteList.length > 0 ? filterObject(req.body, ...whiteList) : req.body;
     let document = await Model.create(req.body);
-    if (populateOptions) {
-      document = await Model.findById(document.id).populate(populateOptions);
-    }
+    if (populateOptions) document = await document.populate(populateOptions);
+
     res.status(201).json({
       status: 'success',
       data: {

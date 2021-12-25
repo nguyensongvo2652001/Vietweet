@@ -4,6 +4,7 @@ import replyCreateView from '../views/replyCreateView.js';
 import tweetView from '../views/tweetView.js';
 import { setTweetsListener } from './tweetsController.js';
 import * as replyCreateModel from '../models/replyCreateModel.js';
+import { showAlert } from '../alert.js';
 
 const insertReplyToReplies = reply => {
   const replyHTML = tweetView.getReplyHTML(reply);
@@ -30,7 +31,7 @@ const submitHandler = async (content, image, tweet) => {
 
     replyCreateView.clear();
   } catch (e) {
-    console.log(e);
+    showAlert('error', 'Something went wrong', 1.5);
   }
 };
 

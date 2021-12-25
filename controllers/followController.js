@@ -6,7 +6,6 @@ const handlerFactory = require('./handlerFactory');
 
 const setFollowRequestBody = (req, res, next) => {
   req.body.user = req.user.id;
-  req.body.following = req.params.followingId || req.body.following;
   next();
 };
 

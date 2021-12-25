@@ -36,6 +36,7 @@ const submitEditProfileFormHandler = async data => {
     const user = await editProfileModel.editProfile(data);
     profileView.updateProfileUI(user);
     tweetsView.updateTweetsUI(user);
+    editProfileFormView.clearForm();
     editProfileFormView.closeForm();
   } catch (e) {
     editProfileFormView.insertErrorToEditProfileForm(e.message);

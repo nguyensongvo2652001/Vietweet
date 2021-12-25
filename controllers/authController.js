@@ -90,10 +90,10 @@ const protect = catchAsync(async (req, res, next) => {
     req.headers.authorization.startsWith('Bearer')
   )
     token = req.headers.authorization.split(' ')[1];
-
   token = token || req.cookies.jwt;
+
   if (!token) {
-    return next(new AppError('Please log in to perform this action', 400));
+    return next(new AppError('Please log in to perform this action', 401));
   }
 
   const decoded = await promisify(jwt.verify)(

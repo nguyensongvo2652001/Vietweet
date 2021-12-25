@@ -24,8 +24,12 @@ const clickLikeIconHandler = async (likeContainer, tweetId) => {
 
 const likeTweet = async (likeContainer, tweetId) => {
   try {
+    if (likeContainer.disabled) return;
+    tweetsView.updateLikeContainerUI(likeContainer, 1);
+    tweetsView.toggleDisabledLikeContainer(likeContainer);
     const like = await tweetModel.likeTweet(tweetId);
-    tweetsView.updateLikeContainerUI(likeContainer, like._id);
+    tweetsView.setLikeContainerLikeId(likeContainer, like._id);
+    tweetsView.toggleDisabledLikeContainer(likeContainer);
   } catch (e) {
     showAlert('error', e, 1.5);
   }
@@ -33,9 +37,12 @@ const likeTweet = async (likeContainer, tweetId) => {
 
 const dislikeTweet = async likeContainer => {
   try {
+    if (likeContainer.disabled) return;
+    tweetsView.updateLikeContainerUI(likeContainer, -1);
     const { likeId } = likeContainer.dataset;
+    tweetsView.toggleDisabledLikeContainer(likeContainer);
     await tweetModel.dislikeTweet(likeId);
-    tweetsView.updateLikeContainerUI(likeContainer);
+    tweetsView.toggleDisabledLikeContainer(likeContainer);
   } catch (e) {
     showAlert('error', e, 1.5);
   }
@@ -47,7 +54,7 @@ export const setTweetsListener = () => {
   tweetsView.setTweetsAvatarClickListeners(goToProfile);
   tweetsView.setTweetsNameClickListeners(goToProfile);
   tweetsView.setTweetsClickListeners(goToTweetDetail);
-
+  tweetsView.setTweetsReplyIconClickListeners(goToTweetDetail);
   tweetsView.setTweetsLikeIconClickListeners(clickLikeIconHandler);
 };
 
