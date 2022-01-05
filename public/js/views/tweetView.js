@@ -36,7 +36,7 @@ class TweetView {
           </p>
           ${imageEl}
           <div class="tweet__metadata">
-            <div class="tweet__data-container">
+            <div class="tweet__data-container tweet__data-reply-container">
               <ion-icon
                 name="chatbox-outline"
                 class="tweet__data__icon"
@@ -44,7 +44,7 @@ class TweetView {
               <p class="tweet__data__number">0</p>
             </div>
 
-            <div class="tweet__data-container">
+            <div class="tweet__data-container like-container">
               <ion-icon
                 name="heart-outline"
                 class="tweet__data__icon"
