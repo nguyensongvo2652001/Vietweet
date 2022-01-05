@@ -34,6 +34,7 @@ const resizeImage = catchAsync(async (req, res, next) => {
   const filePath = `public/img/replies/${req.body.image}`;
   await sharp(req.file.buffer)
     .jpeg()
+    .quality(80)
     .toFile(filePath);
 
   next();

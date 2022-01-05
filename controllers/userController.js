@@ -44,6 +44,7 @@ const resizeAndStoreAvatar = catchAsync(async (req, res, next) => {
   await sharp(avatar[0].buffer)
     .resize(500, 500)
     .jpeg()
+    .quality(80)
     .toFile(`public/img/users/avatars/${req.body.avatar}`);
 
   next();
@@ -57,6 +58,7 @@ const resizeAndStoreBackground = catchAsync(async (req, res, next) => {
   req.body.background = `user_${req.user.id}_background.jpg`;
   await sharp(background[0].buffer)
     .jpeg()
+    .quality(80)
     .toFile(`public/img/users/backgrounds/${req.body.background}`);
 
   next();

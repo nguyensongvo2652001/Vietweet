@@ -30,7 +30,7 @@ const resizeImage = catchAsync(async (req, res, next) => {
   req.body.image = `tweet_${req.user.id}_${Date.now()}.jpeg`;
   const filePath = `public/img/tweets/${req.body.image}`;
   await sharp(req.file.buffer)
-    .jpeg()
+    .jpeg({ quality: 80 })
     .toFile(filePath);
 
   next();
