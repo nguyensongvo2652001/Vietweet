@@ -76,17 +76,23 @@ const getAllTweets = async (req, query) => {
   return tweets;
 };
 
-const getAllLikedTweet = async query => {
+const getAllLikedTweet = async (req, query) => {
   const likes = await Like.find(query).sort('-dateLiked');
+
   let tweets = await Promise.all(
     likes.map(async like => await Tweet.findById(like.tweet).populate('user'))
   );
 
   tweets = tweets.map(tweet => tweet.toObject());
+
+  const liked = await Promise.all(
+    tweets.map(async tweet => await checkIfLikedTweet(req, tweet))
+  );
+
   tweets = tweets.map((tweet, index) => {
     return {
       ...tweet,
-      liked: likes[index]._id
+      liked: liked[index]
     };
   });
   return tweets;
@@ -122,7 +128,7 @@ const profileViewController = catchAsync(async (req, res, next) => {
   }
 
   const tweets = await getAllTweets(req, { user: user._id });
-  const likedTweets = await getAllLikedTweet({ user: user._id });
+  const likedTweets = await getAllLikedTweet(req, { user: user._id });
 
   const isLogInUser = req.user._id.equals(user._id);
   const followed = await Follow.findOne({
