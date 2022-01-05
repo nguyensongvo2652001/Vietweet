@@ -15,7 +15,7 @@ const tweetSchema = new mongoose.Schema(
     image: String,
     dateTweeted: {
       type: Date,
-      default: Date.now()
+      default: Date.now
     }
   },
   {
