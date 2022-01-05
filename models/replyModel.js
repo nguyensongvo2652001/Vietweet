@@ -22,7 +22,7 @@ const replySchema = new mongoose.Schema({
   },
   dateReplied: {
     type: Date,
-    default: new Date()
+    default: Date.now
   },
   image: {
     type: String
