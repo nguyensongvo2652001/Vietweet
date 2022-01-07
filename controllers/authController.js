@@ -234,7 +234,7 @@ const deleteMe = catchAsync(async (req, res, next) => {
       new AppError('Your password is incorrect. Please try again', 400)
     );
 
-  await User.findByIdAndDelete(req.user._id);
+  await user.remove();
 
   res.status(204).json({
     status: 'success',

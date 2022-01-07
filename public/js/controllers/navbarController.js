@@ -10,7 +10,7 @@ const setActiveLink = () => {
   const relativePath = getRelativeUrl();
   if (relativePath.startsWith('/homepage'))
     navbarView.setNavItemActive(navbarView.homeItem);
-  if (relativePath.startsWith('/profile'))
+  if (relativePath.startsWith('/profile/me'))
     navbarView.setNavItemActive(navbarView.profileItem);
 };
 
@@ -23,7 +23,7 @@ const homeItemClickHandler = () => {
 
 const profileItemClickHandler = () => {
   const relativePath = getRelativeUrl();
-  if (relativePath.startsWith('/profile')) return;
+  if (relativePath.startsWith('/profile/me')) return;
   redirect(`/profile/me`);
   setActiveLink();
 };

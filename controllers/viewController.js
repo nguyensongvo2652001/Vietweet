@@ -95,6 +95,7 @@ const getAllLikedTweet = async (req, query) => {
       liked: liked[index]
     };
   });
+
   return tweets;
 };
 
@@ -118,6 +119,7 @@ const setCurrentUser = (req, res, next) => {
 
 const profileViewController = catchAsync(async (req, res, next) => {
   let user;
+
   try {
     user = await User.findOne({ username: req.params.username });
     if (!user) {
@@ -199,6 +201,7 @@ const followListViewController = catchAsync(async (req, res, next) => {
   const followings = await Follow.find({ user: user._id }).populate(
     'following'
   );
+
   const following = req.query.following === 'true';
   res.status(200).render('followList', {
     followers,

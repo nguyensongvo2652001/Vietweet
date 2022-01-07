@@ -3,6 +3,10 @@ const crypto = require('crypto');
 const mongoose = require('mongoose');
 const validator = require('validator');
 const bcrypt = require('bcrypt');
+const Reply = require('./replyModel');
+const Tweet = require('./tweetModel');
+const Follow = require('./followModel');
+const Like = require('./likeModel');
 
 const userSchema = new mongoose.Schema(
   {
@@ -133,6 +137,15 @@ userSchema.pre('save', async function(next) {
 
 userSchema.pre(/^find/, function(next) {
   this.populate('followersCount').populate('followingsCount');
+  next();
+});
+
+userSchema.pre('remove', async function(next) {
+  await Reply.deleteMany({ user: this._id });
+  await Tweet.deleteMany({ user: this._id });
+  await Follow.deleteMany({ user: this._id });
+  await Follow.deleteMany({ following: this._id });
+  await Like.deleteMany({ user: this._id });
   next();
 });
 
