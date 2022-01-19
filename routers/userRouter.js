@@ -15,21 +15,21 @@ router.use(authController.protect);
 router.get('/logout', authController.logout);
 router.patch('/changePassword', authController.changePassword);
 router.patch(
-  '/me',
-  userController.uploadImages,
-  userController.resizeAndStoreAvatar,
-  userController.resizeAndStoreBackground,
-  userController.updateMe
-);
-router
-  .route('/me')
-  .patch(
+    '/me',
     userController.uploadImages,
     userController.resizeAndStoreAvatar,
     userController.resizeAndStoreBackground,
     userController.updateMe
-  )
-  .delete(authController.deleteMe);
+);
+router
+    .route('/me')
+    .patch(
+        userController.uploadImages,
+        userController.resizeAndStoreAvatar,
+        userController.resizeAndStoreBackground,
+        userController.updateMe
+    )
+    .delete(authController.deleteMe);
 
 router.get('/:id', userController.getUser);
 router.get('/:id/followers', followController.getFollowers);
