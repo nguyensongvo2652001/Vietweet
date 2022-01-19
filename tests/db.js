@@ -7,44 +7,44 @@ const Follow = require('../models/followModel');
 const Tweet = require('../models/tweetModel');
 
 const users = JSON.parse(
-  fs.readFileSync(`${__dirname}/fixtures/users.json`, 'utf-8')
+    fs.readFileSync(`${__dirname}/fixtures/users.json`, 'utf-8')
 );
 
-const connectToDatabase = async () => {
-  const db = process.env.DB_STRING.replace(
-    /<password>/,
-    process.env.DB_PASSWORD
-  );
+const connectToDatabase = async() => {
+    const db = process.env.DB_STRING.replace(
+        /<password>/,
+        process.env.DB_PASSWORD
+    );
 
-  await mongoose.connect(db);
+    await mongoose.connect(db);
 };
 
-const clearDatabase = async () => {
-  await User.deleteMany();
-  await Tweet.deleteMany();
-  await Follow.deleteMany();
+const clearDatabase = async() => {
+    await User.deleteMany();
+    await Tweet.deleteMany();
+    await Follow.deleteMany();
 };
 
-const initializeDatabase = async () => {
-  await User.deleteMany();
-  await Tweet.deleteMany();
-  await Follow.deleteMany();
+const initializeDatabase = async() => {
+    await User.deleteMany();
+    await Tweet.deleteMany();
+    await Follow.deleteMany();
 
-  const userOne = await User.create(users.validUserOne);
+    const userOne = await User.create(users.validUserOne);
 };
 
 const setUpDatabase = () => {
-  beforeAll(connectToDatabase);
-  beforeEach(clearDatabase);
+    beforeAll(connectToDatabase);
+    beforeEach(clearDatabase);
 };
 
 const apiVersion = process.env.API_VERSION;
 const apiBasePath = `/api/v${apiVersion}`;
 
 module.exports = {
-  connectToDatabase,
-  initializeDatabase,
-  users,
-  apiBasePath,
-  setUpDatabase
+    connectToDatabase,
+    initializeDatabase,
+    users,
+    apiBasePath,
+    setUpDatabase
 };
