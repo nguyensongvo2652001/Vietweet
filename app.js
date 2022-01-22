@@ -2,6 +2,9 @@ const express = require('express');
 const morgan = require('morgan');
 const cookieParser = require('cookie-parser');
 const compression = require('compression');
+const rateLimit = require('express-rate-limit');
+const mongoSanitize = require('express-mongo-sanitize');
+const xss = require('xss-clean');
 
 const errorController = require('./controllers/errorController');
 const AppError = require('./utils/appError');
@@ -24,6 +27,16 @@ app.enable('trust proxy');
 
 app.use(compression());
 app.use(cookieParser());
+
+const limiter = rateLimit({
+  max: 300,
+  windowMs: 60 * 60 * 1000,
+  message: 'Too much requests. Please try again later'
+});
+
+app.use(limiter);
+app.use(mongoSanitize());
+app.use(xss());
 
 app.use(express.json({ limit: process.env.REQUEST_BODY_MAX_SIZE }));
 app.use(express.static('public'));
