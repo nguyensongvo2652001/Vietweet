@@ -29,7 +29,7 @@ app.use(compression());
 app.use(cookieParser());
 
 const limiter = rateLimit({
-  max: 300,
+  max: 5000,
   windowMs: 60 * 60 * 1000,
   message: 'Too much requests. Please try again later'
 });
